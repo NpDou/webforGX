@@ -1,0 +1,326 @@
+html {
+  font: normal 14px 'SourceHanSansSC-medium';
+  color: #666666;
+  font-size: 14px;
+}
+
+body {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #666;
+}
+
+h1,
+h2 {
+  font-weight: normal;
+}
+
+em {
+  font-style: normal;
+}
+
+.Title {
+  width: 100%;
+  height: 36px;
+  margin-bottom: 10px;
+  display: block;
+  line-height: 36px;
+  background: url(../assets/yxtx/ico2.png) no-repeat left;
+
+  span {
+    float: left;
+    display: block;
+  }
+
+  span.tit {
+    font-size: 20px;
+    color: #680034;
+    padding: 0 12px;
+
+    em {
+      color: #1b1b1b;
+    }
+  }
+
+  .line_l {
+    padding-top: 16px;
+    border-bottom: 1px solid #546b28;
+  }
+
+  .line_s {
+    padding-top: 4px;
+    border-bottom: 1px solid #e2e2e2;
+  }
+
+  span.line_Ls {
+    width: 116px;
+
+    .line_s {
+      width: 88px;
+    }
+  }
+
+  span.line_Ms {
+    width: 414px;
+
+    .line_s {
+      width: 384px;
+    }
+  }
+
+  span.line b {
+    display: block;
+    height: 1px;
+  }
+
+  a {
+    font-size: 18px;
+    float: right;
+    color: #464646;
+
+    font {
+      font: 16px/18px consolas;
+    }
+  }
+}
+
+.out_Container {
+  min-height: 600px;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.n_left {
+  width: 300px;
+  padding: 0 5px;
+  margin-top: 30px;
+  float: left;
+
+  h2 {
+    font-size: 18px;
+    text-align: center;
+    color: #ffcf46;
+    background: #680034;
+    height: 50px;
+    line-height: 50px;
+  }
+
+  .n_nav {
+    width: 100%;
+    background: #fcfcfc;
+    font-size: 16px;
+    padding: 6px 0;
+
+    li a {
+      width: 100px;
+      display: block;
+      padding: 0 26px;
+      line-height: 46px;
+      text-indent: 36px;
+      color: #333;
+      background: url(../assets/yxtx/ico15.png) no-repeat 26px center;
+    }
+
+    a.cur,
+    li a:hover {
+      color: #680034;
+      background: #fff url(../assets/yxtx/ico16.png) no-repeat 26px center;
+    }
+  }
+}
+
+.n_right {
+  width: 870px;
+  padding: 0 5px 0 15px;
+  margin-top: 30px;
+  float: left;
+  min-height: 460px;
+
+  .TitleLong {
+    margin-top: 16px;
+
+    .line {
+      width: 83%;
+
+      .line_s {
+        width: 684px;
+      }
+    }
+  }
+
+  .list {
+    width: 100%;
+    height: auto;
+
+    li {
+      a {
+        display: block;
+        width: 100%;
+        color: #666;
+        font-size: 14px;
+        height: 28px;
+        line-height: 28px;
+        text-indent: 20px;
+        background: url(../assets/yxtx/ico17.png) no-repeat left;
+
+        span {
+          float: right;
+          color: #666;
+        }
+
+      }
+
+      a:hover {
+        color: #680034;
+        text-decoration: underline;
+        background: url(../assets/yxtx/ico18.png) no-repeat left;
+      }
+    }
+  }
+
+  .content {
+    width: 100%;
+    padding: 16px 0;
+  }
+
+  .block {
+    margin-top: 20px;
+  }
+}
+
+.content {
+  p {
+    font-size: 16px;
+    color: #666666;
+    line-height: 30px;
+    text-indent: 2em;
+    padding-bottom: 8px;
+  }
+
+  table {
+    margin: 0 auto;
+
+    td {
+      padding: 10px;
+    }
+
+    p {
+      padding-bottom: 0;
+    }
+  }
+}
+
+.n_tit {
+  width: 100%;
+  height: 49px;
+  line-height: 49px;
+  color: #666666;
+  font-size: 16px;
+  position: relative;
+
+  .el-breadcrumb {
+    position: absolute;
+    top: 16px;
+    left: 85px;
+    display: inline-block;
+    font-size: 16px;
+    color: #666666;
+  }
+}
+
+.contain_con {
+  h2 {
+    font-size: 36px;
+    text-align: center;
+    color: #666;
+    line-height: 40px;
+    padding: 25px 0;
+  }
+
+  .tip {
+    margin: 0 20px;
+    display: block;
+    height: 46px;
+    line-height: 46px;
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    background: #f5f5f5;
+  }
+
+  .content {
+    margin: 0 20px;
+    margin-top: 24px;
+    padding: 0 20px;
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    video {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    table {
+      p {
+        text-indent: 0;
+      }
+    }
+  }
+
+  .con_bm {
+    margin-top: 30px;
+    padding-top: 16px;
+    height: 18px;
+    line-height: 18px;
+    padding-bottom: 30px;
+    font-size: 16px;
+    color: #878787;
+    border-bottom: 1px solid #ccc;
+
+    a {
+      color: #878787;
+      float: right;
+      height: 24px;
+      line-height: 22px;
+      margin-left: 22px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      padding: 0 12px;
+    }
+
+    a.close {
+      background: url(../assets/yxtx/ico20.png) no-repeat 12px center;
+      padding-left: 32px;
+    }
+
+    a.dy {
+      background: url(../assets/yxtx/ico19.png) no-repeat 12px center;
+      padding-left: 32px;
+    }
+  }
+}
+
+.d_flex{
+  display: flex;
+}
+.flex_1{
+  flex: 1;
+}
+.flex_c{
+  flex-direction: column;
+}
+.flex_r{
+  flex-direction: row;
+}
