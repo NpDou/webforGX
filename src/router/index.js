@@ -14,6 +14,22 @@ const routes = [
       scrollToTop: true
     },
     component: () => import('../views/Home.vue')
+  },
+  {
+    path: '/AboutUs',
+    name: 'AboutUs',
+    meta: {
+      scrollToTop: true
+    },
+    component: () => import('../views/aboutUs/index.vue')
+  },
+  {
+    path: '/companyDynamics',
+    name: 'companyDynamics',
+    meta: {
+      scrollToTop: true
+    },
+    component: () => import('../views/companyDynamics/index.vue')
   }
 ]
 

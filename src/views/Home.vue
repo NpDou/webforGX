@@ -2,16 +2,43 @@
   <div>
     <!-- 轮播图 -->
     <Banner></Banner>
+    <contribute />
+    <brandIntroduction />
+    <service />
+    <biddingInformation />
+    <div class="flexBox">
+      <div class="flexBoxItem"><companyNews /></div>
+      <div class="flexBoxItem"><partyBuildingNews /></div>
+    </div>
+    <notice />
+    <contactUs />
   </div>
 </template>
 
 <script>
 // import '@/assets/js/index.js'
 
-import Banner from "./components/Banner.vue";
+import Banner from "../components/Banner.vue";
+import contribute from "./components/contribute.vue";
+import brandIntroduction from "./components/brandIntroduction.vue";
+import service from "./components/service.vue";
+import biddingInformation from "./components/biddingInformation.vue";
+import partyBuildingNews from "./components/partyBuildingNews.vue";
+import companyNews from "./components/companyNews";
+import notice from "./components/notice";
+import contactUs from "./components/contactUs";
+
 export default {
   components: {
     Banner,
+    contribute,
+    brandIntroduction,
+    service,
+    biddingInformation,
+    companyNews,
+    partyBuildingNews,
+    notice,
+    contactUs,
   },
   data() {
     return {
@@ -42,6 +69,14 @@ export default {
   overflow: hidden;
   position: relative;
   margin-bottom: 56px;
+}
+.flexBox{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  .flexBoxItem{
+    width: 48%;
+  }
 }
 .mainOne {
   width: 100%;

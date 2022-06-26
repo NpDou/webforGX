@@ -1,13 +1,15 @@
 <template>
   <div id="app">
     <Head></Head>
-    <router-view v-if="isRouterAlive"/>
-    <Foot></Foot>
+    <div class="main">
+      <router-view v-if="isRouterAlive"/>
+      <Foot></Foot>
+    </div>
   </div>
 </template>
 <script>
-import Head from "./views/components/Head.vue";
-import Foot from "./views/components/Foot.vue";
+import Head from "./components/Head.vue";
+import Foot from "./components/Foot.vue";
 
 export default {
   components: {
@@ -42,6 +44,9 @@ export default {
 html,
 body {
   height: 100%;
+}
+.main{
+  padding-top: 114px;
 }
 
 
