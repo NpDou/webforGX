@@ -30,6 +30,14 @@ const routes = [
       scrollToTop: true
     },
     component: () => import('../views/companyDynamics/index.vue')
+  },
+  {
+    path: '/biddingInformation',
+    name: 'biddingInformation',
+    meta: {
+      scrollToTop: true
+    },
+    component: () => import('../views/biddingInformation/index.vue')
   }
 ]
 

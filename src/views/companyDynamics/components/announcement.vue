@@ -1,5 +1,5 @@
 <template>
-  <div class="dynamicNews">
+  <div class="announcement">
     <search />
     <myList />
     <el-pagination
@@ -13,7 +13,7 @@
 import search from '@/components/search.vue'
 import myList from "@/components/myList.vue";
 export default {
-  name: 'dynamicNews',
+  name: 'announcement',
   components: {
     search,
     myList
@@ -32,7 +32,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.dynamicNews{
+.announcement{
     padding: 15px 158px;
     /deep/ .el-pagination{
         margin-bottom: 20px;

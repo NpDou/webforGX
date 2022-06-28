@@ -26,7 +26,7 @@ font-size: 16px;margin-left: 5px;">0771-56015</span>
             <el-menu-item v-for="(item, index) in category" :key="item.id" :index="item.description"
               :class="{ on: currentIndex === index }" @click="changeIndex(index)">
               <span slot="title">{{ item.name }}</span>
-              <ul class="second_menu">
+              <ul class="second_menu" v-if="item.children&&item.children.length>0">
                 <li v-for="i in item.children" :key="i.id" href="#" @click.stop="toPage(i.description)"
                   @click="changeIndex(index)">
                   <a>{{ i.name }}</a>
@@ -53,53 +53,78 @@ export default {
       // 所有一级栏目
       category: [{
         id: 1,
-        name: '菜单1',
-        description: '',
-        children: [{
-          id: 12,
-          name: '菜单1-2',
-          description: '/AboutUs',
-        }]
+        name: '首页',
+        description: '/home',
+      },
+      {
+        id: 2,
+        name: '关于我们',
+        description: '/aboutUs',
+        children: [
+          {
+            id: 21,
+            name: '公司简介',
+            description: '/aboutUs',
+          },
+          {
+            id: 22,
+            name: '企业架构',
+            description: '/aboutUs',
+          },{
+            id: 23,
+            name: '公司历程',
+            description: '/aboutUs',
+          }
+        ]
+      },
+      {
+        id: 3,
+        name: '动态资讯',
+        description: '/companyDynamics',
+        children: [
+          {
+            id: 31,
+            name: '动态新闻',
+            description: '/companyDynamics',
+          },
+          {
+            id: 32,
+            name: '党建新闻',
+            description: '/companyDynamics',
+          },
+          {
+            id: 33,
+            name: '通知公告',
+            description: '/companyDynamics',
+          },
+        ]
+      },
+      {
+        id: 4,
+        name: '招标信息',
+        description: '/biddingInformation',
+        children: [
+          {
+            id: 41,
+            name: '采购公告',
+            description: '/biddingInformation',
+          },
+          {
+            id: 42,
+            name: '采购结果',
+            description: '/biddingInformation',
+          },
+          {
+            id: 43,
+            name: '更改通知',
+            description: '/biddingInformation',
+          },
+        ]
       },
       {
         id: 1,
-        name: '菜单2',
+        name: '联系我们',
         description: '',
-        children: [{
-          id: 22,
-          name: '菜单2-2',
-          description: '/companyDynamics',
-        }]
-      },
-      {
-        id: 1,
-        name: '菜单3',
-        description: '',
-        children: [{
-          id: 32,
-          name: '菜单4-2',
-          description: '',
-        }]
-      },
-      {
-        id: 1,
-        name: '菜单3',
-        description: '',
-        children: [{
-          id: 42,
-          name: '菜单4-2',
-          description: '',
-        }]
-      },
-      {
-        id: 1,
-        name: '菜单3',
-        description: '',
-        children: [{
-          id: 12,
-          name: '菜单4-2',
-          description: '',
-        }]
       }],
       currentIndex: "",
     };
@@ -269,7 +294,6 @@ export default {
     }
 
     .second_menu {
-      height: 100%;
       line-height: 74px;
       position: absolute;
       background: #fff;
@@ -283,7 +307,7 @@ export default {
       }
 
       li:hover>a {
-        // color: #ffcf46;
+        color: #007AFF;
       }
     }
   }

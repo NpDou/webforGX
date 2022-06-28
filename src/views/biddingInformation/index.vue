@@ -1,35 +1,37 @@
 <template>
-  <div class="aboutUs">
+  <div class="biddingInformation">
     <div class="header">
       <p class="fade" v-show="status">
-        <span>立足南宁</span>
-        <span>布局广西</span>
-        <span>面向全国</span>
+        <span>专业</span>
+        <span>诚信</span>
+        <span>创新</span>
+        <span>合作</span>
+        <span>共赢</span>
       </p>
     </div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="公司简介" name="first">
-          <companyInfo />
+      <el-tab-pane label="采购公告" name="first">
+        <purchaseAnnouncement />
       </el-tab-pane>
-      <el-tab-pane label="企业架构" name="second">
-        <enterpriseArchitecture />
+      <el-tab-pane label="采购结果" name="second">
+        <procurementResults />
       </el-tab-pane>
-      <el-tab-pane label="公司历程" name="third">
-        <companyHistory />
+      <el-tab-pane label="更改通知" name="third">
+        <changeNotification />
       </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 <script>
-import companyInfo from './components/companyInfo.vue'
-import enterpriseArchitecture from './components/enterpriseArchitecture.vue'
-import companyHistory from './components/companyHistory.vue'
+import purchaseAnnouncement from './components/purchaseAnnouncement.vue'
+import procurementResults from './components/procurementResults.vue'
+import changeNotification from './components/changeNotification.vue'
   export default {
-    name:"AboutUs",
+    name:"biddingInformation",
     components:{
-        companyInfo,
-        enterpriseArchitecture,
-        companyHistory,
+        purchaseAnnouncement,
+        procurementResults,
+        changeNotification,
     },
     data() {
       return {
@@ -48,7 +50,7 @@ import companyHistory from './components/companyHistory.vue'
   };
 </script>
 <style lang="less" scoped>
-.aboutUs{
+.biddingInformation{
   .header{
     background-image: url(../../assets/background-1.png);
     width: 100%;

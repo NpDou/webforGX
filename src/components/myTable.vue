@@ -36,7 +36,7 @@ export default {
     padding-bottom: 30px;
     li{
       display: flex;
-      padding: 6px 15px;
+      padding: 7px 15px;
     }
     .content{
       display: inline-block;

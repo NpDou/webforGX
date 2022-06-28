@@ -3,14 +3,16 @@
     <el-date-picker
       v-model="date"
       type="daterange"
+      @change="change"
       start-placeholder="开始日期"
       end-placeholder="结束日期"
       :default-time="['00:00:00', '23:59:59']">
     </el-date-picker>
     <el-input
         placeholder="请输入内容"
+        @change="change"
         prefix-icon="el-icon-search"
-        v-model="nanme">
+        v-model="name">
   </el-input>
   </div>
 </template>
@@ -21,7 +23,7 @@ export default {
     props:['content'],
   data() {
     return {
-      nanme:'',
+      name:'',
       date:''
     };
   },
@@ -29,29 +31,29 @@ export default {
   },
 
   methods: {
-    
+    change(val){
+      this.$emit('search',{name:this.name,date:this.date})
+    }
   },
 };
 </script>
 <style lang="less" scoped>
   .headerTitle{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    box-sizing: border-box;
-    border-bottom: 1px solid;
-    height: 70px;
-    color: rgba(0, 122, 255, 1);
-    font-size: 22px;
-    padding-left: 60px;
-    padding-right: 60px;
-    border-color: rgba(0, 122, 255, 0.7);
-    margin-bottom: 15px;
-    font-weight: bold;
-    .more{
-      color: rgb(204, 202, 202);
-      font-size: 14px;
+    margin-bottom: 30px;
+    /deep/ .el-input__inner{
+      border: 0 none;
+      border-bottom: 1px solid #DCDFE6;
+      border-radius: 0;
+    }
+    /deep/ .el-input{
+      width: 250px;
+      box-sizing: border-box;
+      margin-right: 50px;
+    }
+    /deep/ .el-date-editor{
+      width: 250px;
+      margin-right: 50px;
     }
   }
 </style>

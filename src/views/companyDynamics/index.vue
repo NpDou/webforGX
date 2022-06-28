@@ -11,22 +11,24 @@
         <dynamicNews />
       </el-tab-pane>
       <el-tab-pane label="党建新闻" name="second">
+        <partyBuildingNews />
       </el-tab-pane>
       <el-tab-pane label="通知公告" name="third">
+        <announcement />
       </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 <script>
 import dynamicNews from './components/dynamicNews.vue'
-// import enterpriseArchitecture from './components/enterpriseArchitecture.vue'
-// import companyHistory from './components/companyHistory.vue'
+import partyBuildingNews from './components/partyBuildingNews.vue'
+import announcement from './components/announcement.vue'
   export default {
     name:"companyDynamics",
     components:{
         dynamicNews,
-        // enterpriseArchitecture,
-        // companyHistory,
+        partyBuildingNews,
+        announcement,
     },
     data() {
       return {
@@ -81,7 +83,8 @@ import dynamicNews from './components/dynamicNews.vue'
     background-color: rgba(246, 252, 255, 1);
   }
   /deep/.el-tabs__item{
-    padding: 0 100px!important;
+    padding: 5px 100px!important;
+    box-sizing: content-box;
   }
 }
 
