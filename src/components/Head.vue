@@ -36,7 +36,7 @@
       </div>
       <div class="d_flex action_container">
         <button @click="Login">登录</button>
-        <button>注册</button>
+        <button @click="register">注册</button>
       </div>
     </div>
   </div>
@@ -143,6 +143,11 @@ export default {
       this.$router.push({
         name: 'login'
       })
+    },
+    register(){
+        this.$router.push({
+            name: 'register'
+        })
     },
     // 获取一级栏目信息
     getFirstCategory() {

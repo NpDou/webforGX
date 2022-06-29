@@ -23,6 +23,7 @@
                 <span>忘记密码</span>
             </div>
         </div>
+        <p class="footerText">版权所有：广西博施隆海  桂ICP备10200667号</p>
     </div>
 </template>
 
@@ -107,6 +108,16 @@ export default {
         background-repeat: no-repeat;
         background-size: cover;
         position: relative;
+        .footerText{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            padding-bottom: 30px;
+            color: rgba(255, 255, 255, 100);
+            font-size: 14px;
+            font-family: SourceHanSansSC-regular;
+        }
         .formContent{
             width: 360px;
             height: 400px;
