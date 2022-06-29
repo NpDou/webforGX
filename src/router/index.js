@@ -38,6 +38,22 @@ const routes = [
       scrollToTop: true
     },
     component: () => import('../views/biddingInformation/index.vue')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    meta: {
+      scrollToTop: false
+    },
+    component: () => import('../views/login/index.vue')
+  },
+  {
+    path: '/register',
+    name: 'register',
+    meta: {
+      scrollToTop: false
+    },
+    component: () => import('../views/register/index.vue')
   }
 ]
 

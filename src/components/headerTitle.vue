@@ -8,7 +8,7 @@
 <script>
 export default {
     name: "headerTitle",
-    props:['content'],
+    props:['content','url'],
   data() {
     return {
       

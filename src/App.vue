@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <div id="app" :class="haveFooter?'app':'app appFlex'">
     <Head></Head>
-    <div class="main">
+    <div :class="haveFooter?'main':'main mainFlex'">
       <router-view v-if="isRouterAlive"/>
-      <Foot></Foot>
+      <Foot v-if="haveFooter"></Foot>
     </div>
   </div>
 </template>
@@ -23,7 +23,16 @@ export default {
   },
   data() {
     return {
+      noFooters: ['login','register'],
       isRouterAlive:true
+    }
+  },
+  computed:{
+    haveFooter(){
+      if(this.noFooters.indexOf(this.$route.name) > -1){
+        return false
+      }
+      return true
     }
   },
   methods: {
@@ -34,6 +43,16 @@ export default {
        })
     }
   },
+  mounted(){
+    let time = localStorage.getItem("time");
+    let today = new Date().getTime()
+    console.log(time, today);
+    if(today > time){
+      localStorage.removeItem("userId");
+      localStorage.removeItem("password");
+      localStorage.removeItem("time");
+    }
+  }
 };
 </script>
 <style>
@@ -48,6 +67,12 @@ body {
 .main{
   padding-top: 114px;
 }
-
+.mainFlex{
+  height: 100%;
+  box-sizing: border-box;
+}
+.appFlex{
+  height: 100%;
+}
 
 </style>

@@ -3,11 +3,9 @@
     <!-- 顶部 -->
     <div class="h_top d_flex">
       <div class="left_side">
-        <i style="color: rgba(200, 22, 36, 1);
-font-size: 16px;margin-right: 5px;" class="el-icon-phone"></i>
+        <i style="color: rgba(200, 22, 36, 1);font-size: 16px;margin-right: 5px;" class="el-icon-phone"></i>
         <span>咨询服务热线：</span>
-        <span style="color: rgba(200, 22, 36, 1);
-font-size: 16px;margin-left: 5px;">0771-56015</span>
+        <span style="color: rgba(200, 22, 36, 1);font-size: 16px;margin-left: 5px;">0771-56015</span>
       </div>
       <div class="right_side">
         <span>品质成就品牌</span>
@@ -26,7 +24,7 @@ font-size: 16px;margin-left: 5px;">0771-56015</span>
             <el-menu-item v-for="(item, index) in category" :key="item.id" :index="item.description"
               :class="{ on: currentIndex === index }" @click="changeIndex(index)">
               <span slot="title">{{ item.name }}</span>
-              <ul class="second_menu" v-if="item.children&&item.children.length>0">
+              <ul class="second_menu" v-if="item.children && item.children.length > 0">
                 <li v-for="i in item.children" :key="i.id" href="#" @click.stop="toPage(i.description)"
                   @click="changeIndex(index)">
                   <a>{{ i.name }}</a>
@@ -37,7 +35,7 @@ font-size: 16px;margin-left: 5px;">0771-56015</span>
         </el-menu>
       </div>
       <div class="d_flex action_container">
-        <button>登录</button>
+        <button @click="Login">登录</button>
         <button>注册</button>
       </div>
     </div>
@@ -70,7 +68,7 @@ export default {
             id: 22,
             name: '企业架构',
             description: '/aboutUs',
-          },{
+          }, {
             id: 23,
             name: '公司历程',
             description: '/aboutUs',
@@ -122,7 +120,7 @@ export default {
         ]
       },
       {
-        id: 1,
+        id: 5,
         name: '联系我们',
         description: '',
       }],
@@ -140,6 +138,11 @@ export default {
     // },
     changeIndex(index) {
       this.currentIndex = index;
+    },
+    Login() {
+      this.$router.push({
+        name: 'login'
+      })
     },
     // 获取一级栏目信息
     getFirstCategory() {
@@ -174,17 +177,13 @@ export default {
 };
 </script>
 <style lang='less' scoped>
-.on {
-  color: #ffcf46;
-  background: #680034;
-}
-
 .header {
   width: 100%;
   position: fixed;
   top: 0;
   z-index: 99;
   background: #fff;
+
   .h_top {
     box-sizing: border-box;
     padding: 0 87px;
@@ -266,7 +265,7 @@ export default {
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: fixd-end;
   }
 
   .el-menu-demo {
