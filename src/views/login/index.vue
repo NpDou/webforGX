@@ -41,7 +41,7 @@ export default {
         };
         var validateName = (rule, value, callback) => {
             if (value === '') {
-                callback(new Error('请输入密码'));
+                callback(new Error('请输入用户名'));
             } else {
                 callback();
             }

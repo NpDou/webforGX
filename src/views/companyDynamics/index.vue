@@ -7,13 +7,13 @@
       </p>
     </div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="动态新闻" name="first">
+      <el-tab-pane label="动态新闻" name="dynamicNews">
         <dynamicNews />
       </el-tab-pane>
-      <el-tab-pane label="党建新闻" name="second">
+      <el-tab-pane label="党建新闻" name="partyBuildingNews">
         <partyBuildingNews />
       </el-tab-pane>
-      <el-tab-pane label="通知公告" name="third">
+      <el-tab-pane label="通知公告" name="announcement">
         <announcement />
       </el-tab-pane>
     </el-tabs>
@@ -32,15 +32,33 @@ import announcement from './components/announcement.vue'
     },
     data() {
       return {
-        activeName: 'second',
+        activeName: 'dynamicNews',
         status:true,
       };
+    },
+    watch:{
+      $route:{
+        deep:true,
+        handler(val){
+          this.activeName=this.$route.query.tab
+          this.status=false
+          this.$nextTick(()=>{
+            this.status=true
+          })
+        }
+      }
     },
     methods: {
       handleClick(tab, event) {
         this.status=false
         this.$nextTick(()=>{
           this.status=true
+        })
+        this.$router.replace({
+          path: this.$route.path,
+          query: {
+            tab: this.activeName
+          }
         })
       }
     }

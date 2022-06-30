@@ -10,13 +10,13 @@
       </p>
     </div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="采购公告" name="first">
+      <el-tab-pane label="采购公告" name="purchaseAnnouncement">
         <purchaseAnnouncement />
       </el-tab-pane>
-      <el-tab-pane label="采购结果" name="second">
+      <el-tab-pane label="采购结果" name="procurementResults">
         <procurementResults />
       </el-tab-pane>
-      <el-tab-pane label="更改通知" name="third">
+      <el-tab-pane label="更改通知" name="changeNotification">
         <changeNotification />
       </el-tab-pane>
     </el-tabs>
@@ -35,15 +35,33 @@ import changeNotification from './components/changeNotification.vue'
     },
     data() {
       return {
-        activeName: 'second',
+        activeName: 'purchaseAnnouncement',
         status:true,
       };
+    },
+    watch:{
+      $route:{
+        deep:true,
+        handler(val){
+          this.activeName=this.$route.query.tab
+          this.status=false
+          this.$nextTick(()=>{
+            this.status=true
+          })
+        }
+      }
     },
     methods: {
       handleClick(tab, event) {
         this.status=false
         this.$nextTick(()=>{
           this.status=true
+        })
+        this.$router.replace({
+          path: this.$route.path,
+          query: {
+            tab: this.activeName
+          }
         })
       }
     }

@@ -57,65 +57,65 @@ export default {
       {
         id: 2,
         name: '关于我们',
-        description: '/aboutUs',
+        description: '/aboutUs?tab=companyInfo',
         children: [
           {
             id: 21,
             name: '公司简介',
-            description: '/aboutUs',
+            description: '/aboutUs?tab=companyInfo',
           },
           {
             id: 22,
             name: '企业架构',
-            description: '/aboutUs',
+            description: '/aboutUs?tab=enterpriseArchitecture',
           }, {
             id: 23,
             name: '公司历程',
-            description: '/aboutUs',
+            description: '/aboutUs?tab=companyHistory',
           }
         ]
       },
       {
         id: 3,
         name: '动态资讯',
-        description: '/companyDynamics',
+        description: '/companyDynamics?tab=dynamicNews',
         children: [
           {
             id: 31,
             name: '动态新闻',
-            description: '/companyDynamics',
+            description: '/companyDynamics?tab=dynamicNews',
           },
           {
             id: 32,
             name: '党建新闻',
-            description: '/companyDynamics',
+            description: '/companyDynamics?tab=partyBuildingNews',
           },
           {
             id: 33,
             name: '通知公告',
-            description: '/companyDynamics',
+            description: '/companyDynamics?tab=announcement',
           },
         ]
       },
       {
         id: 4,
         name: '招标信息',
-        description: '/biddingInformation',
+        description: '/biddingInformation?tab=purchaseAnnouncement',
         children: [
           {
             id: 41,
             name: '采购公告',
-            description: '/biddingInformation',
+            description: '/biddingInformation?tab=purchaseAnnouncement',
           },
           {
             id: 42,
             name: '采购结果',
-            description: '/biddingInformation',
+            description: '/biddingInformation?tab=procurementResults',
           },
           {
             id: 43,
             name: '更改通知',
-            description: '/biddingInformation',
+            description: '/biddingInformation?tab=changeNotification',
           },
         ]
       },
@@ -175,7 +175,7 @@ export default {
       });
     },
     // 跳转路由
-    toPage(path, index) {
+    toPage(path) {
       this.$router.push(path);
     },
   },
@@ -270,7 +270,7 @@ export default {
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: fixd-end;
+    justify-content: flex-end;
   }
 
   .el-menu-demo {

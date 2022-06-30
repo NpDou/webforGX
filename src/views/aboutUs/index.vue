@@ -8,13 +8,13 @@
       </p>
     </div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="公司简介" name="first">
-          <companyInfo />
+      <el-tab-pane label="公司简介" name="companyInfo">
+        <companyInfo />
       </el-tab-pane>
-      <el-tab-pane label="企业架构" name="second">
+      <el-tab-pane label="企业架构" name="enterpriseArchitecture">
         <enterpriseArchitecture />
       </el-tab-pane>
-      <el-tab-pane label="公司历程" name="third">
+      <el-tab-pane label="公司历程" name="companyHistory">
         <companyHistory />
       </el-tab-pane>
     </el-tabs>
@@ -33,9 +33,21 @@ import companyHistory from './components/companyHistory.vue'
     },
     data() {
       return {
-        activeName: 'second',
+        activeName: 'companyInfo',
         status:true,
       };
+    },
+    watch:{
+      $route:{
+        deep:true,
+        handler(val){
+          this.activeName=this.$route.query.tab
+          this.status=false
+          this.$nextTick(()=>{
+            this.status=true
+          })
+        }
+      }
     },
     methods: {
       handleClick(tab, event) {
@@ -43,8 +55,14 @@ import companyHistory from './components/companyHistory.vue'
         this.$nextTick(()=>{
           this.status=true
         })
+        this.$router.replace({
+          path: this.$route.path,
+          query: {
+            tab: this.activeName
+          }
+        })
       }
-    }
+    },
   };
 </script>
 <style lang="less" scoped>
