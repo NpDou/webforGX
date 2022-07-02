@@ -9,9 +9,6 @@ import findArticle from './findArticle/findArticle'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
   modules: {
     
     // 根据栏目查找第一个文章
@@ -19,6 +16,6 @@ export default new Vuex.Store({
     // 根据栏目查找所有文章
     allArticle,
     // 根据文章id查找文章
-    findArticle
+    findArticle,
   }
 })

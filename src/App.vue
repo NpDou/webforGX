@@ -5,6 +5,7 @@
       <router-view v-if="isRouterAlive"/>
       <Foot v-if="haveFooter"></Foot>
     </div>
+    <el-backtop v-if="hasSrollTop"></el-backtop>
   </div>
 </template>
 <script>
@@ -33,6 +34,9 @@ export default {
         return false
       }
       return true
+    },
+    hasSrollTop(){
+      return this.$route.meta.scrollToTop
     }
   },
   methods: {
@@ -46,7 +50,6 @@ export default {
   mounted(){
     let time = localStorage.getItem("time");
     let today = new Date().getTime()
-    console.log(time, today);
     if(today > time){
       localStorage.removeItem("userId");
       localStorage.removeItem("password");

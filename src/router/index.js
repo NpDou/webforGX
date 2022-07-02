@@ -54,6 +54,23 @@ const routes = [
       scrollToTop: false
     },
     component: () => import('../views/register/index.vue')
+  },
+  {
+    path: '/person',
+    name: 'person',
+    meta: {
+      scrollToTop: true
+    },
+    component: () => import('../views/person/index.vue'),
+    beforeEnter: (to, from, next) => {
+      let SESSIONID = sessionStorage.getItem("SESSIONID");
+      if(SESSIONID){
+        next(); 
+      }else{          
+        alert('您还没有登录,请先登录!');
+        next("/login")
+      }     
+    },
   }
 ]
 

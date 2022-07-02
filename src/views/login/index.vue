@@ -29,6 +29,7 @@
 
 <script>
 const Base64 = require("js-base64").Base64
+
 export default {
     name: 'login',
     data() {
@@ -76,7 +77,8 @@ export default {
                         localStorage.removeItem("password");
                         localStorage.removeItem("time");
                     }
-                    alert('submit!');
+                    this.setSessionItem("SESSIONID", JSON.stringify('data'));
+                    this.$router.push('/person')
                 } else {
                     console.log('error submit!!');
                     return false;

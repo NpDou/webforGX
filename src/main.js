@@ -62,7 +62,30 @@ router.afterEach((to, from, next) => {
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
+Vue.prototype.setSessionItem = function (key, newVal) {
+  // 创建 StorageEvent 事件
+  let newStorageEvent = document.createEvent("StorageEvent");
+  const storage = {
+    setItem: function (k, val) {
+      sessionStorage.setItem(k, val);
 
+      // 初始化 StorageEvent 事件
+      newStorageEvent.initStorageEvent(
+        "setItem", // 事件别名
+        false,
+        false,
+        k,
+        null,
+        val,
+        null,
+        null
+      );
+      // 派发事件
+      window.dispatchEvent(newStorageEvent);
+    },
+  };
+  return storage.setItem(key, newVal);
+};
 
 Vue.config.productionTip = false
 new Vue({

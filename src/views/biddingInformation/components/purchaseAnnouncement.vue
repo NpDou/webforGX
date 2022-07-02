@@ -4,7 +4,7 @@
     <myTable />
     <el-pagination
         background
-        layout="total,prev, pager, next"
+        layout="total, prev, pager, next"
         :total="1000">
     </el-pagination>
   </div>

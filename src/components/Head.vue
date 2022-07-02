@@ -35,18 +35,22 @@
         </el-menu>
       </div>
       <div class="d_flex action_container">
-        <button @click="Login">登录</button>
-        <button @click="register">注册</button>
+        <span class="contactUs" @click="contactUs">联系我们</span>
+        <button v-if="!hasLogin" @click="Login">登录</button>
+        <button v-if="!hasLogin" @click="register">注册</button>
+        <span v-if="hasLogin" class="contactUs" @click="person">个人中心</span>
+        <button v-if="hasLogin" @click="logout">退出</button>
       </div>
     </div>
   </div>
 </template>
 <script>
-import { get } from "../utils/request";
+import { mapActions } from "vuex";
 export default {
   inject: ["reload"],
   data() {
     return {
+      hasLogin:false,
       searchInput: "",
       // 所有一级栏目
       category: [{
@@ -118,24 +122,34 @@ export default {
             description: '/biddingInformation?tab=changeNotification',
           },
         ]
-      },
-      {
-        id: 5,
-        name: '联系我们',
-        description: '',
       }],
       currentIndex: "",
     };
   },
-  created() {
-    // this.getFirstCategory();
-    // this.getSecondCategory();
+  mounted() {
+    window.addEventListener("setItem", () => {
+      this.hasLogin = sessionStorage.getItem("SESSIONID");
+    });
+    this.hasLogin = sessionStorage.getItem("SESSIONID");
   },
-  computed: {},
   methods: {
-    // handleSelect(key, keyPath) {
-    //   console.log(key, keyPath);
-    // },
+    contactUs(){
+      window.scrollBy(0,99999)
+    },
+    logout(){
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+      setTimeout(() => {
+        loading.close();
+        this.setSessionItem("SESSIONID", '');
+        sessionStorage.clear()
+        this.$router.push('/')
+      }, 2000);
+    },
     changeIndex(index) {
       this.currentIndex = index;
     },
@@ -149,34 +163,12 @@ export default {
             name: 'register'
         })
     },
-    // 获取一级栏目信息
-    getFirstCategory() {
-      get("/index/category/findCategoryTree").then((res) => {
-        if (res.status == 200) {
-          // 父栏目
-          this.category = res.data;
-        } else {
-          this.$message({
-            type: "error",
-            message: res.message,
-          });
-        }
-      });
-    },
-    // 获取二级信息
-    getSecondCategory() {
-      this.category.forEach((item) => {
-        var parentId = item.id;
-        get("/index/category/findByParentId", { parentId }).then((res) => {
-          if (res.status == 200) {
-            item.child = res.data;
-          }
-        });
-      });
-    },
     // 跳转路由
     toPage(path) {
       this.$router.push(path);
+    },
+    person(){
+      this.$router.push('/person');
     },
   },
 };
@@ -243,7 +235,15 @@ export default {
 
     .action_container {
       align-items: center;
-
+      .contactUs{
+        cursor: pointer;
+        font-size: 14px;
+        color: #303133;
+        height: 100%;
+        width: 125px;
+        line-height: 74px;
+        text-align: center;
+      }
       button {
         margin: 25px;
         width: 58px;
