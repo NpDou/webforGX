@@ -21,21 +21,23 @@
       <div class="right demo-input-suffix">
         <el-menu :default-active="$route.path" class="el-menu-demo" mode="horizontal" router>
           <div class="nav_item">
-            <el-menu-item v-for="(item, index) in category" :key="item.id" :index="item.description"
-              :class="{ on: currentIndex === index }" @click="changeIndex(index)">
-              <span slot="title">{{ item.name }}</span>
-              <ul class="second_menu" v-if="item.children && item.children.length > 0">
-                <li v-for="i in item.children" :key="i.id" href="#" @click.stop="toPage(i.description)"
-                  @click="changeIndex(index)">
-                  <a>{{ i.name }}</a>
-                </li>
-              </ul>
-            </el-menu-item>
+            <template  v-for="(item, index) in category">
+              <el-menu-item v-if="status || item.id==1" :key="item.id" :index="item.description"
+                :class="{ on: currentIndex === index }" @click="changeIndex(index)">
+                <span slot="title">{{ item.name }}</span>
+                <ul class="second_menu" v-if="item.children && item.children.length > 0">
+                  <li v-for="i in item.children" :key="i.id" href="#" @click.stop="toPage(i.description)"
+                    @click="changeIndex(index)">
+                    <a>{{ i.name }}</a>
+                  </li>
+                </ul>
+              </el-menu-item>
+            </template>
           </div>
         </el-menu>
       </div>
       <div class="d_flex action_container">
-        <span class="contactUs" @click="contactUs">联系我们</span>
+        <span v-if="status" class="contactUs" @click="contactUs">联系我们</span>
         <button v-if="!hasLogin" @click="Login">登录</button>
         <button v-if="!hasLogin" @click="register">注册</button>
         <span v-if="hasLogin" class="contactUs" @click="person">个人中心</span>
@@ -123,6 +125,7 @@ export default {
           },
         ]
       }],
+      hideMenu:['person'],
       currentIndex: "",
     };
   },
@@ -131,6 +134,14 @@ export default {
       this.hasLogin = sessionStorage.getItem("SESSIONID");
     });
     this.hasLogin = sessionStorage.getItem("SESSIONID");
+  },
+  computed:{
+    status(){
+      if(this.hideMenu.indexOf(this.$route.name) > -1){
+        return false
+      }
+      return true
+    },
   },
   methods: {
     contactUs(){

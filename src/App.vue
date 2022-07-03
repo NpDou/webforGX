@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      noFooters: ['login','register'],
+      noFooters: ['login','register','person'],
       isRouterAlive:true
     }
   },
