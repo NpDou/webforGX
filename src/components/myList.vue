@@ -3,7 +3,7 @@
     <ul>
         <li v-for="(item,index) in 8" :key="index">
             <div class="img">
-                <img src="../assets/image1.png" alt="">
+                <img src="../assets/meetting.png" alt="">
             </div>
             <div class="content">
                 <p class="title">无意者烈火焚身;以正义的烈火拔出黑暗。我</p>
@@ -58,6 +58,7 @@ export default {
       .content{
         flex: 1;
         overflow: hidden;
+        padding-left: 15px;
         .title{
             width: 70%;
             color: rgba(0, 0, 0, 1);
