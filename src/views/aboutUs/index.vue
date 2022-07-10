@@ -68,7 +68,7 @@ import companyHistory from './components/companyHistory.vue'
 <style lang="less" scoped>
 .aboutUs{
   .header{
-    background-image: url(../../assets/background-1.png);
+    background-image: url(../../assets/companiesdynamic_banner_bg.png);
     width: 100%;
     height: 150px;
     line-height: 150px;

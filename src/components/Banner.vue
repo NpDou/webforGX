@@ -4,8 +4,7 @@
     <div class="banner">
       <el-carousel height="460px" :interval="4000" @change="banerChange" ref="cardShow">
         <el-carousel-item v-for="(item, index) in carousel" :key="index+'676'">
-          <img src="../assets/yxtx/banner.jpg" title="我还没有链接，哈哈哈，就这样吧！" />
-          
+          <img src="../assets/banner1.png" title="我还没有链接，哈哈哈，就这样吧！" />
         </el-carousel-item>
       </el-carousel>
       <div :class="carouselIndex%2==0?'cover':'cover2'">
@@ -25,13 +24,17 @@ export default {
     return {
       carouselIndex:0,
       carousel: [{
-        introduce:'2222'
+        introduce:'2222',
+        img:'../assets/banner1.png'
       },{
-        introduce:'2222'
+        introduce:'2222',
+        img:'../assets/banner2.png'
       },{
-        introduce:'2222'
+        introduce:'2222',
+        img:'../assets/banner1.png'
       },{
-        introduce:'2222'
+        introduce:'2222',
+        img:'../assets/banner2.png'
       },],
     };
   },

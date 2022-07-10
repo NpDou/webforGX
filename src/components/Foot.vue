@@ -5,7 +5,7 @@
         <h2>联系我们</h2>
         <p>0771-5601506</p>
         <div class="ftonr_r fl">
-          <img src="../assets/yxtx/code.jpg" alt="" />
+          <img src="../assets/building.png" alt="" />
         </div>
       </div>
       <ul class="fl">

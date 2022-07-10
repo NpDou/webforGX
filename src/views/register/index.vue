@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <agreement v-else @agree="agreeFun" @cancle="goback" />
+        <agreement v-else @agree="agreeFun" @cancel="goback" />
     </div>
 </template>
 
@@ -34,8 +34,8 @@ export default {
     name: "register",
     data() {
         return {
-            agree:true,
-            active: 2,
+            agree:false,
+            active: 0,
         };
     },
     components:{

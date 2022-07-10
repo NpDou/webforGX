@@ -7,7 +7,7 @@
         <p class="text"><i class="el-icon-message icon"></i>2945686859@qq.com</p>
     </div>
     <div class="map">
-        <img src="../../assets/yxtx/banner.jpg" alt="">
+        <img src="../../assets/banner1.png" alt="">
     </div>
   </div>
 </template>
