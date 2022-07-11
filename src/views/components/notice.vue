@@ -1,6 +1,6 @@
 <template>
   <div class="notice">
-    <headerTitle content="通知公告" url="/" class="title" />
+    <headerTitle content="通知公告" url="/companyDynamics?tab=announcement" class="title" />
     <div class="container">
         <myTable />
     </div>

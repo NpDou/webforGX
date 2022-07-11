@@ -1,6 +1,6 @@
 <template>
   <div class="biddingInformation">
-    <headerTitle content="招标信息" url="/" class="title" />
+    <headerTitle content="招标信息" :url="url" class="title" />
     <div class="container">
         <div class="tab">
             <span @click="choseTab(1)" :class="['tabItem',1==activeTab?'active':'']">采购信息</span>
@@ -29,7 +29,26 @@ export default {
   },
   created() {
   },
-
+  computed:{
+    url(){
+      let url = ''
+      switch (this.activeTab) {
+        case 1:
+          url="/biddingInformation?tab=purchaseAnnouncement"
+          break;
+        case 2:
+          url="/biddingInformation?tab=procurementResults"
+          break;
+        case 3:
+          url="/biddingInformation?tab=changeNotification"
+          break;
+        default:
+          url="/"
+          break;
+      }
+      return url
+    }
+  },
   methods: {
     choseTab(tab){
         this.activeTab=tab

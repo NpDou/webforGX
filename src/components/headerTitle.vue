@@ -45,6 +45,7 @@ export default {
     .more{
       color: rgb(204, 202, 202);
       font-size: 14px;
+      cursor: pointer;
     }
   }
 </style>

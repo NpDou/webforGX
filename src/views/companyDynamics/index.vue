@@ -61,6 +61,9 @@ import announcement from './components/announcement.vue'
           }
         })
       }
+    },
+    mounted(){
+      this.activeName=this.$route.query.tab
     }
   };
 </script>

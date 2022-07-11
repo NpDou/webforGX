@@ -11,22 +11,21 @@
       <ul class="fl">
         <li>
           <p>公司简介</p>
-          <a href="https://www.gxust.edu.cn/">公司介绍</a>
-          <a href="http://www.tusdt.com/">公司历程</a>
-          <a href="http://172.16.129.117/">公司业绩</a>
-          <a href="http://172.16.129.117/">组织架构</a>
+          <a href="javascript:;" @click="linkTo('/aboutUs?tab=companyInfo')">公司介绍</a>
+          <a href="javascript:;" @click="linkTo('/aboutUs?tab=companyHistory')">公司历程</a>
+          <a href="javascript:;" @click="linkTo('/aboutUs?tab=enterpriseArchitecture')">组织架构</a>
         </li>
         <li>
           <p>公司动态</p>
-          <a href="http://www.gxust.edu.cn/tsg/">公司新闻动态</a>
-          <a href="http://tusdt.xuetangx.com/about">活动新闻</a>
-          <a href="http://kjt.gxzf.gov.cn/">通知公告</a>
+          <a href="javascript:;" @click="linkTo('/companyDynamics?tab=dynamicNews')">公司新闻动态</a>
+          <a href="javascript:;" @click="linkTo('/companyDynamics?tab=partyBuildingNews')">党建新闻</a>
+          <a href="javascript:;" @click="linkTo('companyDynamics?tab=announcement')">通知公告</a>
         </li>
         <li>
           <p>招标信息</p>
-          <a href="#">采购公告</a>
-          <a href="https://isisn.nsfc.gov.cn/egrantweb/">采购结果</a>
-          <a href="http://kjj.liuzhou.gov.cn/">更改通知</a>
+          <a href="javascript:;" @click="linkTo('/biddingInformation?tab=purchaseAnnouncement')">采购公告</a>
+          <a href="javascript:;" @click="linkTo('/biddingInformation?tab=procurementResults')">采购结果</a>
+          <a href="javascript:;" @click="linkTo('/biddingInformation?tab=changeNotification')">更改通知</a>
         </li>
       </ul>
      
@@ -43,7 +42,13 @@ export default {
 
   created() {},
 
-  methods: {},
+  methods: {
+    linkTo(url){
+      this.$router.push({
+        path:url
+      })
+    }
+  },
 };
 </script>
 <style lang='less' scoped>

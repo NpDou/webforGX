@@ -40,7 +40,6 @@ export default {
     }
   },
   methods: {
-    ...mapActions('allArticle',['getAllArticleData']),
     reload (){
        this.isRouterAlive = false
        this.$nextTick(function(){
@@ -49,11 +48,6 @@ export default {
     }
   },
   mounted(){
-    this.getAllArticleData({
-      current:1,
-      idChannel:1,
-      size:10,
-    })
     let time = localStorage.getItem("time");
     let today = new Date().getTime()
     if(today > time){

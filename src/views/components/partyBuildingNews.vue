@@ -1,6 +1,6 @@
 <template>
   <div class="partyBuildingNews">
-    <headerTitle content="党建新闻" url="/" class="title" />
+    <headerTitle content="党建新闻" url="/companyDynamics?tab=partyBuildingNews" class="title" />
     <div class="container">
         <myTable />
     </div>
