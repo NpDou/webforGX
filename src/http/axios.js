@@ -2,7 +2,7 @@ import axios from 'axios'
 import qs from 'qs'
 
 //1.配置基础路由
-axios.defaults.baseURL = 'http://114.116.127.0:8080'
+axios.defaults.baseURL = ''
 
 // 3.添加响应拦截器
 axios.interceptors.response.use(function(response) {

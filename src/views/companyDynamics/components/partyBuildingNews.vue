@@ -1,54 +1,52 @@
 <template>
   <div class="partyBuildingNews">
     <search @search="onsearch" />
-    <myList />
+    <myList :tableData="allArticleData.partyBuildingNews.records"/>
     <el-pagination
         background
+        :page-size="size"
+        :total="allArticleData.partyBuildingNews.total"
+        :page-count="page"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        layout="prev, pager, next"
-        :total="1000">
+        layout="prev, pager, next">
     </el-pagination>
   </div>
 </template>
 <script>
-import search from '@/components/search.vue'
-import myList from "@/components/myList.vue";
+import mixin from "@/mixin/index.js";
 export default {
   name: 'partyBuildingNews',
-  components: {
-    search,
-    myList
-  },
-  provide(){
-    return{
-    }
-  },
+  mixins: [mixin],
   data() {
-    return {
+     return {
+      params:{
+        idChannel:2,
+        startDate:'',
+        title:'',
+        endDate:'',
+      },
+      page:1,
+      size:20,
     }
   },
   methods: {
-    onsearch(params){
-      console.log(params);
-    },
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-    },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+    fetchData(){
+      this.getAllArticleData({
+        key:'partyBuildingNews',
+        params:{...this.params,size:this.size,page:this.page}
+      })
     }
   },
 };
 </script>
 <style lang="less" scoped>
-.partyBuildingNews{
-    padding: 15px 158px;
-    /deep/ .el-pagination{
-        margin-bottom: 20px;
-        text-align: center;
-    }
+.partyBuildingNews {
+  padding: 15px 158px;
+
+  /deep/ .el-pagination {
+    margin-bottom: 20px;
+    text-align: center;
+  }
 }
-
-
 </style>

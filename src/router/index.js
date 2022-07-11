@@ -1,7 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
-
+const origiPush = VueRouter.prototype.push
+// 修改 原型对象中的push方法
+VueRouter.prototype.push = function push(location) {
+  return origiPush.call(this, location).catch(err=>err)
+}
+const origiReplace = VueRouter.prototype.replace
+// 修改 原型对象中的push方法
+VueRouter.prototype.replace = function replace(location) {
+  return origiReplace.call(this, location).catch(err=>err)
+}
 const routes = [
   {
     path: "/",

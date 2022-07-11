@@ -1,42 +1,41 @@
 <template>
   <div class="purchaseAnnouncement">
     <search @search="onsearch" />
-    <myTable />
+    <myTable :tableData="allArticleData.purchaseAnnouncement.records"/>
     <el-pagination
         background
+        :page-size="size"
+        :total="allArticleData.purchaseAnnouncement.total"
+        :page-count="page"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        layout="total, prev, pager, next"
-        :total="1000">
+        layout="prev, pager, next">
     </el-pagination>
   </div>
 </template>
 <script>
-import search from '@/components/search.vue'
-import myTable from "@/components/myTable.vue";
+import mixin from "@/mixin/index.js";
 export default {
   name: 'purchaseAnnouncement',
-  components: {
-    search,
-    myTable
-  },
-  provide(){
-    return{
-    }
-  },
+  mixins:[mixin],
   data() {
     return {
+      params:{
+        idChannel:4,
+        startDate:'',
+        title:'',
+        endDate:'',
+      },
+      page:1,
+      size:20,
     }
   },
   methods: {
-    onsearch(params){
-      console.log(params);
-    },
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-    },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+    fetchData(){
+      this.getAllArticleData({
+        key:'purchaseAnnouncement',
+        params:{...this.params,size:this.size,page:this.page}
+      })
     }
   },
 };

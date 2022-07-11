@@ -2,9 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 // 引入文章模块
-import article from './article/article'
 import allArticle from './allArticle/allArticle'
-import findArticle from './findArticle/findArticle'
+import getters from './getters.js'
 
 Vue.use(Vuex)
 
@@ -17,5 +16,8 @@ export default new Vuex.Store({
     allArticle,
     // 根据文章id查找文章
     findArticle,
+  },
+  getters:{
+    ...getters
   }
 })

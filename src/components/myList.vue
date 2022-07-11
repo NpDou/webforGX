@@ -18,7 +18,14 @@
 <script>
 export default {
     name: "myList",
-    props:['tableData','page'],
+    props:{
+      tableData:{
+        type: Array,
+        default(){
+          return []
+        }
+      },
+    },
   data() {
     return {
       
