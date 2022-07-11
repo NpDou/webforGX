@@ -15,7 +15,7 @@ export default {
   actions: {
     //   获取文章的数据
     getAllArticleData({commit}, payload) {
-      get('/index/article/pageQuery', payload).then(res => {
+      get('/api/article/list', payload).then(res => {
         commit('SET_ALLARTICLEDATA', res.data)
       })
     }

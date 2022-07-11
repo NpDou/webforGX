@@ -11,7 +11,7 @@
 <script>
 import Head from "./components/Head.vue";
 import Foot from "./components/Foot.vue";
-
+import { mapActions } from "vuex";
 export default {
   components: {
     Head,
@@ -40,6 +40,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('allArticle',['getAllArticleData']),
     reload (){
        this.isRouterAlive = false
        this.$nextTick(function(){
@@ -48,6 +49,11 @@ export default {
     }
   },
   mounted(){
+    this.getAllArticleData({
+      current:1,
+      idChannel:1,
+      size:10,
+    })
     let time = localStorage.getItem("time");
     let today = new Date().getTime()
     if(today > time){
