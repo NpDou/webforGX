@@ -9,13 +9,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    
-    // 根据栏目查找第一个文章
-    article,
     // 根据栏目查找所有文章
     allArticle,
-    // 根据文章id查找文章
-    findArticle,
   },
   getters:{
     ...getters
