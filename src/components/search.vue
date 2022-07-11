@@ -20,11 +20,10 @@
 <script>
 export default {
     name: "headerTitle",
-    props:['content'],
   data() {
     return {
       name:'',
-      date:''
+      date:[]
     };
   },
   created() {

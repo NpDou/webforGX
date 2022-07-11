@@ -43,6 +43,7 @@ export default {
       }
   .myList{
     padding-bottom: 30px;
+    min-height: 50vh;
     li{
       display: flex;
       margin-bottom: 64px;

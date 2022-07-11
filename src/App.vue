@@ -2,7 +2,7 @@
   <div id="app" :class="haveFooter?'app':'app appFlex'">
     <Head></Head>
     <div :class="haveFooter?'main':'main mainFlex'">
-      <router-view v-if="isRouterAlive"/>
+      <router-view class="mainContent" v-if="isRouterAlive"/>
       <Foot v-if="haveFooter"></Foot>
     </div>
     <el-backtop v-if="hasSrollTop"></el-backtop>
@@ -67,15 +67,25 @@ html,
 body {
   height: 100%;
 }
+#app{
+  min-width: 1200px;
+}
 .main{
   padding-top: 114px;
+  background: #f5f6f7;
 }
 .mainFlex{
+ 
   height: 100%;
   box-sizing: border-box;
 }
 .appFlex{
   height: 100%;
 }
-
+.mainContent{
+    min-width: 1200px;
+    max-width: 1500px;
+    background: #fff;
+    margin: auto;
+  }
 </style>
