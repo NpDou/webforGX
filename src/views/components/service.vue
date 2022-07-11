@@ -8,28 +8,28 @@
     <div class="content">
         <div class="item">
             <div class="imgBox">
-                 <img src="../../assets/yxtx/banner.jpg" alt="">
+                 <img src="../../assets/banner1.png" alt="">
                 <p class="cover"></p>
             </div>
             <p class="title">土地综合整治</p>
         </div>
         <div class="item">
             <div class="imgBox">
-                 <img src="../../assets/yxtx/banner.jpg" alt="">
+                 <img src="../../assets/banner1.png" alt="">
                 <p class="cover"></p>
             </div>
             <p class="title">乡村振兴</p>
         </div>
         <div class="item">
             <div class="imgBox">
-                 <img src="../../assets/yxtx/banner.jpg" alt="">
+                 <img src="../../assets/banner1.png" alt="">
                 <p class="cover"></p>
             </div>
             <p class="title">集中采购</p>
         </div>
         <div class="item">
             <div class="imgBox">
-                 <img src="../../assets/yxtx/banner.jpg" alt="">
+                 <img src="../../assets/banner1.png" alt="">
                 <p class="cover"></p>
             </div>
             <p class="title">种植管护服务</p>

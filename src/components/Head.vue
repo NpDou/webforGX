@@ -191,7 +191,9 @@ export default {
   top: 0;
   z-index: 99;
   background: #fff;
-
+  min-width: 1200px;
+  overflow-x: auto;
+  overflow-y: hidden;
   .h_top {
     box-sizing: border-box;
     padding: 0 87px;

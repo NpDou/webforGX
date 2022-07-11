@@ -1,9 +1,11 @@
 <template>
   <div class="dynamicNews">
-    <search />
+    <search @search="onsearch" />
     <myList />
     <el-pagination
         background
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
         layout="prev, pager, next"
         :total="1000">
     </el-pagination>
@@ -26,8 +28,16 @@ export default {
     return {
     }
   },
-  methods: {
-    
+methods: {
+    onsearch(params){
+      console.log(params);
+    },
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    }
   },
 };
 </script>

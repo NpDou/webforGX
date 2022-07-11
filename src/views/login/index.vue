@@ -105,7 +105,7 @@ export default {
     .backContent{
         height: 100%;
         width: 100%;
-        background-image: url(../../assets/yxtx/banner.jpg);
+        background-image: url(../../assets/login_bg.png);
         background-origin: 100% 100%;
         background-repeat: no-repeat;
         background-size: cover;

@@ -80,7 +80,6 @@ export default {
 }
 .mainOne {
   width: 100%;
-  background: url("../assets/yxtx/main_bg.jpg") no-repeat center;
   background-size: cover;
   margin-top: 60px;
   .wrap {

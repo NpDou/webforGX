@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="imageBox">
-            <img src="../../assets/yxtx/banner.jpg" alt="">
+            <img src="../../assets/banner1.png" alt="">
         </div>
     </div>
 </template>

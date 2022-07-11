@@ -7,7 +7,7 @@
             <span @click="choseTab(2)" :class="['tabItem',2==activeTab?'active':'']">采购结果</span>
             <span @click="choseTab(3)" :class="['tabItem',3==activeTab?'active':'']">通知公告</span>
         </div>
-        <myTable />
+        <myTable :autoScroll="true" />
     </div>
   </div>
 </template>
