@@ -4,6 +4,7 @@
     <myList :tableData="allArticleData.partyBuildingNews.records"/>
     <el-pagination
         background
+        v-if="allArticleData.partyBuildingNews.total>0"
         :page-size="size"
         :total="allArticleData.partyBuildingNews.total"
         :page-count="page"

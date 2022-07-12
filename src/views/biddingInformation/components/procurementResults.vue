@@ -3,6 +3,7 @@
     <search @search="onsearch" />
     <myTable :tableData="allArticleData.procurementResults.records"/>
     <el-pagination
+        v-if="allArticleData.procurementResults.total>0"
         background
         :page-size="size"
         :total="allArticleData.procurementResults.total"

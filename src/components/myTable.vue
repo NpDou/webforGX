@@ -1,14 +1,14 @@
 <template>
   <div class="myTable">
     <ul ref="scrollUl" :class="autoScroll?'autoScroll':'notScroll'">
-        <li v-for="(item,index) in 16" :key="index">
+        <li v-for="(item,index) in tableData" :key="index">
             <span class="content">
               <span class=text>
-                广西壮族自治区亚热带作物研究所2022年6月至7月政府采购意向广西壮族自治区亚热带作物研究所2022年6月至7月政府采购意向广西壮族自治区亚热带作物研究所2022年6月至7月政府采购意向广西壮族自治区亚热带作物研究所2022年6月至7月政府采购意向广西壮族自治区亚热带作物研究所2022年6月至7月政府采购意向广西壮族自治区亚热带作物研究所2022年6月至7月政府采购意向广西壮族自治区亚热带作物研究所2022年6月至7月政府采购意向
+                {{item.title || '--'}}
+                <span v-if="getStatus(item)" class="tag">new</span>
               </span>
-              <span v-if="index==1||index==2" class="tag">new</span>
             </span>
-            <span class="time">2020-09-22  08:20:46</span>
+            <span class="time">{{item.modifyTime || '--'}}</span>
         </li>
     </ul>
   </div>
@@ -43,6 +43,11 @@ export default {
     }
   },
   methods: {
+    getStatus(item){
+      let todayDate=new Date().setHours(0,0,0,0);//把今天的日期时分秒设置为00：00：00，返回一个时间戳, 
+      let paramsDate=new Date(item.modifyTime).setHours(0,0,0,0);//给new Date()传入时间，并返回传入时间的时间戳
+      return todayDate===paramsDate;//时间戳相同时 True 就为今天 
+    },
     toRoll() {
       // 绑定滚动和鼠标事件
       this.animationLiveHood = animationUseScroll(

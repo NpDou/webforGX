@@ -3,6 +3,7 @@
     <search @search="onsearch" />
     <myList :tableData="allArticleData.announcement.records"/>
     <el-pagination
+        v-if="allArticleData.announcement.total>0"
         background
         :page-size="size"
         :total="allArticleData.announcement.total"

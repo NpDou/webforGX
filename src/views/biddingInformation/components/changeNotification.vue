@@ -4,6 +4,7 @@
     <myTable :tableData="allArticleData.changeNotification.records"/>
     <el-pagination
         background
+        v-if="allArticleData.changeNotification.total>0"
         :page-size="size"
         :total="allArticleData.changeNotification.total"
         :page-count="page"

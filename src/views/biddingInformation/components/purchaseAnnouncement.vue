@@ -4,6 +4,7 @@
     <myTable :tableData="allArticleData.purchaseAnnouncement.records"/>
     <el-pagination
         background
+        v-if="allArticleData.purchaseAnnouncement.total>0"
         :page-size="size"
         :total="allArticleData.purchaseAnnouncement.total"
         :page-count="page"

@@ -4,6 +4,7 @@
     <myList :tableData="allArticleData.dynamicNews.records"/>
     <el-pagination
         background
+        v-if="allArticleData.dynamicNews.total>0"
         :page-size="size"
         :total="allArticleData.dynamicNews.total"
         :page-count="page"

@@ -1,14 +1,14 @@
 <template>
   <div class="myList">
     <ul>
-        <li v-for="(item,index) in 8" :key="index">
+        <li v-for="(item,index) in tableData" :key="index">
             <div class="img">
                 <img src="../assets/meetting.png" alt="">
             </div>
             <div class="content">
-                <p class="title">无意者烈火焚身;以正义的烈火拔出黑暗。我</p>
-                <p class="time">2022-05-01</p>
-                <p class="text">折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结!真正的恩典因不折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结!真正的恩典因不折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结!真正的恩典因不折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结!真正的恩典因不折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结!</p>
+                <p class="title">{{item.title || '--'}}</p>
+                <p class="time">{{item.modifyTime}}</p>
+                <p class="text">{{item.summary}}</p>
             </div>
         </li>
     </ul>
