@@ -49,7 +49,7 @@ export default {
         this.$refs['scrollUl'],// 传入对应的ref 值
         {
           height: 33,
-          delay: 4000
+          delay: 2000
         }
       )
     },

@@ -112,7 +112,7 @@ export default {
         this.$emit('agree')
       },
       getTime(){
-        const TIME_COUNT = 60;
+        const TIME_COUNT = 30;
         if (!this.timer) {
             this.count = TIME_COUNT;
             this.show = false;

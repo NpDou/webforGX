@@ -37,7 +37,7 @@
         </el-menu>
       </div>
       <div class="d_flex action_container">
-        <span v-if="status" class="contactUs" @click="contactUs">联系我们</span>
+        <!-- <span v-if="status" class="contactUs" @click="contactUs">联系我们</span> -->
         <button v-if="!hasLogin" @click="Login">登录</button>
         <button v-if="!hasLogin" @click="register">注册</button>
         <span v-if="hasLogin" class="contactUs" @click="person">个人中心</span>
@@ -124,7 +124,12 @@ export default {
             description: '/biddingInformation?tab=changeNotification',
           },
         ]
-      }],
+      },{
+        id: 5,
+        name: '联系我们',
+        description: '/contactUs',
+      },
+      ],
       hideMenu:['person'],
       currentIndex: "",
     };
@@ -145,7 +150,10 @@ export default {
   },
   methods: {
     contactUs(){
-      window.scrollBy(0,99999)
+      this.$router.push({
+        path:'/contactUs'
+      })
+      // window.scrollBy(0,99999)
     },
     logout(){
       const loading = this.$loading({
@@ -192,8 +200,6 @@ export default {
   z-index: 99;
   background: #fff;
   min-width: 1200px;
-  overflow-x: auto;
-  overflow-y: hidden;
   .h_top {
     box-sizing: border-box;
     padding: 0 87px;

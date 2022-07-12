@@ -109,7 +109,7 @@ export default {
 <style lang="less" scoped>
     .person{
         padding: 17px 120px;
-         background: #f9f9f9;
+         background: #f5f6f7;
          min-height: 100%;
          /deep/.el-main{
             padding-top: 0;

@@ -66,6 +66,7 @@ export default {
 html,
 body {
   height: 100%;
+  background: #f5f6f7;
 }
 #app{
   min-width: 1200px;

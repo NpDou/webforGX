@@ -65,6 +65,14 @@ const routes = [
     component: () => import('../views/register/index.vue')
   },
   {
+    path: '/contactUs',
+    name: 'contactUs',
+    meta: {
+      scrollToTop: false
+    },
+    component: () => import('../views/components/contactUs.vue')
+  },
+  {
     path: '/person',
     name: 'person',
     meta: {

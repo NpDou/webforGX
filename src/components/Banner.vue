@@ -19,6 +19,10 @@
 
 <script>
 import { get } from "../utils/request";
+import {
+    mapActions,
+    mapGetters
+} from "vuex";
 export default {
   data() {
     return {
@@ -38,35 +42,25 @@ export default {
       },],
     };
   },
-  created() {
+  computed:{
+    ...mapGetters(['allArticleData']),
   },
-
   methods: {
+    ...mapActions('common', ['getBanner']),
     banerChange(index){
       this.carouselIndex=index
     },
     // 获取轮播图图片
-    getCarousel() {
-      get("/index/carousel/findAll").then((res) => {
-        if (res.status == 200) {
-          this.carousel = res.data;
-        } else {
-          this.$message({
-            type: "error",
-            message: res.message,
-          });
-        }
-      });
-    },
-    // 自定义箭头
-    arrowClick(val) {
-      if (val === "right") {
-        this.$refs.cardShow.next();
-      } else {
-        this.$refs.cardShow.prev();
-      }
+    fetchData(){
+      this.getBanner({
+          isShow:1,
+          type:'index'
+      })
     },
   },
+  mounted(){
+    this.fetchData()
+  }
 };
 </script>
 <style lang="less" scoped>

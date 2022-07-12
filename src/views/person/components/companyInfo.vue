@@ -142,7 +142,7 @@
     }
     .content{
       display: inline-block;
-      width: 70%;
+      flex: 1;
       line-height: 91px;
       color: rgba(145, 145, 145, 100);
      font-size: 14px;
@@ -153,7 +153,7 @@
     .label{
       display: inline-block;
       text-align: right;
-      width: 20%;
+      width: 160px;
       line-height: 91px;
       color: rgba(0, 0, 0, 1);
         font-size: 18px;
