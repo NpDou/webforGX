@@ -70,13 +70,13 @@ body {
 }
 #app{
   min-width: 1200px;
+  height: 100%;
 }
 .main{
   padding-top: 114px;
   background: #f5f6f7;
 }
 .mainFlex{
- 
   height: 100%;
   box-sizing: border-box;
 }

@@ -78,7 +78,7 @@ export default {
       }
     }
     .notScroll{
-      min-height: 50vh;
+      min-height: 25vh;
     }
     li{
       display: flex;

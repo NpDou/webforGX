@@ -4,9 +4,9 @@
       <div class="ftonr_r fl">
         <h2>联系我们</h2>
         <p>0771-5601506</p>
-        <div class="ftonr_r fl">
+        <!-- <div class="ftonr_r fl">
           <img src="../assets/building.png" alt="" />
-        </div>
+        </div> -->
       </div>
       <ul class="fl">
         <li>
