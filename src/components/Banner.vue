@@ -3,8 +3,8 @@
     <!-- 轮播图 -->
     <div class="banner">
       <el-carousel height="460px" :interval="4000" @change="banerChange" ref="cardShow">
-        <el-carousel-item v-for="(item, index) in carousel" :key="index+'676'">
-          <img src="../assets/banner1.png" title="我还没有链接，哈哈哈，就这样吧！" />
+        <el-carousel-item v-for="(item, index) in bannerList" :key="index">
+          <img :src="getSrc(item)" title="我还没有链接!" />
         </el-carousel-item>
       </el-carousel>
       <div :class="carouselIndex%2==0?'cover':'cover2'">
@@ -43,17 +43,20 @@ export default {
     };
   },
   computed:{
-    ...mapGetters(['allArticleData']),
+    ...mapGetters(['bannerList']),
   },
   methods: {
     ...mapActions('common', ['getBanner']),
     banerChange(index){
       this.carouselIndex=index
     },
+    getSrc(item){
+      return `${process.env.VUE_APP_SERVER_URL}/api/file/download?idFile=${item.id}`
+    },
     // 获取轮播图图片
     fetchData(){
       this.getBanner({
-          isShow:1,
+          isShow:0,
           type:'index'
       })
     },

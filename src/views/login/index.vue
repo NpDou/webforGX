@@ -20,10 +20,21 @@
             </el-form>
             <div class="otherAction">
                 <span @click="register">注册账号</span>
-                <span>忘记密码</span>
+                <span @click="centerDialogVisible = true">忘记密码</span>
             </div>
         </div>
         <p class="footerText">版权所有：广西博施隆海  桂ICP备10200667号</p>
+        <el-dialog
+            title="欢迎登录广西博施隆海"
+            :visible.sync="centerDialogVisible"
+            width="360px"
+            center>
+            <p class="centerContent">忘记密码请联系客服进行修改</p>
+            <p class="centerContent">客服咨询热线：0771-5601506</p>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -48,6 +59,7 @@ export default {
             }
         };
         return {
+            centerDialogVisible:false,
             ruleForm: {
                 name: '',
                 password: '',
@@ -175,5 +187,9 @@ export default {
                 }
             }
         }
+    }
+    .centerContent{
+        text-align: center;
+        padding: 20px;
     }
 </style>

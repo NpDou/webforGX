@@ -1,7 +1,7 @@
 <template>
   <div class="myTable">
-    <ul ref="scrollUl" :class="autoScroll?'autoScroll':'notScroll'">
-        <li v-for="(item,index) in tableData" :key="index">
+    <ul ref="scrollUl" v-if="tableData && tableData.length>0" :class="autoScroll?'autoScroll':'notScroll'">
+        <li v-for="(item,index) in tableData" :key="index" @click="gotoDetail(item)">
             <span class="content">
               <span class=text>
                 {{item.title || '--'}}
@@ -11,6 +11,7 @@
             <span class="time">{{item.modifyTime || '--'}}</span>
         </li>
     </ul>
+    <el-empty v-else :image-size="200"></el-empty>
   </div>
 </template>
 
@@ -30,6 +31,18 @@ export default {
         default(){
           return false
         }
+      },
+      tab:{
+        type:String,
+        default(){
+          return ''
+        }
+      },
+      type:{
+        type:String,
+        default(){
+          return ''
+        }
       }
     },
   data() {
@@ -43,6 +56,17 @@ export default {
     }
   },
   methods: {
+    gotoDetail(item){
+      console.log(this.tab,);
+      this.$router.push({
+        path:'/detail',
+        query:{
+          id:item.id,
+          tab:this.tab || this.$route.query.tab,
+          type:this.type || this.$route.name
+        }
+      })
+    },
     getStatus(item){
       let todayDate=new Date().setHours(0,0,0,0);//把今天的日期时分秒设置为00：00：00，返回一个时间戳, 
       let paramsDate=new Date(item.modifyTime).setHours(0,0,0,0);//给new Date()传入时间，并返回传入时间的时间戳
@@ -50,13 +74,18 @@ export default {
     },
     toRoll() {
       // 绑定滚动和鼠标事件
-      this.animationLiveHood = animationUseScroll(
-        this.$refs['scrollUl'],// 传入对应的ref 值
-        {
-          height: 33,
-          delay: 2000
-        }
-      )
+      if(this.$refs['scrollUl']){
+        this.animationLiveHood = animationUseScroll(
+          this.$refs['scrollUl'],// 传入对应的ref 值
+          {
+            height: 33,
+            delay: 2000
+          }
+        )
+      }else{
+        this.animationLiveHood = null
+      }
+      
     },
   },
   destoryed() {
@@ -67,6 +96,7 @@ export default {
 </script>
 <style lang="less" scoped>
   .myTable{
+    min-height: 25vh;
     padding-bottom: 30px;
     .autoScroll{
       height:330px;

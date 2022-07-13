@@ -2,7 +2,7 @@
   <div class="companyNews">
     <headerTitle content="公司动态新闻" url="/companyDynamics?tab=dynamicNews" class="title" />
     <div class="container">
-      <myTable :tableData="allArticleData.dynamicNews.records"/>
+      <myTable tab="dynamicNews" type="home" :tableData="allArticleData.dynamicNews.records"/>
     </div>
   </div>
 </template>

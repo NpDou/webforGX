@@ -49,6 +49,14 @@ const routes = [
     component: () => import('../views/biddingInformation/index.vue')
   },
   {
+    path: '/detail',
+    name: 'detail',
+    meta: {
+      scrollToTop: true
+    },
+    component: () => import('../components/detail.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     meta: {

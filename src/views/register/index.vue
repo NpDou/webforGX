@@ -59,10 +59,10 @@ export default {
       },
       nextStep(){
         if (this.active==0) {
-            this.$refs.setaccount&&this.$refs.setaccount.submitForm('ruleForm',this.next())
+            this.$refs.setaccount&&this.$refs.setaccount.submitForm('ruleForm',this.next)
         }
         if (this.active==1) {
-            this.$refs.setInfo&&this.$refs.setInfo.submitForm('ruleForm',this.next())
+            this.$refs.setInfo&&this.$refs.setInfo.submitForm('ruleForm',this.next)
         }
       },
       prevStep(){

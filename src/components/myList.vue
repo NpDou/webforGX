@@ -1,17 +1,18 @@
 <template>
   <div class="myList">
-    <ul>
-        <li v-for="(item,index) in tableData" :key="index">
+    <ul v-if="tableData && tableData.length>0">
+        <li v-for="(item,index) in tableData" :key="index" @click="gotoDetail(item)">
             <div class="img">
-                <img src="../assets/meetting.png" alt="">
+                <img :src="getSrc(item)" alt="">
             </div>
             <div class="content">
                 <p class="title">{{item.title || '--'}}</p>
-                <p class="time">{{item.modifyTime}}</p>
-                <p class="text">{{item.summary}}</p>
+                <p class="time">{{item.modifyTime || '--'}}</p>
+                <p class="text">{{item.summary || '--'}}</p>
             </div>
         </li>
     </ul>
+    <el-empty v-else :image-size="200"></el-empty>
   </div>
 </template>
 
@@ -25,6 +26,18 @@ export default {
           return []
         }
       },
+      tab:{
+        type:String,
+        default(){
+          return ''
+        }
+      },
+      type:{
+        type:String,
+        default(){
+          return ''
+        }
+      }
     },
   data() {
     return {
@@ -35,7 +48,19 @@ export default {
   },
 
   methods: {
-    
+    getSrc(item){
+      return `${process.env.VUE_APP_SERVER_URL}/api/file/download?idFile=${item.id}`
+    },
+    gotoDetail(item){
+      this.$router.push({
+        path:'/detail',
+        query:{
+          id:item.id,
+          tab:this.tab || this.$route.query.tab,
+          type:this.type || this.$route.name
+        }
+      })
+    }
   },
 };
 </script>
@@ -50,7 +75,7 @@ export default {
       }
   .myList{
     padding-bottom: 30px;
-    min-height: 50vh;
+    min-height: 25vh;
     li{
       display: flex;
       margin-bottom: 64px;

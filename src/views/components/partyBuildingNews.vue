@@ -2,7 +2,7 @@
   <div class="partyBuildingNews">
     <headerTitle content="党建新闻" url="/companyDynamics?tab=partyBuildingNews" class="title" />
     <div class="container">
-        <myTable :tableData="allArticleData.dynamicNews.records"/>
+        <myTable tab="partyBuildingNews" type="home" :tableData="allArticleData.dynamicNews.records"/>
     </div>
   </div>
 </template>

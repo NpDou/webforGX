@@ -2,7 +2,7 @@
   <div class="notice">
     <headerTitle content="通知公告" url="/companyDynamics?tab=announcement" class="title" />
     <div class="container">
-        <myTable :tableData="allArticleData.announcement.records"/>
+        <myTable tab="announcement" type="home" :tableData="allArticleData.announcement.records"/>
     </div>
   </div>
 </template>
