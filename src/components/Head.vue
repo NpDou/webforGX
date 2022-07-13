@@ -5,7 +5,7 @@
       <div class="left_side">
         <i style="color: rgba(200, 22, 36, 1);font-size: 16px;margin-right: 5px;" class="el-icon-phone"></i>
         <span>咨询服务热线：</span>
-        <span style="color: rgba(200, 22, 36, 1);font-size: 16px;margin-left: 5px;">0771-56015</span>
+        <span style="color: rgba(200, 22, 36, 1);font-size: 16px;margin-left: 5px;">0771-5601506</span>
       </div>
       <div class="right_side">
         <span>品质成就品牌</span>

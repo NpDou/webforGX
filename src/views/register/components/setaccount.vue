@@ -66,6 +66,8 @@
             //使用正则表达式进行验证手机号码
             if (!/^1[3456789]\d{9}$/.test(value)){
                 callback(new Error('手机号不正确！'));
+            }else{
+                callback()
             }
         };
         return {

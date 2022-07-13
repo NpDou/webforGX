@@ -95,13 +95,7 @@ export default {
         },
         submitForm(formName,cb) {
             this.$refs[formName].validate((valid) => {
-            if (valid) {
-                alert('submit!');
-                cb&&cb()
-            } else {
-                console.log('error submit!!');
-                return false;
-            }
+                return valid
             });
         },
         beforeAvatarUpload(file) {
