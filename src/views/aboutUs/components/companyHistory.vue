@@ -27,7 +27,7 @@
   .container{
     flex: 1;
     height: 562px;
-    background: url(../../../assets/image3.png);
+    background: url(../../../assets/history.png);
     background-position: 100% 100%;
     background-repeat: no-repeat;
     background-size: cover;

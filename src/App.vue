@@ -48,12 +48,12 @@ export default {
     }
   },
   mounted(){
-    let time = localStorage.getItem("time");
+    let time = localStorage.getItem(`${process.env.VUE_APP_SERVER_URL}-time`);
     let today = new Date().getTime()
     if(today > time){
-      localStorage.removeItem("userId");
-      localStorage.removeItem("password");
-      localStorage.removeItem("time");
+      localStorage.removeItem(`${process.env.VUE_APP_SERVER_URL}-account`);
+      localStorage.removeItem(`${process.env.VUE_APP_SERVER_URL}-password`);
+      localStorage.removeItem(`${process.env.VUE_APP_SERVER_URL}-time`);
     }
   }
 };

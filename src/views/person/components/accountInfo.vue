@@ -4,7 +4,7 @@
             <li>
                 <span class="content">
                     <p>用户名</p>
-                    <p>15674856城规</p>
+                    <p>{{userInfo.account || '--'}}</p>
                 </span>
                 <span class="time">编辑</span>
             </li>
@@ -18,21 +18,21 @@
             <li>
                 <span class="content">
                     <p>管理员姓名</p>
-                    <p>谢武</p>
+                    <p>{{userInfo.name || '--'}}</p>
                 </span>
                 <span class="time">编辑</span>
             </li>
             <li>
                 <span class="content">
                     <p>管理员电话</p>
-                    <p>0771****485</p>
+                    <p>{{userInfo.telephone || '--'}}</p>
                 </span>
                 <span class="time">编辑</span>
             </li>
             <li>
                 <span class="content">
                     <p>管理员手机</p>
-                    <p>183****3333</p>
+                    <p>{{userInfo.cellphone || '--'}}</p>
                 </span>
                 <span class="time">编辑</span>
             </li>
@@ -56,6 +56,14 @@
     data(){
       return {
         centerDialogVisible:false
+      }
+    },
+    props:{
+      userInfo:{
+        type:Object,
+        default(){
+          return {}
+        }
       }
     }
   }

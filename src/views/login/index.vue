@@ -3,8 +3,8 @@
         <div class="formContent">
             <p class="title">欢迎登录广西博施隆海</p>
             <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
-                <el-form-item label="" prop="name">
-                    <el-input placeholder="请输入用户名" v-model="ruleForm.name" autocomplete="off">
+                <el-form-item label="" prop="account">
+                    <el-input placeholder="请输入用户名" v-model="ruleForm.account" autocomplete="off">
                     <i slot="prefix" class="el-input__icon el-icon-user-solid"></i></el-input>
                 </el-form-item>
                 <el-form-item label="" prop="password">
@@ -40,7 +40,7 @@
 
 <script>
 const Base64 = require("js-base64").Base64
-
+import { post } from "../../utils/request";
 export default {
     name: 'login',
     data() {
@@ -61,11 +61,11 @@ export default {
         return {
             centerDialogVisible:false,
             ruleForm: {
-                name: '',
+                account: '',
                 password: '',
             },
             rules: {
-                name: [
+                account: [
                     { validator: validateName, trigger: 'blur' }
                 ],
                 password: [
@@ -79,18 +79,22 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    if (this.checked) {
-                        let password = Base64.encode(this.ruleForm.password); // base64加密
-                        localStorage.setItem("name", this.ruleForm.name);
-                        localStorage.setItem("password", password);
-                        localStorage.setItem("time", new Date().getTime() + 86400000 * 15);
-                    } else {
-                        localStorage.removeItem("userId");
-                        localStorage.removeItem("password");
-                        localStorage.removeItem("time");
-                    }
-                    this.setSessionItem("SESSIONID", JSON.stringify('data'));
-                    this.$router.push('/person')
+                    post('/api/gys/supplier/supplierLogin',this.ruleForm).then(res=>{
+                        if(res.code==20000){
+                            if (this.checked) {
+                                let password = Base64.encode(this.ruleForm.password); // base64加密
+                                localStorage.setItem(`${process.env.VUE_APP_SERVER_URL}-account`, this.ruleForm.account);
+                                localStorage.setItem(`${process.env.VUE_APP_SERVER_URL}-password`, password);
+                                localStorage.setItem(`${process.env.VUE_APP_SERVER_URL}-time`, new Date().getTime() + 86400000 * 15);
+                            } else {
+                                localStorage.removeItem(`${process.env.VUE_APP_SERVER_URL}-account`);
+                                localStorage.removeItem(`${process.env.VUE_APP_SERVER_URL}-password`);
+                                localStorage.removeItem(`${process.env.VUE_APP_SERVER_URL}-time`);
+                            }
+                            this.setSessionItem("SESSIONID", JSON.stringify(res.data));
+                            this.$router.push('/person')
+                        }
+                    })
                 } else {
                     console.log('error submit!!');
                     return false;
@@ -104,10 +108,10 @@ export default {
         }
     },
     mounted(){
-        let username = localStorage.getItem("name");
+        let username = localStorage.getItem(`${process.env.VUE_APP_SERVER_URL}-account`);
         if (username) {
-            this.ruleForm.name = localStorage.getItem("name");
-            this.ruleForm.password = Base64.decode(localStorage.getItem("password"));// base64解密
+            this.ruleForm.account = localStorage.getItem(`${process.env.VUE_APP_SERVER_URL}-account`);
+            this.ruleForm.password = Base64.decode(localStorage.getItem(`${process.env.VUE_APP_SERVER_URL}-password`));// base64解密
             this.checked = true;
         }
     }

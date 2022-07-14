@@ -9,9 +9,9 @@
                 </el-steps>
             </div>
             <div class="content">
-                <setaccount v-if="active==0" ref="setaccount" />
-                <setInfo v-if="active==1" ref="setInfo" />
-                <upload v-if="active==2" ref="upload" />
+                <setaccount v-show="active==0" ref="setaccount" />
+                <setInfo v-show="active==1" ref="setInfo" />
+                <upload v-show="active==2" ref="upload" />
                 <div class="registerAction">
                     <button v-if="active==0" class="cancel" @click="goback">取消</button>
                     <button v-if="active!=0" @click="prevStep">上一步</button>
@@ -29,13 +29,38 @@ import agreement from './components/agreement.vue';
 import setaccount from './components/setaccount.vue';
 import setInfo from './components/setInfo.vue';
 import upload from './components/upload.vue';
-
+//              account:this.form.account,//用户名
+//                   password:this.form.password,//密码
+//                   name:this.form.name,//账号管理员姓名
+//                   email:this.form.email,//账号管理员邮箱
+//                   cellphone:this.form.cellphone,//账号管理员手机
+//                   telephone:this.form.telephone,//账号管理员电话
+//                   supplierName:this.form.supplierName,//供应商名称
+//                   code:this.form.code,//统一社会信用代码
+//                   qyxz:this.form.qyxz,//企业性质
+//                   djjg:this.form.djjg,//登记机关
+//                   jyStatus:this.form.jyStatus,//经营状态
+//                   jyqx:this.form.jyqx?this.form.jyqx.toString():'',//经营期限
+//                   address:this.form.address,//经营地址
+//                   zczj:this.form.zczj,//注册资金
+//                   supplierType: this.form.supplierType,//供应商类型
+//                   bankAccount:this.form.bankAccount,//银行账户
+//                   khhmc:this.form.khhmc,//开户行名称
+//                   dwxxdz:this.form.dwxxdz,//单位详细地址
+//                   personName:this.form.personName,//法人代表姓名
+//                   personPhone:this.form.personPhone,//法人联系方式
+//                   businessScope:this.form.businessScope,//经营范围
+//                   yyzz:this.form.yyzz,//营业执照id
+//                   aqscxkz:this.form.aqscxkz,//安全生产许可证id
+//                   zzzsIds:this.zzzs.toString(),//资质证书id集合
+//                   xgyjIds:this.xgyj.toString(),//相关业绩id集合
+//                   qycxzzIds:this.qycxzz.toString(),//企业诚信资质id集合
 export default {
     name: "register",
     data() {
         return {
             agree:false,
-            active: 0,
+            active: 2,
         };
     },
     components:{
@@ -63,6 +88,9 @@ export default {
         }
         if (this.active==1) {
             this.$refs.setInfo&&this.$refs.setInfo.submitForm('ruleForm',this.next)
+        }
+        if (this.active==2) {
+            this.$refs.upload&&this.$refs.upload.submitForm('ruleForm',this.next)
         }
       },
       prevStep(){
