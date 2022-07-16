@@ -6,7 +6,7 @@
                     供应商名称
                 </span>
                 <span class="content">
-                    南宁市城规地理信息技术有限公司
+                    {{userInfo.supplierName || '--'}}
                 </span>
             </li>
             <li>
@@ -14,7 +14,7 @@
                     供应商类型
                 </span>
                 <span class="content">
-                    设计单位
+                    {{userInfo.supplierType || '--'}}
                 </span>
             </li>
             <li>
@@ -22,7 +22,7 @@
                     统一社会信用代码
                 </span>
                 <span class="content">
-                    3468017591785XXXf4531896235346
+                    {{userInfo.code || '--'}}
                 </span>
             </li>
             <li>
@@ -30,7 +30,7 @@
                     企业性质
                 </span>
                 <span class="content">
-                    国有企业
+                    {{userInfo.qyxz || '--'}}
                 </span>
             </li>
 
@@ -39,7 +39,7 @@
                     登记机关
                 </span>
                 <span class="content">
-                    XXXXXXXX
+                    {{userInfo.djjg || '--'}}
                 </span>
             </li>
             <li>
@@ -47,7 +47,7 @@
                     经营状态
                 </span>
                 <span class="content">
-                    在营
+                    {{userInfo.jyStatus || '--'}}
                 </span>
             </li>
             <li>
@@ -55,9 +55,9 @@
                     经营期限
                 </span>
                 <span class="content">
-                    2022-01-13
+                    {{userInfo.jyqx.split(',')[0] || '--'}}
                     <i>至</i>
-                    2042-01-13
+                    {{userInfo.jyqx.split(',')[1] || '--'}}
                 </span>
             </li>
             <li>
@@ -65,7 +65,7 @@
                     注册资金
                 </span>
                 <span class="content">
-                    ￥ 2000.00万
+                    ￥ {{userInfo.zczj || '--'}}万
                 </span>
             </li>
             <li>
@@ -73,7 +73,7 @@
                     开户行名称
                 </span>
                 <span class="content">
-                    中国建设银行茶花园路支行
+                    {{userInfo.khhmc || '--'}}
                 </span>
             </li>
             <li>
@@ -81,7 +81,7 @@
                     银行账号
                 </span>
                 <span class="content">
-                    6217 0033 6666 321
+                    {{userInfo.bankAccount || '--'}}
                 </span>
             </li>
             <li>
@@ -89,7 +89,7 @@
                     法定代表人姓名
                 </span>
                 <span class="content">
-                    谢武
+                    {{userInfo.personName || '--'}}
                 </span>
             </li>
             <li>
@@ -97,7 +97,7 @@
                     法人联系方式
                 </span>
                 <span class="content">
-                    13307815895
+                    {{userInfo.personPhone || '--'}}
                 </span>
             </li>
             <li>
@@ -105,15 +105,15 @@
                     单位详细地址
                 </span>
                 <span class="content">
-                    广西南宁市青秀区XXXX路XXXXXXXXX
+                    {{userInfo.dwxxdz || '--'}}
                 </span>
             </li>
             <li>
                 <span class="label">
-                    单位详细地址
+                    经营范围
                 </span>
                 <span class="content">
-                    XXXXXXXXXXXXXX、XXXXXXXXXXXXXX、XXXXXXXXXXXXXXXXX、XXXXXXXXX、XXXXXXXXXXXX、XXXXXXXXXXXXXXXXX、XXXXXXXXXXXX、XXXXXXXXX、XXXXXXXXXXXXXXX、XXXXXXXXXXXXXX、XXXXXXXXXXXX、XXXXXXXXXXX、XXXXX、XXXXXXXXXXXXXXXXXXXXXX、XXXXXXXXXXXXXXXXXXXXXXX、XXXXXXXXXXXXXX、XXXXXXXXXXXX
+                    {{userInfo.businessScope || '--'}}
                 </span>
             </li>
 
@@ -122,7 +122,15 @@
   </template>
   <script>
   export default {
-    name:'companyInfo'
+    name:'companyInfo',
+    props:{
+      userInfo:{
+        type:Object,
+        default(){
+          return {}
+        }
+      }
+    }
   }
   </script>
   <style lang="less">
@@ -142,7 +150,7 @@
     }
     .content{
       display: inline-block;
-      width: 70%;
+      flex: 1;
       line-height: 91px;
       color: rgba(145, 145, 145, 100);
      font-size: 14px;
@@ -153,7 +161,7 @@
     .label{
       display: inline-block;
       text-align: right;
-      width: 20%;
+      width: 160px;
       line-height: 91px;
       color: rgba(0, 0, 0, 1);
         font-size: 18px;

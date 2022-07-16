@@ -3,8 +3,8 @@
     <!-- 轮播图 -->
     <div class="banner">
       <el-carousel height="460px" :interval="4000" @change="banerChange" ref="cardShow">
-        <el-carousel-item v-for="(item, index) in carousel" :key="index+'676'">
-          <img src="../assets/banner1.png" title="我还没有链接，哈哈哈，就这样吧！" />
+        <el-carousel-item v-for="(item, index) in bannerList" :key="index">
+          <img :src="getSrc(item)" title="我还没有链接!" />
         </el-carousel-item>
       </el-carousel>
       <div :class="carouselIndex%2==0?'cover':'cover2'">
@@ -19,6 +19,10 @@
 
 <script>
 import { get } from "../utils/request";
+import {
+    mapActions,
+    mapGetters
+} from "vuex";
 export default {
   data() {
     return {
@@ -38,35 +42,28 @@ export default {
       },],
     };
   },
-  created() {
+  computed:{
+    ...mapGetters(['bannerList']),
   },
-
   methods: {
+    ...mapActions('common', ['getBanner']),
     banerChange(index){
       this.carouselIndex=index
     },
-    // 获取轮播图图片
-    getCarousel() {
-      get("/index/carousel/findAll").then((res) => {
-        if (res.status == 200) {
-          this.carousel = res.data;
-        } else {
-          this.$message({
-            type: "error",
-            message: res.message,
-          });
-        }
-      });
+    getSrc(item){
+      return `${process.env.VUE_APP_SERVER_URL}/api/file/download?idFile=${item.id}`
     },
-    // 自定义箭头
-    arrowClick(val) {
-      if (val === "right") {
-        this.$refs.cardShow.next();
-      } else {
-        this.$refs.cardShow.prev();
-      }
+    // 获取轮播图图片
+    fetchData(){
+      this.getBanner({
+          isShow:0,
+          type:'index'
+      })
     },
   },
+  mounted(){
+    this.fetchData()
+  }
 };
 </script>
 <style lang="less" scoped>

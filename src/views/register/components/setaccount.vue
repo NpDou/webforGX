@@ -1,26 +1,26 @@
 <template>
     <div class="setaccount">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="150px" class="demo-ruleForm">
-            <el-form-item label="用户名：" prop="name">
-                <el-input v-model="ruleForm.name"></el-input>
+            <el-form-item label="用户名：" prop="account">
+                <el-input v-model="ruleForm.account"></el-input>
             </el-form-item>
-            <el-form-item label="密码：" prop="psd">
-                <el-input type="password" v-model="ruleForm.psd"></el-input>
+            <el-form-item label="密码：" prop="password">
+                <el-input type="password" v-model="ruleForm.password"></el-input>
             </el-form-item>
             <el-form-item label="确认密码：" prop="checkpsd">
                 <el-input type="password" v-model="ruleForm.checkpsd"></el-input>
             </el-form-item>
-            <el-form-item label="账号管理员姓名：" prop="manageName">
-                <el-input v-model="ruleForm.manageName"></el-input>
+            <el-form-item label="账号管理员姓名：" prop="name">
+                <el-input v-model="ruleForm.name"></el-input>
             </el-form-item>
-            <el-form-item label="账号管理员邮箱：" prop="manageEmail">
-                <el-input v-model="ruleForm.manageEmail"></el-input>
+            <el-form-item label="账号管理员邮箱：" prop="email">
+                <el-input v-model="ruleForm.email"></el-input>
             </el-form-item>
-            <el-form-item label="账号管理员手机：" prop="managePhone">
-                <el-input oninput="if(isNaN(value)) { value = null }" v-model="ruleForm.managePhone"></el-input>
+            <el-form-item label="账号管理员手机：" prop="cellphone">
+                <el-input oninput="if(isNaN(value)) { value = null }" v-model="ruleForm.cellphone"></el-input>
             </el-form-item>
-            <el-form-item label="账号管理员电话：" prop="manageTel">
-                <el-input oninput="if(isNaN(value)) { value = null }" v-model="ruleForm.manageTel"></el-input>
+            <el-form-item label="账号管理员电话：" prop="telephone">
+                <el-input oninput="if(isNaN(value)) { value = null }" v-model="ruleForm.telephone"></el-input>
             </el-form-item>
         </el-form>
     </div>
@@ -40,7 +40,7 @@
         var validatePass2 = (rule, value, callback) => {
             if (value === '') {
                 callback(new Error('请再次输入密码'));
-            } else if (value !== this.ruleForm.psd) {
+            } else if (value !== this.ruleForm.password) {
                 callback(new Error('两次输入密码不一致!'));
             } else {
                 callback();
@@ -66,38 +66,41 @@
             //使用正则表达式进行验证手机号码
             if (!/^1[3456789]\d{9}$/.test(value)){
                 callback(new Error('手机号不正确！'));
+            }else{
+                callback()
             }
         };
         return {
+
             ruleForm: {
                 name: '',
-                psd: '',
+                password: '',
                 checkpsd: '',
-                manageName: '',
-                manageEmail: '',
-                managePhone: '',
-                manageTel: '',
+                name: '',
+                email: '',
+                cellphone: '',
+                telephone: '',
             },
             rules: {
-                name: [
+                account: [
                     { required: true, message: '请输入名称', trigger: 'blur' },
                 ],
-                psd: [
+                password: [
                     { required: true, validator: validatePass, trigger: 'blur' },
                 ],
                 checkpsd: [
                     { required: true, validator: validatePass2, trigger: 'blur' },
                 ],
-                manageName: [
+                name: [
                     { required: true, message: '请输入管理员姓名', trigger: 'blur' },
                 ],
-                manageEmail: [
+                email: [
                     { required: true, validator: checkEmail, trigger: 'blur' },
                 ],
-                managePhone: [
+                cellphone: [
                     { required: true, validator: validatePhone, trigger: 'blur' },
                 ],
-                manageTel: [
+                telephone: [
                     { required: true, message: '请输入管理员电话', trigger: 'blur' },
                 ],
             }

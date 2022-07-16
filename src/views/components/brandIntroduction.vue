@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="imageBox">
-            <img src="../../assets/banner1.png" alt="">
+            <img src="../../assets/Introduction.png" alt="">
         </div>
     </div>
 </template>

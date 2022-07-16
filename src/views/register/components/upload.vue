@@ -4,45 +4,45 @@
             <p class="tips">请上传以下资料由公司账号管理员进行注册</p>
             <div class="content">
                 <div class="item">
-                    <el-form-item label="营业执照：" prop="name">
-                        <el-upload accept=".jpg" :limit="1" action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card"
-                            :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+                    <el-form-item label="营业执照：" prop="yyzz">
+                        <el-upload :on-success="(response, file, fileList)=>{uploadSuccess(response, file, fileList,'yyzz')}" :before-upload="beforeAvatarUpload" accept=".jpg" :limit="1" :action="uploadAction" list-type="picture-card"
+                            :on-preview="handlePictureCardPreview" :on-remove="(file, fileList)=>{handleRemove(file, fileList,'yyzz')}">
                             <i class="el-icon-plus"></i>
-                            <div slot="tip" class="el-upload__tip">只支持.jpg 格式</div>
+                            <div slot="tip" class="el-upload__tip">只支持.jpg 格式且不超过500kb</div>
                         </el-upload>
                     </el-form-item>
                 </div>
                 <div class="item">
-                    <el-form-item label="安全生产许可证：" prop="name">
-                        <el-upload accept=".jpg" :limit="1" action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card"
-                            :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+                    <el-form-item label="安全生产许可证：" prop="aqscxkz">
+                        <el-upload :on-success="(response, file, fileList)=>{uploadSuccess(response, file, fileList,'aqscxkz')}" :before-upload="beforeAvatarUpload" accept=".jpg" :limit="1" :action="uploadAction" list-type="picture-card"
+                            :on-preview="handlePictureCardPreview" :on-remove="(file, fileList)=>{handleRemove(file, fileList,'aqscxkz')}">
                             <i class="el-icon-plus"></i>
-                            <div slot="tip" class="el-upload__tip">只支持.jpg 格式</div>
+                            <div slot="tip" class="el-upload__tip">只支持.jpg 格式且不超过500kb</div>
                         </el-upload>
                     </el-form-item>
                     <p></p>
                 </div>
                 <div class="item">
-                    <el-form-item label="资质证书：" prop="name">
-                        <el-upload accept=".jpg" :limit="1" action="https://jsonplaceholder.typicode.com/posts/" list-type="picture-card"
-                            :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+                    <el-form-item label="资质证书：" prop="zzzsIds">
+                        <el-upload :on-success="(response, file, fileList)=>{uploadSuccess(response, file, fileList,'zzzsIds')}" :before-upload="beforeAvatarUpload" accept=".jpg" :action="uploadAction" list-type="picture-card"
+                            :on-preview="handlePictureCardPreview" :on-remove="(file, fileList)=>{handleRemove(file, fileList,'zzzsIds')}">
                             <i class="el-icon-plus"></i>
-                            <div slot="tip" class="el-upload__tip">只支持.jpg 格式</div>
+                            <div slot="tip" class="el-upload__tip">只支持.jpg 格式且不超过500kb</div>
                         </el-upload>
                     </el-form-item>
                 </div>
                 <div class="item">
-                    <el-form-item label="相关业绩：" prop="name">
-                        <el-upload class="upload-demo" accept=".jpg" :limit="1" action="https://jsonplaceholder.typicode.com/posts/" 
-                            :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+                    <el-form-item label="相关业绩：" prop="xgyjIds">
+                        <el-upload :on-success="(response, file, fileList)=>{uploadSuccess(response, file, fileList,'xgyjIds')}" :on-preview="handlePictureCardPreview" class="upload-demo" :action="uploadAction" 
+                             :on-remove="(file, fileList)=>{handleRemove(file, fileList,'xgyjIds')}">
                             <el-button size="small" type="primary">上传文件</el-button>
                         </el-upload>
                     </el-form-item>
                 </div>
                 <div class="item">
-                    <el-form-item label="企业诚信资质：" prop="name">
-                        <el-upload class="upload-demo" accept=".jpg" :limit="1" action="https://jsonplaceholder.typicode.com/posts/"
-                            :on-preview="handlePictureCardPreview" :on-remove="handleRemove">
+                    <el-form-item label="企业诚信资质：" prop="qycxzzIds">
+                        <el-upload :on-success="(response, file, fileList)=>{uploadSuccess(response, file, fileList,'qycxzzIds')}" :on-preview="handlePictureCardPreview" class="upload-demo" :action="uploadAction"
+                            :on-remove="(file, fileList)=>{handleRemove(file, fileList,'qycxzzIds')}">
                             <el-button size="small" type="primary">上传文件</el-button>
                         </el-upload>
                     </el-form-item>
@@ -63,46 +63,64 @@ export default {
             dialogImageUrl: '',
             dialogVisible: false,
             ruleForm: {
-                name: '',
-                psd: '',
-                checkpsd: '',
-                manageName: '',
-                manageEmail: '',
-                managePhone: '',
-                manageTel: '',
+                yyzz: '',
+                aqscxkz: '',
+                zzzsIds: '',
+                xgyjIds: '',
+                qycxzzIds: '',
             },
+            uploadAction:`${process.env.VUE_APP_SERVER_URL}/api/file`,
             rules: {
-                name: [
-                    { required: true, message: '请输入名称', trigger: 'blur' },
+                yyzz: [
+                    { required: true, message: '请上传相关文件', trigger: 'blur' },
                 ],
-                psd: [
-                    { required: true, message: '请输入名称', trigger: 'blur' },
+                aqscxkz: [
+                    { required: true, message: '请上传相关文件', trigger: 'blur' },
                 ],
-                checkpsd: [
-                    { required: true, message: '请输入名称', trigger: 'blur' },
+                zzzsIds: [
+                    { required: true, message: '请上传相关文件', trigger: 'blur' },
+                ],
+                xgyjIds: [
+                    { required: true, message: '请上传相关文件', trigger: 'blur' },
+                ],
+                qycxzzIds: [
+                    { required: true, message: '请上传相关文件', trigger: 'blur' },
                 ],
             }
         };
     },
     methods: {
-        handleRemove(file, fileList) {
-            console.log(file, fileList);
+        handleRemove(file, fileList,key) {
+            this.$set(this.ruleForm,key,fileList)
+            console.log(this.ruleForm);
+            this.$refs['ruleForm'].validateField(key);
+        },
+        uploadSuccess(response, file, fileList,key){
+            this.$set(this.ruleForm,key,fileList)
+            this.$refs['ruleForm'].validateField(key);
+            console.log(response, file, fileList,key);
         },
         handlePictureCardPreview(file) {
             this.dialogImageUrl = file.url;
             this.dialogVisible = true;
         },
         submitForm(formName,cb) {
+            console.log(111);
             this.$refs[formName].validate((valid) => {
-            if (valid) {
-                alert('submit!');
-                cb&&cb()
-            } else {
-                console.log('error submit!!');
-                return false;
-            }
+                return valid
             });
         },
+        beforeAvatarUpload(file) {
+            const isJPG = file.type === 'image/jpeg';
+            const isLt2M = file.size / 1024 < 5.12;
+            if (!isJPG) {
+                this.$message.error('上传头像图片只能是 JPG 格式!');
+            }
+            if (!isLt2M) {
+            this.$message.error('上传头像图片大小不能超过 512k!');
+            }
+            return isJPG && isLt2M;
+        }
     }
 }
 </script>

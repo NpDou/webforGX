@@ -1,7 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
-
+const origiPush = VueRouter.prototype.push
+// 修改 原型对象中的push方法
+VueRouter.prototype.push = function push(location) {
+  return origiPush.call(this, location).catch(err=>err)
+}
+const origiReplace = VueRouter.prototype.replace
+// 修改 原型对象中的push方法
+VueRouter.prototype.replace = function replace(location) {
+  return origiReplace.call(this, location).catch(err=>err)
+}
 const routes = [
   {
     path: "/",
@@ -40,6 +49,14 @@ const routes = [
     component: () => import('../views/biddingInformation/index.vue')
   },
   {
+    path: '/detail',
+    name: 'detail',
+    meta: {
+      scrollToTop: true
+    },
+    component: () => import('../components/detail.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     meta: {
@@ -54,6 +71,14 @@ const routes = [
       scrollToTop: false
     },
     component: () => import('../views/register/index.vue')
+  },
+  {
+    path: '/contactUs',
+    name: 'contactUs',
+    meta: {
+      scrollToTop: false
+    },
+    component: () => import('../views/components/contactUs.vue')
   },
   {
     path: '/person',

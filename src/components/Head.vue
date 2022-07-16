@@ -5,7 +5,7 @@
       <div class="left_side">
         <i style="color: rgba(200, 22, 36, 1);font-size: 16px;margin-right: 5px;" class="el-icon-phone"></i>
         <span>咨询服务热线：</span>
-        <span style="color: rgba(200, 22, 36, 1);font-size: 16px;margin-left: 5px;">0771-56015</span>
+        <span style="color: rgba(200, 22, 36, 1);font-size: 16px;margin-left: 5px;">0771-5601506</span>
       </div>
       <div class="right_side">
         <span>品质成就品牌</span>
@@ -37,7 +37,7 @@
         </el-menu>
       </div>
       <div class="d_flex action_container">
-        <span v-if="status" class="contactUs" @click="contactUs">联系我们</span>
+        <!-- <span v-if="status" class="contactUs" @click="contactUs">联系我们</span> -->
         <button v-if="!hasLogin" @click="Login">登录</button>
         <button v-if="!hasLogin" @click="register">注册</button>
         <span v-if="hasLogin" class="contactUs" @click="person">个人中心</span>
@@ -124,7 +124,12 @@ export default {
             description: '/biddingInformation?tab=changeNotification',
           },
         ]
-      }],
+      },{
+        id: 5,
+        name: '联系我们',
+        description: '/contactUs',
+      },
+      ],
       hideMenu:['person'],
       currentIndex: "",
     };
@@ -145,7 +150,10 @@ export default {
   },
   methods: {
     contactUs(){
-      window.scrollBy(0,99999)
+      this.$router.push({
+        path:'/contactUs'
+      })
+      // window.scrollBy(0,99999)
     },
     logout(){
       const loading = this.$loading({
@@ -191,7 +199,7 @@ export default {
   top: 0;
   z-index: 99;
   background: #fff;
-
+  min-width: 1200px;
   .h_top {
     box-sizing: border-box;
     padding: 0 87px;

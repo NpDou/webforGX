@@ -1,33 +1,48 @@
 <template>
   <div class="announcement">
-    <search />
-    <myList />
+    <search @search="onsearch" />
+    <myList :tableData="allArticleData.announcement.records"/>
     <el-pagination
+        v-if="allArticleData.announcement.total>0"
         background
-        layout="prev, pager, next"
-        :total="1000">
+        :page-size="size"
+        :total="allArticleData.announcement.total"
+        :page-count="page"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        layout="prev, pager, next">
     </el-pagination>
   </div>
 </template>
 <script>
-import search from '@/components/search.vue'
-import myList from "@/components/myList.vue";
+
+import mixin from "@/mixin/index.js";
 export default {
   name: 'announcement',
-  components: {
-    search,
-    myList
-  },
+  mixins:[mixin],
   provide(){
     return{
     }
   },
   data() {
     return {
+      params:{
+        idChannel:3,
+        startDate:'',
+        title:'',
+        endDate:'',
+      },
+      page:1,
+      size:20,
     }
   },
   methods: {
-    
+    fetchData(){
+      this.getAllArticleData({
+        key:'announcement',
+        params:{...this.params,size:this.size,page:this.page}
+      })
+    }
   },
 };
 </script>

@@ -64,6 +64,9 @@ import changeNotification from './components/changeNotification.vue'
           }
         })
       }
+    },
+    mounted(){
+      this.activeName=this.$route.query.tab
     }
   };
 </script>

@@ -1,33 +1,43 @@
 <template>
   <div class="dynamicNews">
-    <search />
-    <myList />
+    <search @search="onsearch" />
+    <myList :tableData="allArticleData.dynamicNews.records"/>
     <el-pagination
         background
-        layout="prev, pager, next"
-        :total="1000">
+        v-if="allArticleData.dynamicNews.total>0"
+        :page-size="size"
+        :total="allArticleData.dynamicNews.total"
+        :page-count="page"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        layout="prev, pager, next">
     </el-pagination>
   </div>
 </template>
 <script>
-import search from '@/components/search.vue'
-import myList from "@/components/myList.vue";
+import mixin from "@/mixin/index.js";
 export default {
   name: 'dynamicNews',
-  components: {
-    search,
-    myList
-  },
-  provide(){
-    return{
-    }
-  },
+  mixins:[mixin],
   data() {
     return {
+      params:{
+        idChannel:1,
+        startDate:'',
+        title:'',
+        endDate:'',
+      },
+      page:1,
+      size:20,
     }
   },
-  methods: {
-    
+methods: {
+    fetchData(){
+      this.getAllArticleData({
+        key:'dynamicNews',
+        params:{...this.params,size:this.size,page:this.page}
+      })
+    }
   },
 };
 </script>

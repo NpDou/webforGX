@@ -1,8 +1,8 @@
 <template>
   <div class="partyBuildingNews">
-    <headerTitle content="党建新闻" url="/" class="title" />
+    <headerTitle content="党建新闻" url="/companyDynamics?tab=partyBuildingNews" class="title" />
     <div class="container">
-        <myTable />
+        <myTable tab="partyBuildingNews" type="home" :tableData="allArticleData.dynamicNews.records"/>
     </div>
   </div>
 </template>
@@ -10,24 +10,43 @@
 <script>
 import headerTitle from "@/components/headerTitle.vue";
 import myTable from "@/components/myTable.vue";
-
+import {
+    mapActions,
+    mapGetters
+} from "vuex";
 export default {
     name: "partyBuildingNews",
   data() {
     return {
-      activeTab:1,
+      params:{
+        idChannel:2,
+        startDate:'',
+        title:'',
+        endDate:'',
+        page:1,
+        size:20,
+      }
     };
   },
   components:{
     headerTitle,
     myTable
   },
-  created() {
+  computed:{
+    ...mapGetters(['allArticleData']),
   },
-
   methods: {
-   
+    ...mapActions('allArticle', ['getAllArticleData']),
+    fetchData(){
+      this.getAllArticleData({
+        key:'partyBuildingNews',
+        params:{...this.params}
+      })
+    },
   },
+  mounted(){
+    this.fetchData()
+  }
 };
 </script>
 <style lang="less" scoped>

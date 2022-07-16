@@ -1,33 +1,43 @@
 <template>
   <div class="purchaseAnnouncement">
-    <search />
-    <myTable />
+    <search @search="onsearch" />
+    <myTable :tableData="allArticleData.purchaseAnnouncement.records"/>
     <el-pagination
         background
-        layout="total, prev, pager, next"
-        :total="1000">
+        v-if="allArticleData.purchaseAnnouncement.total>0"
+        :page-size="size"
+        :total="allArticleData.purchaseAnnouncement.total"
+        :page-count="page"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        layout="prev, pager, next">
     </el-pagination>
   </div>
 </template>
 <script>
-import search from '@/components/search.vue'
-import myTable from "@/components/myTable.vue";
+import mixin from "@/mixin/index.js";
 export default {
   name: 'purchaseAnnouncement',
-  components: {
-    search,
-    myTable
-  },
-  provide(){
-    return{
-    }
-  },
+  mixins:[mixin],
   data() {
     return {
+      params:{
+        idChannel:4,
+        startDate:'',
+        title:'',
+        endDate:'',
+      },
+      page:1,
+      size:20,
     }
   },
   methods: {
-    
+    fetchData(){
+      this.getAllArticleData({
+        key:'purchaseAnnouncement',
+        params:{...this.params,size:this.size,page:this.page}
+      })
+    }
   },
 };
 </script>

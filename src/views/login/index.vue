@@ -3,8 +3,8 @@
         <div class="formContent">
             <p class="title">欢迎登录广西博施隆海</p>
             <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
-                <el-form-item label="" prop="name">
-                    <el-input placeholder="请输入用户名" v-model="ruleForm.name" autocomplete="off">
+                <el-form-item label="" prop="account">
+                    <el-input placeholder="请输入用户名" v-model="ruleForm.account" autocomplete="off">
                     <i slot="prefix" class="el-input__icon el-icon-user-solid"></i></el-input>
                 </el-form-item>
                 <el-form-item label="" prop="password">
@@ -20,16 +20,27 @@
             </el-form>
             <div class="otherAction">
                 <span @click="register">注册账号</span>
-                <span>忘记密码</span>
+                <span @click="centerDialogVisible = true">忘记密码</span>
             </div>
         </div>
         <p class="footerText">版权所有：广西博施隆海  桂ICP备10200667号</p>
+        <el-dialog
+            title="欢迎登录广西博施隆海"
+            :visible.sync="centerDialogVisible"
+            width="360px"
+            center>
+            <p class="centerContent">忘记密码请联系客服进行修改</p>
+            <p class="centerContent">客服咨询热线：0771-5601506</p>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 
 <script>
 const Base64 = require("js-base64").Base64
-
+import { post } from "../../utils/request";
 export default {
     name: 'login',
     data() {
@@ -48,12 +59,13 @@ export default {
             }
         };
         return {
+            centerDialogVisible:false,
             ruleForm: {
-                name: '',
+                account: '',
                 password: '',
             },
             rules: {
-                name: [
+                account: [
                     { validator: validateName, trigger: 'blur' }
                 ],
                 password: [
@@ -67,18 +79,22 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    if (this.checked) {
-                        let password = Base64.encode(this.ruleForm.password); // base64加密
-                        localStorage.setItem("name", this.ruleForm.name);
-                        localStorage.setItem("password", password);
-                        localStorage.setItem("time", new Date().getTime() + 86400000 * 15);
-                    } else {
-                        localStorage.removeItem("userId");
-                        localStorage.removeItem("password");
-                        localStorage.removeItem("time");
-                    }
-                    this.setSessionItem("SESSIONID", JSON.stringify('data'));
-                    this.$router.push('/person')
+                    post('/api/gys/supplier/supplierLogin',this.ruleForm).then(res=>{
+                        if(res.code==20000){
+                            if (this.checked) {
+                                let password = Base64.encode(this.ruleForm.password); // base64加密
+                                localStorage.setItem(`${process.env.VUE_APP_SERVER_URL}-account`, this.ruleForm.account);
+                                localStorage.setItem(`${process.env.VUE_APP_SERVER_URL}-password`, password);
+                                localStorage.setItem(`${process.env.VUE_APP_SERVER_URL}-time`, new Date().getTime() + 86400000 * 15);
+                            } else {
+                                localStorage.removeItem(`${process.env.VUE_APP_SERVER_URL}-account`);
+                                localStorage.removeItem(`${process.env.VUE_APP_SERVER_URL}-password`);
+                                localStorage.removeItem(`${process.env.VUE_APP_SERVER_URL}-time`);
+                            }
+                            this.setSessionItem("SESSIONID", JSON.stringify(res.data));
+                            this.$router.push('/person')
+                        }
+                    })
                 } else {
                     console.log('error submit!!');
                     return false;
@@ -92,10 +108,10 @@ export default {
         }
     },
     mounted(){
-        let username = localStorage.getItem("name");
+        let username = localStorage.getItem(`${process.env.VUE_APP_SERVER_URL}-account`);
         if (username) {
-            this.ruleForm.name = localStorage.getItem("name");
-            this.ruleForm.password = Base64.decode(localStorage.getItem("password"));// base64解密
+            this.ruleForm.account = localStorage.getItem(`${process.env.VUE_APP_SERVER_URL}-account`);
+            this.ruleForm.password = Base64.decode(localStorage.getItem(`${process.env.VUE_APP_SERVER_URL}-password`));// base64解密
             this.checked = true;
         }
     }
@@ -175,5 +191,9 @@ export default {
                 }
             }
         }
+    }
+    .centerContent{
+        text-align: center;
+        padding: 20px;
     }
 </style>

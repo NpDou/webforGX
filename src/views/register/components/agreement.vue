@@ -84,7 +84,7 @@
             <br />（五）本协议从注册之日起适用。
             <div class="action">
                 <button @click="goback" class="cancel">取消</button>
-                <button v-if="!show" class="diableBtn" disabled>{{`同意(${count})`}}</button>
+                <button v-if="!show" class="diableBtn" disabled>{{`同意(${count+1})`}}</button>
                 <button v-if="show" @click="agree">同意</button>
             </div>
         </div>
@@ -112,7 +112,7 @@ export default {
         this.$emit('agree')
       },
       getTime(){
-        const TIME_COUNT = 60;
+        const TIME_COUNT = 9;
         if (!this.timer) {
             this.count = TIME_COUNT;
             this.show = false;

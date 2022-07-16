@@ -2,7 +2,7 @@
   <div id="app" :class="haveFooter?'app':'app appFlex'">
     <Head></Head>
     <div :class="haveFooter?'main':'main mainFlex'">
-      <router-view v-if="isRouterAlive"/>
+      <router-view class="mainContent" v-if="isRouterAlive"/>
       <Foot v-if="haveFooter"></Foot>
     </div>
     <el-backtop v-if="hasSrollTop"></el-backtop>
@@ -11,7 +11,7 @@
 <script>
 import Head from "./components/Head.vue";
 import Foot from "./components/Foot.vue";
-
+import { mapActions } from "vuex";
 export default {
   components: {
     Head,
@@ -48,12 +48,12 @@ export default {
     }
   },
   mounted(){
-    let time = localStorage.getItem("time");
+    let time = localStorage.getItem(`${process.env.VUE_APP_SERVER_URL}-time`);
     let today = new Date().getTime()
     if(today > time){
-      localStorage.removeItem("userId");
-      localStorage.removeItem("password");
-      localStorage.removeItem("time");
+      localStorage.removeItem(`${process.env.VUE_APP_SERVER_URL}-account`);
+      localStorage.removeItem(`${process.env.VUE_APP_SERVER_URL}-password`);
+      localStorage.removeItem(`${process.env.VUE_APP_SERVER_URL}-time`);
     }
   }
 };
@@ -66,9 +66,15 @@ export default {
 html,
 body {
   height: 100%;
+  background: #f5f6f7;
+}
+#app{
+  min-width: 1200px;
+  height: 100%;
 }
 .main{
   padding-top: 114px;
+  background: #f5f6f7;
 }
 .mainFlex{
   height: 100%;
@@ -77,5 +83,10 @@ body {
 .appFlex{
   height: 100%;
 }
-
+.mainContent{
+    min-width: 1200px;
+    max-width: 1500px;
+    background: #fff;
+    margin: auto;
+  }
 </style>

@@ -63,6 +63,9 @@ import companyHistory from './components/companyHistory.vue'
         })
       }
     },
+    mounted(){
+      this.activeName=this.$route.query.tab
+    }
   };
 </script>
 <style lang="less" scoped>
