@@ -17,8 +17,7 @@
                 <el-col :span="12">
                     <el-form-item label="企业性质：" prop="qyxz">
                         <el-select v-model="ruleForm.qyxz" placeholder="请选择企业性质">
-                            <el-option label="区域一" value="shanghai"></el-option>
-                            <el-option label="区域二" value="beijing"></el-option>
+                            <el-option v-for="(item,index) in option" :key="index" :label="item" :value="item">{{item}}</el-option>
                         </el-select>
                     </el-form-item>
                 </el-col>
@@ -47,8 +46,9 @@
                     <el-form-item label="经营期限：" prop="jyqx">
                         <el-date-picker
                             v-model="ruleForm.jyqx"
-                            type="datetimerange"
-                            :picker-options="pickerOptions"
+                            type="daterange"
+                            format="yyyy-mm-dd"
+                            value-format="yyyy-mm-dd"
                             range-separator="至"
                             start-placeholder="开始日期"
                             end-placeholder="结束日期"
@@ -120,6 +120,8 @@
 </template>
 
 <script>
+import { get, post } from "@/utils/request";
+
   export default {
     name: "setInfo",
     data() {
@@ -127,9 +129,6 @@
             if(value == ''){
                 callback(new Error('请输入用户名'));
             } else {
-                if(value==this.userInfo.supplierName){
-                callback()
-                }else{
                 get("/api/gys/supplier/verifySupplierName", {
                     supplierName: value,
                 }).then(res=>{
@@ -139,7 +138,6 @@
                     callback(new Error('供应商名称已存在'));
                     }
                 })
-                }
             }
         }
         let validatePhone = (rule,value,callback)=>{
@@ -154,33 +152,40 @@
             }
         };
         return {
-            pickerOptions: {
-            shortcuts: [{
-                    text: '最近一周',
-                    onClick(picker) {
-                    const end = new Date();
-                    const start = new Date();
-                    start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-                    picker.$emit('pick', [start, end]);
-                    }
-                }, {
-                    text: '最近一个月',
-                    onClick(picker) {
-                    const end = new Date();
-                    const start = new Date();
-                    start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-                    picker.$emit('pick', [start, end]);
-                    }
-                }, {
-                    text: '最近三个月',
-                    onClick(picker) {
-                    const end = new Date();
-                    const start = new Date();
-                    start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-                    picker.$emit('pick', [start, end]);
-                    }
-                }]
-            },
+            option:[                            
+"内资",
+"国有全资",
+"集体全资",
+"股份合作",
+"联营",
+"国有联营",
+"集体联营",
+"国有与集体联营",
+"其他联营",
+"有限责任（公司）",
+"其他有限责任（公司）",
+"股份有限（公司）",
+"私有",
+"私有独资",
+"私有合资",
+"私营有限责任（公司）",
+"私营股份有有限（公司）",
+"个体经营",
+"其他私有",
+"其他内资",
+"港、澳、台合资",
+"内地和港、澳、台合资",
+"内地和港、澳、台合作",
+"港、澳、台、独资",
+"港、澳、台投资股份有限（公司）",
+"其他港、澳、台投资",
+"国外投资",
+"中外合资",
+"中外合作",
+"外资",
+"国外投资股份有限（公司）",
+"其他国外投资"],
+            
             ruleForm: {
                 supplierName:'',//供应商名称
                 code:'',//统一社会信用代码
@@ -251,7 +256,6 @@
       submitForm(formName,cb) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('submit!');
             cb&&cb()
           } else {
             console.log('error submit!!');

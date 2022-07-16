@@ -12,10 +12,15 @@
             </el-breadcrumb>
         </div>
         <div class="content" v-html="content"></div>
+        <div v-if="tab=='purchaseAnnouncement'" class="action">
+            <button v-if="userInfo.status==1" @click="join">响应报名</button>
+            <button class="disableBtn" v-if="userInfo.status!==1" disabled>响应报名</button>
+            <p v-if="userInfo.status!==1">您的企业信息未通过审核暂时无法报名，请及时区个人中心更改信息</p>
+        </div>
     </div>
 </template>
 <script>
-import { get } from "@/utils/request";
+import { get,post } from "@/utils/request";
 export default {
     name:'detail',
     data(){
@@ -39,7 +44,7 @@ export default {
             tab:'',
             type:'',
             content:'',
-            
+            detail:{}
         }
     },
     computed:{
@@ -79,6 +84,15 @@ export default {
                     {
                         name:this.dict[this.tab],
                     }
+                ],
+                personhome:[
+                    {
+                        name:'个人中心',
+                        path:'/person'
+                    },
+                    {
+                        name:this.dict[this.tab],
+                    }
                 ]
             }
         }
@@ -87,12 +101,37 @@ export default {
         getDetail(){
             get('/api/article/getArticleById', {id:this.$route.query.id}).then(res => {
                 console.log(res);
+                this.detail=res.data
                 this.content = res.data.content
             })
+        },
+        join(){
+             let isLogin=sessionStorage.getItem("SESSIONID")
+             if(isLogin){
+                post('/api/article/apply',{
+                    articleId:this.detail.id,
+                    supplierId:this.userInfo.id
+                }).then(res=>{
+                    if(res.code==20000){
+                        this.$message.success('报名成功')
+                    }
+                })
+             }else{
+                this.$message.warning('请先登录')
+                this.$router.push({
+                    path:'/login',
+                    query:{
+                        back:true
+                    }
+                })
+             }
         }
     },
     mounted(){
         this.getDetail()
+        if(sessionStorage.getItem("SESSIONID")){
+            this.userInfo=JSON.parse(sessionStorage.getItem("SESSIONID"))
+        }
         this.tab=this.$route.query.tab
         this.id=this.$route.query.id
         this.type=this.$route.query.type
@@ -136,6 +175,32 @@ export default {
         }
         .content{
             padding: 20px 200px;
+        }
+        .action{
+            text-align: right;
+            padding: 40px 200px;
+            button{
+                width: 197px;
+                height: 40px;
+                border-radius: 4px;
+                background-color: rgba(0, 130, 250, 1);
+                color: rgba(255, 255, 255, 1);
+                font-size: 14px;
+                text-align: center;
+                font-family: Microsoft Yahei;
+                border: 0 none;
+            }
+            .disableBtn{
+                width: 197px;
+                height: 40px;
+                border-radius: 4px;
+                background-color: rgba(145, 145, 145, 1);
+            }
+            p{
+                color: rgba(255, 0, 0, 100);
+                font-size: 14px;
+                font-family: SourceHanSansSC-regular;
+            }
         }
     }
     .el-breadcrumb{

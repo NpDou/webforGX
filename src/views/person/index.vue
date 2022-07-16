@@ -8,7 +8,7 @@
                         <img v-if="imageUrl" :src="imageUrl" class="avatar">
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
-                    <p class="companyName">{{userInfo.supplierName}}</p>
+                    <p class="companyName" @click="toHome">{{userInfo.supplierName}}</p>
                 </div>
                 <el-menu default-active="1-1" :default-openeds="openeds" class="el-menu-vertical-demo" @select="chose">
                     <el-submenu index="1">
@@ -46,6 +46,10 @@ import companyInfo from "./components/companyInfo.vue"
 import systemRecommendation from "./components/systemRecommendation.vue"
 import home from "./components/home.vue"
 import { get, post } from "../../utils/request";
+import {
+    mapActions,
+    mapGetters
+} from "vuex";
 export default {
     name: "person",
     components: {
@@ -59,14 +63,29 @@ export default {
         return {
             openeds: ['1', '2'],
             imageUrl: '',
-            result: 'home',
+            result: '',
             uploadAction: `${process.env.VUE_APP_SERVER_URL}/api/file`,
             userInfo:{},
         }
     },
     computed: {
+        ...mapGetters(['userInfo_vuex']),
+    },
+    watch:{
+        userInfo_vuex:{
+            deep:true,
+            handler(){
+                if(sessionStorage.getItem("SESSIONID")){
+                    this.userInfo=JSON.parse(sessionStorage.getItem("SESSIONID"))
+                    this.imageUrl=this.userInfo.buddha?`${process.env.VUE_APP_SERVER_URL}/api/file/download?idFile=${this.userInfo.buddha}`:''
+                }
+            }
+        }
     },
     methods: {
+        toHome(){
+            this.result = 'home'
+        },
         chose(key, keyPath) {
             this.result = key
         },
@@ -86,7 +105,12 @@ export default {
                     console.log(res)
                     if(res.code==20000){
                         this.imageUrl = URL.createObjectURL(file.raw);
-                        this.$message.error('上传头像失败');
+                        this.$message.success('上传头像成功');
+                        post('/api/gys/supplier/getSupplierById',{id:this.userInfo.id}).then(res1=>{
+                            if(res1.code==20000){
+                                this.setSessionItem("SESSIONID", JSON.stringify(res1.data));
+                            }
+                        })
                     }
                 })
             }else{
@@ -110,6 +134,7 @@ export default {
         if(sessionStorage.getItem("SESSIONID")){
             this.userInfo=JSON.parse(sessionStorage.getItem("SESSIONID"))
             this.imageUrl=this.userInfo.buddha?`${process.env.VUE_APP_SERVER_URL}/api/file/download?idFile=${this.userInfo.buddha}`:''
+            this.result='home'
         }
     }
 }

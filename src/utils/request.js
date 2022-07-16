@@ -71,6 +71,15 @@ export function post(url, data) {
     }
   })
 }
+export function put(url, data) {
+  return service.put(url, qs.stringify(data), {
+    timeout: 10000,
+    headers: {
+      'X-Requested-With': 'XMLHttpRequest',
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+    }
+  })
+}
 
 // 退出
 async function logout() {

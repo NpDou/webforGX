@@ -39,8 +39,11 @@
     </ul>
     <el-dialog title="提示" :visible.sync="centerDialogVisible" width="30%" center>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" class="demo-ruleForm">
-        <el-form-item v-if="type == 'password'" label="密码" prop="password">
-          <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
+        <el-form-item v-if="type == 'password'" label="原密码" prop="oldPassword">
+          <el-input type="password" v-model="ruleForm.oldPassword" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item v-if="type == 'password'" label="新密码" prop="newPassword">
+          <el-input type="password" v-model="ruleForm.newPassword" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item v-if="type == 'password'" label="确认密码" prop="checkPass">
           <el-input type="password" v-model="ruleForm.checkpsd" autocomplete="off"></el-input>
@@ -89,6 +92,16 @@ export default {
         }
       }
     }
+    var validatePass_old =(rule, value, callback) => {
+      const passwordReg = /^(?![A-Za-z]+$)(?![A-Z\\d]+$)(?![A-Z\\W]+$)(?![a-z\\d]+$)(?![a-z\\W]+$)(?![\\d\\W]+$)\\S{6,}$/
+      if (value === '') {
+        callback(new Error('请输入原密码'));
+      }else if (value !== this.ruleForm.password) {
+        callback(new Error('原密码输入错误!'));
+      } else {
+        callback();
+      }
+    };
     var validatePass = (rule, value, callback) => {
       const passwordReg = /^(?![A-Za-z]+$)(?![A-Z\\d]+$)(?![A-Z\\W]+$)(?![a-z\\d]+$)(?![a-z\\W]+$)(?![\\d\\W]+$)\\S{6,}$/
       if (value === '') {
@@ -105,7 +118,7 @@ export default {
     var validatePass2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'));
-      } else if (value !== this.ruleForm.password) {
+      } else if (value !== this.ruleForm.newPassword) {
         callback(new Error('两次输入密码不一致!'));
       } else {
         callback();
@@ -140,8 +153,10 @@ export default {
       type: '',
       ruleForm: {
         account: '',
+        oldPassword: '',
         password: '',
         checkpsd: '',
+        newPassword:'',
         name: '',
         email: '',
         cellphone: '',
@@ -151,8 +166,11 @@ export default {
         account: [
                     { required: true, validator: verifyAccount, trigger: 'blur' },
                 ],
-        password: [
+        newPassword: [
           { required: true, validator: validatePass, trigger: 'blur' },
+        ],
+        oldPassword: [
+          { required: true, validator: validatePass_old, trigger: 'blur' },
         ],
         checkpsd: [
           { required: true, validator: validatePass2, trigger: 'blur' },
@@ -190,8 +208,28 @@ export default {
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
           this.centerDialogVisible = false
+          let params ={...this.ruleForm}
+          const url=''
+          if(this.type=='password'){
+            url='/api/gys/supplier/updatePassword'
+            params.password = params.newPassword
+          }else{
+            url='/api/gys/supplier/updateInformation'
+          }
+          post(url,{id:this.userInfo.id, ...params}).then(res=>{
+            if(res.code==20000 && this.type == 'password'){
+              this.$router.push('/login')
+            }else if(res.code==20000 && this.type != 'password'){
+              post('/api/gys/supplier/getSupplierById',{id:this.userInfo.id}).then(res=>{
+                if(res.code==20000){
+                  this.setSessionItem("SESSIONID", JSON.stringify(res.data));
+                }
+              })
+            }else{
+              this.$message.error('修改失败！')
+            }
+          })
         } else {
-          console.log('error submit!!');
           return false;
         }
       });

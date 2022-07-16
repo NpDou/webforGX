@@ -91,14 +91,22 @@ export default {
     },
     methods: {
         handleRemove(file, fileList,key) {
-            this.$set(this.ruleForm,key,fileList)
-            console.log(this.ruleForm);
+            let idArr=[]
+            fileList.forEach(element => {
+                idArr.push(element.response.data.id)
+            });
+            this.$set(this.ruleForm,key,idArr.join(','))
+            console.log(this.ruleForm,'this.ruleForm');
             this.$refs['ruleForm'].validateField(key);
         },
         uploadSuccess(response, file, fileList,key){
-            this.$set(this.ruleForm,key,fileList)
+            let idArr=[]
+            fileList.forEach(element => {
+                idArr.push(element.response.data.id)
+            });
+            this.$set(this.ruleForm,key,idArr.join(','))
+            console.log(this.ruleForm,'this.ruleForm');
             this.$refs['ruleForm'].validateField(key);
-            console.log(response, file, fileList,key);
         },
         handlePictureCardPreview(file) {
             this.dialogImageUrl = file.url;
@@ -107,12 +115,17 @@ export default {
         submitForm(formName,cb) {
             console.log(111);
             this.$refs[formName].validate((valid) => {
-                return valid
+                if (valid) {
+                cb&&cb()
+            } else {
+                console.log('error submit!!');
+                return false;
+            }
             });
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';
-            const isLt2M = file.size / 1024 < 5.12;
+            const isLt2M = file.size / 1024 /1024< 5.12;
             if (!isJPG) {
                 this.$message.error('上传头像图片只能是 JPG 格式!');
             }

@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import { post } from '../../utils/request';
 import agreement from './components/agreement.vue';
 import setaccount from './components/setaccount.vue';
 import setInfo from './components/setInfo.vue';
@@ -59,8 +60,8 @@ export default {
     name: "register",
     data() {
         return {
-            agree:false,
-            active: 2,
+            agree:true,
+            active: 0,
         };
     },
     components:{
@@ -89,9 +90,26 @@ export default {
         if (this.active==1) {
             this.$refs.setInfo&&this.$refs.setInfo.submitForm('ruleForm',this.next)
         }
+        console.log(this.active);
         if (this.active==2) {
-            this.$refs.upload&&this.$refs.upload.submitForm('ruleForm',this.next)
+            this.$refs.upload&&this.$refs.upload.submitForm('ruleForm',this.submit)
         }
+      },
+      submit(){
+        let params={...this.$refs.setaccount.ruleForm,...this.$refs.setInfo.ruleForm,...this.$refs.upload.ruleForm}
+        params.jyqx=params.jyqx.join(',')
+        post('/api/gys/supplier/add',params).then(res=>{
+            console.log(res);
+            if(res.code==20000){
+                this.$message.success('注册成功，两秒后跳转登录页')
+                setTimeout(()=>{
+                    this.$router.push('/login')
+                },2000)
+            }else{
+                this.$message.error('注册失败！')
+            }
+
+        })
       },
       prevStep(){
         this.active--

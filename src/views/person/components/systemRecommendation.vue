@@ -1,42 +1,73 @@
  <template>
     <div class="systemRecommendation">
         <p class="title">系统推荐采购公告</p>
-        <myTable></myTable>
+        <myTable :tableData="tableData"></myTable>
         <el-pagination
-            background
-            layout="total, prev, pager, next"
-            :total="1000">
-        </el-pagination>
+          background
+          v-if="tableData.total>0"
+          :page-size="size"
+          :total="total"
+          :page-count="page"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          layout="prev, pager, next,total">
+          </el-pagination>
     </div>
   </template>
   <script>
 import myTable from "@/components/myTable.vue"
-
+ import { get, post } from "@/utils/request";
     export default {
         name:"systemRecommendation",
-      data() {
-        return {
-          tableData: [{
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-          }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }]
-        }
-      },
       components:{
         myTable
+      },
+      data() {
+        return {
+          tableData: [],
+           size:20,
+              page:1,
+              total:0
+        }
+      },
+      props: {
+        userInfo: {
+          type: Object,
+          default() {
+            return {
+             
+            }
+          }
+        }
+      },
+      methods:{
+        handleSizeChange(val) {
+            this.size = val
+            this.fetchData()
+        },
+        handleCurrentChange(val) {
+            this.page = val
+            this.fetchData()
+        },
+        fetchData(){
+          post('/api/article/getArticleBySupplierId',{
+            currentPage: this.page,
+            pageSize: this.size,
+            supplierId: this.userInfo.id,
+            id_channel: 6,
+          }).then(res=>{
+            if(res.code==20000){
+              this.tableData=res.data.list||[]
+              this.total=res.data.total
+            }else{
+              this.tableData=[]
+              this.total=0
+            }
+          })
+        }
+      },
+      mounted(){
+        this.fetchData()
       }
     }
   </script>

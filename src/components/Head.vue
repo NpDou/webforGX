@@ -47,7 +47,10 @@
   </div>
 </template>
 <script>
-import { mapActions } from "vuex";
+import {
+    mapActions,
+    mapGetters
+} from "vuex";
 export default {
   inject: ["reload"],
   data() {
@@ -137,6 +140,7 @@ export default {
   mounted() {
     window.addEventListener("setItem", () => {
       this.hasLogin = sessionStorage.getItem("SESSIONID");
+      this.updateUserInfo(this.hasLogin)
     });
     this.hasLogin = sessionStorage.getItem("SESSIONID");
   },
@@ -149,6 +153,7 @@ export default {
     },
   },
   methods: {
+    ...mapActions('common', ['updateUserInfo']),
     contactUs(){
       this.$router.push({
         path:'/contactUs'

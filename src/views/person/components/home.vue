@@ -1,40 +1,70 @@
  <template>
     <div class="home">
         <p class="title">最新更改通知<span class="more" @click="seeAll(1)">全部</span></p>
-        <myTable></myTable>
+        <myTable :tableData="tableData1"></myTable>
         <p class="title">系统推荐 <span class="more" @click="seeAll(0)">全部</span></p>
-        <myTable></myTable>
+        <myTable :tableData="tableData2"></myTable>
     </div>
   </template>
   <script>
+ import { get, post } from "@/utils/request";
+
 import myTable from "@/components/myTable.vue"
     export default {
         name:"home",
       data() {
         return {
-          tableData: [{
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-          }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-          }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-          }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-          }]
+          tableData1: [],
+          tableData2: [],
+        }
+      },
+      props: {
+        userInfo: {
+          type: Object,
+          default() {
+            return {
+             
+            }
+          }
         }
       },
       components:{
         myTable
       },
+      mounted(){
+        this.fetchData1()
+        this.fetchData2()
+        console.log(this.userInfo,"===");
+      },
       methods:{
+        fetchData1(){
+          post('/api/article/getArticleBySupplierId',{
+            currentPage: 1,
+            pageSize : 15,
+            id_channel: 6,
+            supplierId : this.userInfo.id,
+          }).then(res=>{
+            if(res.code==20000){
+              this.tableData1=res.data.list||[]
+            }else{
+              this.tableData1=[]
+            }
+          })
+        },
+        fetchData2(){
+          post('/api/article/getArticleBySupplierId',{
+            currentPage: 1,
+            pageSize : 15,
+            id_channel: 4,
+            supplierId : this.userInfo.id,
+          }).then(res=>{
+            if(res.code==20000){
+              this.tableData2=res.data.list||[]
+            }else{
+              this.tableData2=[]
+            }
+          })
+        },
         seeAll(val){
             this.$emit('viewMore',val)
         }

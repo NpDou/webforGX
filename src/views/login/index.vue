@@ -92,7 +92,11 @@ export default {
                                 localStorage.removeItem(`${process.env.VUE_APP_SERVER_URL}-time`);
                             }
                             this.setSessionItem("SESSIONID", JSON.stringify(res.data));
-                            this.$router.push('/person')
+                            if(this.$route.query.back){
+                                this.$router.go(-1)
+                            }else{
+                                this.$router.push('/person')
+                            }
                         }
                     })
                 } else {

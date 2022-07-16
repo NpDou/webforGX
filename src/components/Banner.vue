@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import { get } from "../utils/request";
 import {
     mapActions,
     mapGetters
