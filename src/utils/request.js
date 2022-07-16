@@ -8,7 +8,7 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 import router from '@/router'
-import qs from 'querystring'
+import qs from 'qs'
 // create an axios instance
 const service = axios.create({
   timeout: 5000 // request timeout

@@ -101,10 +101,10 @@ import companyHistory from './components/companyHistory.vue'
     }
     
   }
-  /deep/ .el-tabs__header{
+  :deep(.el-tabs__header){
     background-color: rgba(246, 252, 255, 1);
   }
-  /deep/.el-tabs__item{
+  :deep(.el-tabs__item){
     padding: 5px 100px!important;
     box-sizing: content-box;
   }

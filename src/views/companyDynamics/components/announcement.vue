@@ -49,7 +49,7 @@ export default {
 <style lang="less" scoped>
 .announcement{
     padding: 15px 158px;
-    /deep/ .el-pagination{
+    :deep( .el-pagination){
         margin-bottom: 20px;
         text-align: center;
     }

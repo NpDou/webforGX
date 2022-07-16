@@ -45,6 +45,7 @@ import accountInfo from "./components/accountInfo.vue"
 import companyInfo from "./components/companyInfo.vue"
 import systemRecommendation from "./components/systemRecommendation.vue"
 import home from "./components/home.vue"
+import { get, post } from "../../utils/request";
 export default {
     name: "person",
     components: {
@@ -78,17 +79,28 @@ export default {
             }
         },
         handleAvatarSuccess(res, file) {
-            this.imageUrl = URL.createObjectURL(file.raw);
+            console.log(res,file);
+            let fileId=file.response&&file.response.data?(file.response.data.id||''):''
+            if(fileId){
+                post(`/api/gys/supplier/uploadBuddha?fileId=${fileId}&supplierId=${this.userInfo.id}`).then(res=>{
+                    console.log(res)
+                    if(res.code==20000){
+                        this.imageUrl = URL.createObjectURL(file.raw);
+                        this.$message.error('上传头像失败');
+                    }
+                })
+            }else{
+                this.$message.error('上传头像失败');
+            }
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';
-            const isLt2M = file.size / 1024 / 1024 < 5;
-
+            const isLt2M = file.size / 1024 / 1024 < 2;
             if (!isJPG) {
                 this.$message.error('上传头像图片只能是 JPG 格式!');
             }
             if (!isLt2M) {
-                this.$message.error('上传头像图片大小不能超过 5Mb!');
+                this.$message.error('上传头像图片大小不能超过 2Mb!');
             }
             return isJPG && isLt2M;
         }
@@ -108,22 +120,22 @@ export default {
     background: #f5f6f7;
     min-height: 100%;
 
-    /deep/.el-main {
+    :deep(.el-main ){
         padding-top: 0;
         padding-bottom: 0;
     }
 
-    /deep/.el-aside {
+    :deep(.el-aside ){
         display: flex;
         flex-direction: column;
     }
 
-    /deep/.el-menu {
+    :deep(.el-menu ){
         flex: 1;
         border: 0 none;
     }
 
-    /deep/.personLogo {
+    :deep(.personLogo ){
         background: #fff;
         text-align: center;
         margin-bottom: 16px;
@@ -149,7 +161,7 @@ export default {
     margin-top: 34px;
 }
 
-/deep/ .avatar-uploader .el-upload {
+:deep( .avatar-uploader .el-upload ){
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
     cursor: pointer;
@@ -157,11 +169,11 @@ export default {
     overflow: hidden;
 }
 
-/deep/ .avatar-uploader .el-upload:hover {
+:deep( .avatar-uploader .el-upload:hover ){
     border-color: #409EFF;
 }
 
-/deep/ .avatar-uploader-icon {
+:deep( .avatar-uploader-icon ){
     font-size: 28px;
     color: #8c939d;
     width: 60px;
@@ -170,7 +182,7 @@ export default {
     text-align: center;
 }
 
-/deep/ .avatar {
+:deep( .avatar ){
     width: 60px;
     height: 60px;
     display: block;

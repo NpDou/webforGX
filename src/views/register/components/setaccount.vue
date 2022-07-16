@@ -27,13 +27,41 @@
 </template>
 
 <script>
+import { get, post } from "@/utils/request";
+
   export default {
     name: "setaccount",
     data() {
+        var verifyAccount = (rule, value, callback)=>{
+      if(value == ''){
+        callback(new Error('请输入用户名'));
+      } else {
+        if(value==this.userInfo.account){
+          callback()
+        }else{
+          get("/api/gys/supplier/verifyAccount", {
+            account: value,
+          }).then(res=>{
+            if(res.success){
+                callback();
+            } else{
+              callback(new Error('用户名已存在'));
+            }
+          })
+        }
+      }
+        }
+        
         var validatePass = (rule, value, callback) => {
+            const passwordReg = /^(?![A-Za-z]+$)(?![A-Z\\d]+$)(?![A-Z\\W]+$)(?![a-z\\d]+$)(?![a-z\\W]+$)(?![\\d\\W]+$)\\S{6,}$/
             if (value === '') {
                 callback(new Error('请输入密码'));
             } else {
+                if(passwordReg.test(value)){
+                    callback()
+                }else{
+                    callback(new Error('密码格式不规范，至少包含大小写字母、数字、特殊字符大于6个字符,请重新填写！'))
+                }
                 callback();
             }
         };
@@ -83,7 +111,7 @@
             },
             rules: {
                 account: [
-                    { required: true, message: '请输入名称', trigger: 'blur' },
+                    { required: true, validator: verifyAccount, trigger: 'blur' },
                 ],
                 password: [
                     { required: true, validator: validatePass, trigger: 'blur' },

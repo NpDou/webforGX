@@ -148,7 +148,7 @@ export default {
             border-radius: 3px;
             padding: 30px 38px;
             box-sizing: border-box;
-            /deep/ .el-form-item{
+            :deep( .el-form-item){
                 margin-bottom: 30px;
             }
             .title{
@@ -157,7 +157,7 @@ export default {
                 text-align: center;
                 margin-bottom: 30px;
             }
-            /deep/ .el-button{
+            :deep( .el-button){
                 width: 100%;
             }
             .remenberPsd{

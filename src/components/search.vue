@@ -67,19 +67,19 @@ export default {
   display: flex;
   margin-bottom: 30px;
 
-  /deep/ .el-input__inner {
+  :deep( .el-input__inner ){
     border: 0 none;
     border-bottom: 1px solid #DCDFE6;
     border-radius: 0;
   }
 
-  /deep/ .el-input {
+  :deep( .el-input ){
     width: 250px;
     box-sizing: border-box;
     margin-right: 50px;
   }
 
-  /deep/ .el-date-editor {
+  :deep( .el-date-editor ){
     width: 250px;
     margin-right: 50px;
   }

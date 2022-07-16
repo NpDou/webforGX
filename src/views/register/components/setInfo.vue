@@ -123,34 +123,24 @@
   export default {
     name: "setInfo",
     data() {
-        var validatePass = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('请输入密码'));
+        var verifySupplierName = (rule, value, callback)=>{
+            if(value == ''){
+                callback(new Error('请输入用户名'));
             } else {
-                callback();
-            }
-        };
-        var validatePass2 = (rule, value, callback) => {
-            if (value === '') {
-                callback(new Error('请再次输入密码'));
-            } else if (value !== this.ruleForm.psd) {
-                callback(new Error('两次输入密码不一致!'));
-            } else {
-                callback();
-            }
-        };
-        var checkEmail = (rule, value, callback) => {
-            const mailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
-            if (!value) {
-                return callback(new Error('邮箱不能为空'))
-            }
-            setTimeout(() => {
-                if (mailReg.test(value)) {
-                    callback()
-                } else {
-                    callback(new Error('请输入正确的邮箱格式'))
+                if(value==this.userInfo.supplierName){
+                callback()
+                }else{
+                get("/api/gys/supplier/verifySupplierName", {
+                    supplierName: value,
+                }).then(res=>{
+                    if(res.success){
+                        callback();
+                    } else{
+                    callback(new Error('供应商名称已存在'));
+                    }
+                })
                 }
-            }, 100)
+            }
         }
         let validatePhone = (rule,value,callback)=>{
             if (!value){
@@ -210,7 +200,7 @@
             },
             rules: {
                 supplierName: [
-                    { required: true, message: '请输入供应商名称', trigger: 'blur' },
+                    { required: true, validator: verifySupplierName, trigger: 'blur' },
                 ],
                 code: [
                     { required: true, message:'请输入统一社会信用代码', trigger: 'blur' },
@@ -276,10 +266,10 @@
     .setInfo{
         padding: 60px 56px;
         background: #fff;
-        /deep/.el-select{
+        :deep(.el-select){
             width: 100%;
         }
-        /deep/.el-range-editor.el-input__inner{
+        :deep(.el-range-editor.el-input__inner){
             width: 100%;
         }
     }

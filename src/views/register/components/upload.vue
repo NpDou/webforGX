@@ -143,7 +143,7 @@ export default {
         font-family: SourceHanSansSC-regular;
         margin-bottom: 30px;
     }
-    /deep/ .el-upload__tip{
+    :deep( .el-upload__tip){
         color: rgba(0, 0, 0, 0.45);
         font-size: 14px;
         text-align: left;

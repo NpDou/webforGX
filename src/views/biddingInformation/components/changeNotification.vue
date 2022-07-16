@@ -44,7 +44,7 @@ export default {
 <style lang="less" scoped>
 .changeNotification{
     padding: 15px 158px;
-    /deep/ .el-pagination{
+    :deep( .el-pagination){
         margin-bottom: 20px;
         text-align: center;
     }

@@ -44,7 +44,7 @@ methods: {
 <style lang="less" scoped>
 .dynamicNews{
     padding: 15px 158px;
-    /deep/ .el-pagination{
+    :deep( .el-pagination){
         margin-bottom: 20px;
         text-align: center;
     }

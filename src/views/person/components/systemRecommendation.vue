@@ -52,7 +52,7 @@ import myTable from "@/components/myTable.vue"
         padding: 30px 0;
         padding-bottom: 15px;
     }
-    /deep/ .el-pagination{
+    :deep( .el-pagination){
         margin-bottom: 20px;
         text-align: center;
     }
