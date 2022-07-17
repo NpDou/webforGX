@@ -49,7 +49,7 @@ export default {
 
   methods: {
     getSrc(item){
-      return `${process.env.VUE_APP_SERVER_URL}/api/file/download?idFile=${item.id}`
+      return `${process.env.VUE_APP_SERVER_URL}/api/file/download?idFile=${item.img}`
     },
     gotoDetail(item){
       this.$router.push({
