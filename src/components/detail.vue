@@ -91,6 +91,10 @@ export default {
                         path:'/person'
                     },
                     {
+                        name:'我的响应',
+                        path:'/person'
+                    },
+                    {
                         name:this.dict[this.tab],
                     }
                 ]

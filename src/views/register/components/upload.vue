@@ -92,17 +92,20 @@ export default {
     methods: {
         handleRemove(file, fileList,key) {
             let idArr=[]
-            fileList.forEach(element => {
-                idArr.push(element.response.data.id)
-            });
-            this.$set(this.ruleForm,key,idArr.join(','))
-            console.log(this.ruleForm,'this.ruleForm');
-            this.$refs['ruleForm'].validateField(key);
+            post(`/api/file/deleteFile?id=${file.response?file.response.data.id:file.id}`).then(res=>{
+                if(res.code==20000){
+                    fileList.forEach(element => {
+                        idArr.push(element.response?element.response.data.id:element.id)
+                    });
+                    this.$set(this.ruleForm,key,idArr.join(','))
+                    this.$refs['ruleForm'].validateField(key);
+                }
+            })
         },
         uploadSuccess(response, file, fileList,key){
             let idArr=[]
             fileList.forEach(element => {
-                idArr.push(element.response.data.id)
+                idArr.push(element.response?element.response.data.id:element.id)
             });
             this.$set(this.ruleForm,key,idArr.join(','))
             console.log(this.ruleForm,'this.ruleForm');

@@ -521,7 +521,7 @@ export default {
         },
         handleRemove(file, fileList,key) {
             let idArr=[]
-            post('/api/file/deleteFile',{id:file.response?file.response.data.id:file.id}).then(res=>{
+            post(`/api/file/deleteFile?id=${file.response?file.response.data.id:file.id}`).then(res=>{
                 if(res.code==20000){
                     fileList.forEach(element => {
                         idArr.push(element.response?element.response.data.id:element.id)

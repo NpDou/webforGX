@@ -8,7 +8,7 @@
                     <i slot="prefix" class="el-input__icon el-icon-user-solid"></i></el-input>
                 </el-form-item>
                 <el-form-item label="" prop="password">
-                    <el-input placeholder="请输入密码" type="password" v-model="ruleForm.password" autocomplete="off">
+                    <el-input placeholder="请输入密码" type="password" v-model="ruleForm.password" show-password autocomplete="off">
                     <i slot="prefix" class="el-input__icon el-icon-lock"></i></el-input>
                 </el-form-item>
                 <div class="remenberPsd">

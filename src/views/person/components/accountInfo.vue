@@ -93,7 +93,6 @@ export default {
       }
     }
     var validatePass_old =(rule, value, callback) => {
-      const passwordReg = /^(?![A-Za-z]+$)(?![A-Z\\d]+$)(?![A-Z\\W]+$)(?![a-z\\d]+$)(?![a-z\\W]+$)(?![\\d\\W]+$)\\S{6,}$/
       if (value === '') {
         callback(new Error('请输入原密码'));
       }else if (value !== this.ruleForm.password) {
@@ -103,7 +102,7 @@ export default {
       }
     };
     var validatePass = (rule, value, callback) => {
-      const passwordReg = /^(?![A-Za-z]+$)(?![A-Z\\d]+$)(?![A-Z\\W]+$)(?![a-z\\d]+$)(?![a-z\\W]+$)(?![\\d\\W]+$)\\S{6,}$/
+      const passwordReg = /(?=.*[a-z_])(?=.*\d)(?=.*[^a-z0-9_])[\S]{6,}/i
       if (value === '') {
         callback(new Error('请输入密码'));
       } else {

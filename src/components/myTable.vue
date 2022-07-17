@@ -113,6 +113,8 @@ export default {
     li{
       display: flex;
       padding: 7px 15px;
+      cursor:pointer;
+
     }
     .content{
       display: inline-block;

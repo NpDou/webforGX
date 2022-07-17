@@ -4,7 +4,7 @@
             <el-form-item label="用户名：" prop="account">
                 <el-input autocomplete="new-account" v-model="ruleForm.account"></el-input>
             </el-form-item>
-            <el-form-item autocomplete="new-password" label="密码：" prop="password">
+            <el-form-item autocomplete="new-password" show-password label="密码：" prop="password">
                 <el-input type="password" v-model="ruleForm.password"></el-input>
             </el-form-item>
             <el-form-item  label="确认密码：" prop="checkpsd">
@@ -50,15 +50,15 @@ import { get, post } from "@/utils/request";
         }
         
         var validatePass = (rule, value, callback) => {
-            // const passwordReg = /^(?![A-Za-z]+$)(?![A-Z\\d]+$)(?![A-Z\\W]+$)(?![a-z\\d]+$)(?![a-z\\W]+$)(?![\\d\\W]+$)\\S{6,}$/
+            const passwordReg = /(?=.*[a-z_])(?=.*\d)(?=.*[^a-z0-9_])[\S]{6,}/i
             if (value === '') {
                 callback(new Error('请输入密码'));
             } else {
-                // if(passwordReg.test(value)){
-                //     callback()
-                // }else{
-                //     callback(new Error('密码格式不规范，至少包含大小写字母、数字、特殊字符大于6个字符,请重新填写！'))
-                // }
+                if(passwordReg.test(value)){
+                    callback()
+                }else{
+                    callback(new Error('密码格式不规范，至少包含大小写字母、数字、特殊字符大于6个字符,请重新填写！'))
+                }
                 callback();
             }
         };

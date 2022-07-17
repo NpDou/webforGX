@@ -78,6 +78,7 @@ export default {
     min-height: 25vh;
     li{
       display: flex;
+      cursor:pointer;
       margin-bottom: 64px;
       .img{
         width: 341px;

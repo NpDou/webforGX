@@ -3,6 +3,7 @@
         <p class="title">采购结果</p>
         <el-table
         :data="tableData"
+        @row-click="gotoDetail"
         style="width: 100%">
         <el-table-column
             prop="applyTime"
@@ -66,6 +67,16 @@
         }
       },
       methods:{
+        gotoDetail(row, column, event){
+          this.$router.push({
+            path:'/detail',
+            query:{
+              id:row.id,
+              tab:'procurementResults',
+              type:'personhome'
+            }
+          })
+        },
         handleSizeChange(val) {
             this.size = val
             this.fetchData()
