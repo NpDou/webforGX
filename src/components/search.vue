@@ -4,8 +4,8 @@
       v-model="date"
       type="daterange"
       unlink-panels
-      format="yyyy-mm-dd"
-      value-format="yyyy-mm-dd"
+      format="yyyy-MM-dd"
+      value-format="yyyy-MM-dd"
       :picker-options="pickerOptions"
       range-separator="至"
       @change="change"

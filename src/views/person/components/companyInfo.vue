@@ -214,7 +214,7 @@
                 </el-form-item>
                 <el-form-item label="经营期限：" prop="jyqx">
                     <el-date-picker v-model="ruleForm.jyqx" type="daterange" format="yyyy-mm-dd"
-                        value-format="yyyy-mm-dd" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"
+                        value-format="yyyy-MM-dd" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"
                         align="right">
                     </el-date-picker>
                 </el-form-item>
