@@ -34,7 +34,6 @@ import myTable from "@/components/myTable.vue"
       mounted(){
         this.fetchData1()
         this.fetchData2()
-        console.log(this.userInfo,"===");
       },
       methods:{
         fetchData1(){

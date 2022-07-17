@@ -26,19 +26,6 @@ export default {
   data() {
     return {
       carouselIndex:0,
-      carousel: [{
-        introduce:'2222',
-        img:'../assets/banner1.png'
-      },{
-        introduce:'2222',
-        img:'../assets/banner2.png'
-      },{
-        introduce:'2222',
-        img:'../assets/banner1.png'
-      },{
-        introduce:'2222',
-        img:'../assets/banner2.png'
-      },],
     };
   },
   computed:{
@@ -50,7 +37,7 @@ export default {
       this.carouselIndex=index
     },
     getSrc(item){
-      return `${process.env.VUE_APP_SERVER_URL}/api/file/download?idFile=${item.id}`
+      return `${process.env.VUE_APP_SERVER_URL}/api/file/download?idFile=${item.idFile}`
     },
     // 获取轮播图图片
     fetchData(){

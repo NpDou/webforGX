@@ -30,7 +30,7 @@
                 </el-menu>
             </el-aside>
             <el-main>
-                <component :userInfo="userInfo" :is="result" @viewMore="viewMore"></component>
+                <component :userInfo="userInfo" :is="result" @viewMore="viewMore" :id="articleId" @gotoDetail="gotoDetail"></component>
             </el-main>
         </el-container>
         <el-footer>
@@ -44,6 +44,7 @@ import result from "./components/result.vue"
 import accountInfo from "./components/accountInfo.vue"
 import companyInfo from "./components/companyInfo.vue"
 import systemRecommendation from "./components/systemRecommendation.vue"
+import detail from "./components/detail.vue"
 import home from "./components/home.vue"
 import { get, post } from "../../utils/request";
 import {
@@ -58,6 +59,7 @@ export default {
         companyInfo,
         systemRecommendation,
         home,
+        detail
     },
     data() {
         return {
@@ -66,6 +68,7 @@ export default {
             result: '',
             uploadAction: `${process.env.VUE_APP_SERVER_URL}/api/file`,
             userInfo:{},
+            articleId:null
         }
     },
     computed: {
@@ -98,11 +101,9 @@ export default {
             }
         },
         handleAvatarSuccess(res, file) {
-            console.log(res,file);
             let fileId=file.response&&file.response.data?(file.response.data.id||''):''
             if(fileId){
                 post(`/api/gys/supplier/uploadBuddha?fileId=${fileId}&supplierId=${this.userInfo.id}`).then(res=>{
-                    console.log(res)
                     if(res.code==20000){
                         this.imageUrl = URL.createObjectURL(file.raw);
                         this.$message.success('上传头像成功');
@@ -127,14 +128,22 @@ export default {
                 this.$message.error('上传头像图片大小不能超过 2Mb!');
             }
             return isJPG && isLt2M;
+        },
+        gotoDetail(id){
+            this.articleId = id
+            this.result='detail'
         }
-
     },
     mounted(){
         if(sessionStorage.getItem("SESSIONID")){
             this.userInfo=JSON.parse(sessionStorage.getItem("SESSIONID"))
             this.imageUrl=this.userInfo.buddha?`${process.env.VUE_APP_SERVER_URL}/api/file/download?idFile=${this.userInfo.buddha}`:''
             this.result='home'
+            post('/api/gys/supplier/getSupplierById',{id:this.userInfo.id}).then(res=>{
+                if(res.code==20000){
+                    this.setSessionItem("SESSIONID", JSON.stringify(res.data));
+                }
+            })
         }
     }
 }

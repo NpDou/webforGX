@@ -108,7 +108,6 @@ export default {
                 idArr.push(element.response?element.response.data.id:element.id)
             });
             this.$set(this.ruleForm,key,idArr.join(','))
-            console.log(this.ruleForm,'this.ruleForm');
             this.$refs['ruleForm'].validateField(key);
         },
         handlePictureCardPreview(file) {
@@ -116,7 +115,6 @@ export default {
             this.dialogVisible = true;
         },
         submitForm(formName,cb) {
-            console.log(111);
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                 cb&&cb()
@@ -128,7 +126,7 @@ export default {
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';
-            const isLt2M = file.size / 1024 /1024< 5.12;
+            const isLt2M = file.size / 1024 < 5.12;
             if (!isJPG) {
                 this.$message.error('上传头像图片只能是 JPG 格式!');
             }

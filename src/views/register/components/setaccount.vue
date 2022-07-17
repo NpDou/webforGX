@@ -33,7 +33,6 @@ import { get, post } from "@/utils/request";
     name: "setaccount",
     data() {
         var verifyAccount = (rule, value, callback)=>{
-            console.log(value);
             if(value&&value.trim() == '' || !value){
                 callback(new Error('请输入用户名'));
             } else {

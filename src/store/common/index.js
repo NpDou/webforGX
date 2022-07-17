@@ -23,7 +23,6 @@ export default {
       })
     },
     updateUserInfo({commit}, playload) {
-        console.log(playload,'qweqwe')
         commit('update_userInfo', playload)
     },
   }

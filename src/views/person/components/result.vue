@@ -68,14 +68,7 @@
       },
       methods:{
         gotoDetail(row, column, event){
-          this.$router.push({
-            path:'/detail',
-            query:{
-              id:row.id,
-              tab:'procurementResults',
-              type:'personhome'
-            }
-          })
+          this.$emit('gotoDetail',row.id)
         },
         handleSizeChange(val) {
             this.size = val

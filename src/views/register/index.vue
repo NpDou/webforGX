@@ -90,7 +90,6 @@ export default {
         if (this.active==1) {
             this.$refs.setInfo&&this.$refs.setInfo.submitForm('ruleForm',this.next)
         }
-        console.log(this.active);
         if (this.active==2) {
             this.$refs.upload&&this.$refs.upload.submitForm('ruleForm',this.submit)
         }
@@ -99,7 +98,6 @@ export default {
         let params={...this.$refs.setaccount.ruleForm,...this.$refs.setInfo.ruleForm,...this.$refs.upload.ruleForm}
         params.jyqx=params.jyqx.join(',')
         post('/api/gys/supplier/add',params).then(res=>{
-            console.log(res);
             if(res.code==20000){
                 this.$message.success('注册成功，两秒后跳转登录页')
                 setTimeout(()=>{

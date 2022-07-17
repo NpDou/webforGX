@@ -12,6 +12,14 @@
             </el-breadcrumb>
         </div>
         <div class="content" v-html="content"></div>
+        <div class="fileInfos" v-if="detail.fileInfos&&detail.fileInfos.length>0">
+            附件信息
+            <ul >
+                <li v-for="(item, index) in detail.fileInfos" @click="download(item)" :key="index">
+                    {{item.originalFileName}}
+                </li>
+            </ul>
+        </div>
         <div v-if="tab=='purchaseAnnouncement'" class="action">
             <button v-if="userInfo.status==1" @click="join">响应报名</button>
             <button class="disableBtn" v-if="userInfo.status!==1" disabled>响应报名</button>
@@ -104,10 +112,12 @@ export default {
     methods:{
         getDetail(){
             get('/api/article/getArticleById', {id:this.$route.query.id}).then(res => {
-                console.log(res);
                 this.detail=res.data
                 this.content = res.data.content
             })
+        },
+        download(item){
+            window.open(`${process.env.VUE_APP_SERVER_URL}/api/file/download?idFile=${item.id}`)
         },
         join(){
              let isLogin=sessionStorage.getItem("SESSIONID")
@@ -139,7 +149,6 @@ export default {
         this.tab=this.$route.query.tab
         this.id=this.$route.query.id
         this.type=this.$route.query.type
-        console.log(this.$route);
     }
 }
 </script>
@@ -203,6 +212,20 @@ export default {
             p{
                 color: rgba(255, 0, 0, 100);
                 font-size: 14px;
+                font-family: SourceHanSansSC-regular;
+            }
+        }
+    }
+    .fileInfos{
+        background: #fff;
+        padding: 20px 200px;
+        ul{
+            li{
+                padding: 15px 0;
+                font-size: 14px;
+                color: #2295FF;
+                cursor: pointer;
+                text-align: left;
                 font-family: SourceHanSansSC-regular;
             }
         }

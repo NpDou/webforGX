@@ -513,11 +513,14 @@ export default {
                 item.name=item.originalFileName
                 arr3.push(item.id)
             })
-            this.ruleForm.zzzsIds=arr1.join(',')
-            this.ruleForm.xgyjIds=arr2.join(',')
-            this.ruleForm.qycxzzIds=arr3.join(',')
-            this.ruleForm.jyqx=this.ruleForm.jyqx.split(',')
-            this.isEdit = true
+            this.ruleForm.zzzsIds=arr1.join(',')||''
+            this.ruleForm.xgyjIds=arr2.join(',')||''
+            this.ruleForm.qycxzzIds=arr3.join(',')||''
+            this.ruleForm.jyqx=this.ruleForm.jyqx.split(',')||''
+            
+            this.$nextTick(()=>{
+                this.isEdit = true
+            })
         },
         handleRemove(file, fileList,key) {
             let idArr=[]
@@ -527,18 +530,25 @@ export default {
                         idArr.push(element.response?element.response.data.id:element.id)
                     });
                     this.$set(this.ruleForm,key,idArr.join(','))
-                    this.$refs['ruleForm'].validateField(key);
+                    this.$nextTick(()=>{
+                        this.$refs['ruleForm'].validateField(key);
+                    })
                     if(key=='yyzz'||key=='aqscxkz'){
                         let params={}
                         params.id=this.ruleForm.id
                         params[key]=this.ruleForm[key]
                         put('/api/gys/supplier/update',params).then(res=>{
                             this.$message.success('更新成功')
+                            this.isEdit=false
+                            post('/api/gys/supplier/getSupplierById',{id:this.userInfo.id}).then(res=>{
+                                if(res.code==20000){
+                                    this.setSessionItem("SESSIONID", JSON.stringify(res.data));
+                                }
+                            })
                         })
                     }
                 }
             })
-            console.log(file, fileList,key);
         },
         uploadSuccess(response, file, fileList,key){
             let idArr=[]
@@ -546,15 +556,15 @@ export default {
                 idArr.push(element.response?element.response.data.id:element.id)
             });
             this.$set(this.ruleForm,key,idArr.join(','))
-            console.log(this.ruleForm,'this.ruleForm');
-            this.$refs['ruleForm'].validateField(key);
+            this.$nextTick(()=>{
+                this.$refs['ruleForm'].validateField(key);
+            })
         },
         handlePictureCardPreview(file) {
             this.dialogImageUrl = file.url;
             this.dialogVisible = true;
         },
         submit() {
-            console.log(111);
             this.$refs['ruleForm'].validate((valid) => {
                 if (valid) {
                     let params=_.cloneDeep(this.ruleForm)
@@ -578,7 +588,7 @@ export default {
                         this.isEdit = true
                     })
                 } else {
-                    this.$message.error('更新失败')
+                    this.$message.error('校验不通过')
                     console.log('error submit!!');
                     return false;
                 }
@@ -586,7 +596,7 @@ export default {
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';
-            const isLt2M = file.size / 1024 /1024< 5.12;
+            const isLt2M = file.size / 1024 < 5.12;
             if (!isJPG) {
                 this.$message.error('上传头像图片只能是 JPG 格式!');
             }

@@ -57,7 +57,6 @@ export default {
   },
   methods: {
     gotoDetail(item){
-      console.log(this.tab,);
       this.$router.push({
         path:'/detail',
         query:{
