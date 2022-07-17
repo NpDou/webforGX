@@ -83,9 +83,9 @@ export default {
                 xgyjIds: [
                     { required: true, message: '请上传相关文件', trigger: 'blur' },
                 ],
-                qycxzzIds: [
-                    { required: true, message: '请上传相关文件', trigger: 'blur' },
-                ],
+                // qycxzzIds: [
+                //     { required: true, message: '请上传相关文件', trigger: 'blur' },
+                // ],
             }
         };
     },

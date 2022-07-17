@@ -7,6 +7,7 @@ import '@/styles.scss'
 import '@/style/main.scss'
 import * as filters from './filters'
 import VueSuperSlide from 'vue-superslide'
+import 'element-ui/lib/theme-chalk/icon.css'
 // 引入moment
 import moment from 'moment'
 

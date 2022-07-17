@@ -3,9 +3,9 @@
         <div class="registerMain" v-if="agree">
             <div class="step">
                 <el-steps :active="active" finish-status="success">
-                    <el-step title="设置账号" description="这是一段很长很长很长的描述性文字"></el-step>
-                    <el-step title="填写资料" description="这是一段很长很长很长的描述性文字"></el-step>
-                    <el-step title="上传资料" description="这段就没那么长了"></el-step>
+                    <el-step title="设置账号" description=""></el-step>
+                    <el-step title="填写资料" description=""></el-step>
+                    <el-step title="上传资料" description=""></el-step>
                 </el-steps>
             </div>
             <div class="content">

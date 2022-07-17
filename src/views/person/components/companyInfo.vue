@@ -125,7 +125,7 @@
                         营业执照：
                     </span>
                     <span class="content">
-                        <img :src="userInfo.yyzz ? (env + '/api/file/download?idFile=' + userInfo.yyzz) : nopass"
+                        <img :src="userInfo.yyzz ? (env + '/api/file/download?idFile=' + userInfo.yyzz) : ''"
                             alt="">
                     </span>
                 </div>
@@ -134,7 +134,7 @@
                         安全生产许可证：
                     </span>
                     <span class="content">
-                        <img :src="userInfo.aqscxkz ? (env + '/api/file/download?idFile=' + userInfo.aqscxkz) : nopass"
+                        <img :src="userInfo.aqscxkz ? (env + '/api/file/download?idFile=' + userInfo.aqscxkz) : ''"
                             alt="">
                     </span>
                 </div>
@@ -145,7 +145,7 @@
                     <span class="content">
                         <template v-for="(item, key) in userInfo.qycxzzList">
                             <img v-if="getstatus(item.originalFileName) == 'image'" :key="key"
-                                :src="item.id ? (env + '/api/file/download?idFile=' + item.id) : nopass" alt="">
+                                :src="item.id ? (env + '/api/file/download?idFile=' + item.id) : ''" alt="">
                             <img v-else :key="key" :src="otherIcon" alt="">
                         </template>
                     </span>
@@ -157,7 +157,7 @@
                     <span class="content">
                         <template v-for="(item, key) in userInfo.xgyjList">
                             <img v-if="getstatus(item.originalFileName) == 'image'" :key="key"
-                                :src="item.id ? (env + '/api/file/download?idFile=' + item.id) : nopass" alt="">
+                                :src="item.id ? (env + '/api/file/download?idFile=' + item.id) : ''" alt="">
                             <img v-else :key="key" :src="otherIcon" alt="">
                         </template>
                     </span>
@@ -169,7 +169,7 @@
                     <span class="content">
                         <template v-for="(item, key) in userInfo.zzzsList">
                             <img v-if="getstatus(item.originalFileName) == 'image'" :key="key"
-                                :src="item.id ? (env + '/api/file/download?idFile=' + item.id) : nopass" alt="">
+                                :src="item.id ? (env + '/api/file/download?idFile=' + item.id) : ''" alt="">
                             <img v-else :key="key" :src="otherIcon" alt="">
                         </template>
                     </span>
@@ -422,9 +422,9 @@ export default {
                 xgyjIds: [
                     { required: true, message: '请上传相关文件', trigger: 'blur' },
                 ],
-                qycxzzIds: [
-                    { required: true, message: '请上传相关文件', trigger: 'blur' },
-                ],
+                // qycxzzIds: [
+                //     { required: true, message: '请上传相关文件', trigger: 'blur' },
+                // ],
                 supplierName: [
                     { required: true, validator: verifySupplierName, trigger: 'blur' },
                 ],

@@ -47,7 +47,7 @@ export default {
     },
   data() {
     return {
-      animationUseScrollFun: null,
+      animationLiveHood: null,
     };
   },
   mounted() {
@@ -81,10 +81,7 @@ export default {
             delay: 2000
           }
         )
-      }else{
-        this.animationLiveHood = null
       }
-      
     },
   },
   destoryed() {

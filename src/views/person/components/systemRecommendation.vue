@@ -1,10 +1,10 @@
  <template>
     <div class="systemRecommendation">
         <p class="title">系统推荐采购公告</p>
-        <myTable :tableData="tableData"></myTable>
+        <myTable :tableData="tableData" tab="purchaseAnnouncement" type="personhome"></myTable>
         <el-pagination
           background
-          v-if="tableData.total>0"
+          v-if="total>0"
           :page-size="size"
           :total="total"
           :page-count="page"

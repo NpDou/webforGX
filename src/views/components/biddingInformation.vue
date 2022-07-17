@@ -95,9 +95,21 @@ export default {
 .biddingInformation {
   .container {
     padding: 0 40px;
-    .tab {
-      padding: 20px 0;
-    }
+    .tab{
+            padding: 20px 0;
+            .tabItem{
+                display: inline-block;
+                width: 127px;
+                height: 35px;
+                line-height: 35px;
+                border-radius: 32px;
+                text-align: center;
+                
+            }
+            .active{
+                background-color: rgba(226, 240, 255, 100);
+            }
+        }
   }
 }
 </style>
