@@ -52,7 +52,8 @@ export default {
             tab:'',
             type:'',
             content:'',
-            detail:{}
+            detail:{},
+            userInfo:{}
         }
     },
     computed:{
