@@ -1,6 +1,6 @@
 <template>
-  <div class="myTable">
-    <ul ref="scrollUl" v-if="tableData && tableData.length>0" :class="autoScroll?'autoScroll':'notScroll'">
+  <div class="myTable" :style="autoScroll?'overflowY:hidden':''">
+    <ul :style="{animationDuration: time + 's',height:tableData.length *33+ 'px'}"  v-if="tableData && tableData.length>0" :class="autoScroll&&scrollNum > 1?'autoScroll':'notScroll'">
         <li v-for="(item,index) in tableData" :key="index" @click="gotoDetail(item)">
             <span class="content">
               <span class=text>
@@ -10,13 +10,23 @@
             </span>
             <span class="time">{{item.modifyTime || '--'}}</span>
         </li>
+        <template v-if="autoScroll">
+          <li v-for="(item,index) in tableData" :key="index+'-copy'" @click="gotoDetail(item)">
+              <span class="content">
+                <span class=text>
+                  {{item.title || '--'}}
+                  <span v-if="getStatus(item)" class="tag">new</span>
+                </span>
+              </span>
+              <span class="time">{{item.modifyTime || '--'}}</span>
+          </li>
+        </template>
     </ul>
     <el-empty v-else :image-size="200"></el-empty>
   </div>
 </template>
 
 <script>
-import {animationUseScroll} from '@/utils/scroll.js' 
 export default {
     name: "myTable",
     props:{
@@ -47,13 +57,20 @@ export default {
     },
   data() {
     return {
-      animationLiveHood: null,
+      time:12
     };
   },
-  mounted() {
-    if(this.autoScroll){
-      this.toRoll()
-    }
+  computed:{
+    // 滚动层份数，当内容溢出scrollWrapHeight，复制两份，添加滚动动画
+    // 否则就一份，不填加滚动动画
+    scrollNum: function () {
+      let successHeight = this.tableData.length * 33
+      if (successHeight > 330) {
+        return 2
+      } else {
+        return 1
+      }
+    },
   },
   methods: {
     gotoDetail(item){
@@ -84,10 +101,6 @@ export default {
       }
     },
   },
-  destoryed() {
-    // 离开页面 销毁定时器
-    this.animationLiveHood = null
-  }
 };
 </script>
 <style lang="less" scoped>
@@ -95,12 +108,19 @@ export default {
     min-height: 25vh;
     padding-bottom: 30px;
     .autoScroll{
-      height:330px;
-      overflow: auto;
+      animation: scrollData 10s infinite linear;
       &::-webkit-scrollbar { 
         width: 0 !important;
         -ms-overflow-style: none;
         overflow: -moz-scrollbars-none;
+      }
+    }
+    @keyframes scrollData {
+      from {
+        transform: translateY(0px);
+      }
+      to {
+        transform: translateY(-100%);
       }
     }
     .notScroll{
@@ -110,7 +130,14 @@ export default {
       display: flex;
       padding: 7px 15px;
       cursor:pointer;
-
+      &:hover{
+        .text{
+          color: #1890ff;
+        }
+        .time{
+          color: #1890ff;
+        }
+      }
     }
     .content{
       display: inline-block;
