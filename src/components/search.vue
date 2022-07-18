@@ -2,10 +2,10 @@
   <div class="headerTitle">
     <el-date-picker
       v-model="date"
-      type="daterange"
+      type="datetimerange"
       unlink-panels
-      format="yyyy-MM-dd"
-      value-format="yyyy-MM-dd"
+      format="yyyy-MM-dd hh:mm:ss"
+      value-format="yyyy-MM-dd hh:mm:ss"
       :picker-options="pickerOptions"
       range-separator="至"
       @change="change"
@@ -82,7 +82,7 @@ export default {
   }
 
   :deep( .el-date-editor ){
-    width: 250px;
+    width: 360px;
     margin-right: 50px;
   }
 }
