@@ -516,7 +516,7 @@ export default {
             this.ruleForm.zzzsIds=arr1.join(',')||''
             this.ruleForm.xgyjIds=arr2.join(',')||''
             this.ruleForm.qycxzzIds=arr3.join(',')||''
-            this.ruleForm.jyqx=this.ruleForm.jyqx.split(',')||''
+            this.ruleForm.jyqx=this.ruleForm.jyqx.split(',')||[]
             
             this.$nextTick(()=>{
                 this.isEdit = true
@@ -663,18 +663,16 @@ export default {
       .content {
           display: flex;
           flex-wrap: wrap;
-  
+          margin-bottom: 20px;
           .item {
               margin: 0 30px;
               min-width: 250px;
-  
               img {
                   width: 250px;
                   height: 150px;
                   margin-right: 24px;
               }
           }
-  
           .tal {
               text-align: left !important;
           }
@@ -683,9 +681,7 @@ export default {
       .action {
           text-align: center;
           padding: 20px;
-          margin-top: 20px;
           border-top: 1px solid rgba(187, 187, 187, 1);
-  
           button {
               width: 80px;
               height: 30px;

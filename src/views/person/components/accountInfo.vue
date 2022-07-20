@@ -208,7 +208,7 @@ export default {
         if (valid) {
           this.centerDialogVisible = false
           let params ={...this.ruleForm}
-          const url=''
+          let url=''
           if(this.type=='password'){
             url='/api/gys/supplier/updatePassword'
             params.password = params.newPassword

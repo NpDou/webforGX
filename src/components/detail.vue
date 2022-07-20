@@ -23,7 +23,7 @@
         <div v-if="tab=='purchaseAnnouncement'" class="action">
             <button v-if="userInfo.status==1" @click="join">响应报名</button>
             <button class="disableBtn" v-if="userInfo.status!==1" disabled>响应报名</button>
-            <p v-if="userInfo.status!==1">您的企业信息未通过审核暂时无法报名，请及时区个人中心更改信息</p>
+            <p v-if="userInfo.status!==1">您的企业信息未通过审核暂时无法报名，请及时去个人中心更改信息</p>
         </div>
     </div>
 </template>

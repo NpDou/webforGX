@@ -1,6 +1,6 @@
  <template>
     <div class="systemRecommendation">
-        <p class="title">系统推荐采购公告</p>
+        <p class="title">更改通知</p>
         <myTable :tableData="tableData" tab="purchaseAnnouncement" type="personhome"></myTable>
         <el-pagination
           background
@@ -18,7 +18,7 @@
 import myTable from "@/components/myTable.vue"
  import { get, post } from "@/utils/request";
     export default {
-        name:"systemRecommendation",
+        name:"changeNotificationforperson",
       components:{
         myTable
       },
@@ -54,7 +54,7 @@ import myTable from "@/components/myTable.vue"
             currentPage: this.page,
             pageSize: this.size,
             supplierId: this.userInfo.id,
-            id_channel: 4,
+            id_channel: 6,
           }).then(res=>{
             if(res.code==20000){
               this.tableData=res.data.list||[]

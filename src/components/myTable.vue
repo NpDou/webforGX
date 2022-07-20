@@ -109,10 +109,19 @@ export default {
     padding-bottom: 30px;
     .autoScroll{
       animation: scrollData 10s infinite linear;
+      animation-play-state:runing;
+
+      /* Safari and Chrome */
+      -webkit-animation:scrollData 10s infinite linear;
+      -webkit-animation-play-state:runing;
       &::-webkit-scrollbar { 
         width: 0 !important;
         -ms-overflow-style: none;
         overflow: -moz-scrollbars-none;
+      }
+      &:hover{
+        animation-play-state:paused;
+        -webkit-animation-play-state:paused;
       }
     }
     @keyframes scrollData {
