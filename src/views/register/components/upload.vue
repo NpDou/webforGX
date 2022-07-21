@@ -33,7 +33,7 @@
                 </div>
                 <div class="item">
                     <el-form-item label="相关业绩：" prop="xgyjIds">
-                        <el-upload :on-success="(response, file, fileList)=>{uploadSuccess(response, file, fileList,'xgyjIds')}" :on-preview="handlePictureCardPreview" class="upload-demo" :action="uploadAction" 
+                        <el-upload :on-success="(response, file, fileList)=>{uploadSuccess(response, file, fileList,'xgyjIds')}" :before-upload="beforeAvatarUpload2" :on-preview="handlePictureCardPreview" accept=".jpg,.png,.ppt,.pptx,.pdf,.doc,.docx,.xls,.xlsx" class="upload-demo" :action="uploadAction" 
                              :on-remove="(file, fileList)=>{handleRemove(file, fileList,'xgyjIds')}">
                             <el-button size="small" type="primary">上传文件</el-button>
                         </el-upload>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="item">
                     <el-form-item label="企业诚信资质：" prop="qycxzzIds">
-                        <el-upload :on-success="(response, file, fileList)=>{uploadSuccess(response, file, fileList,'qycxzzIds')}" :on-preview="handlePictureCardPreview" class="upload-demo" :action="uploadAction"
+                        <el-upload :on-success="(response, file, fileList)=>{uploadSuccess(response, file, fileList,'qycxzzIds')}" :before-upload="beforeAvatarUpload2" :on-preview="handlePictureCardPreview" accept=".jpg,.png,.ppt,.pptx,.pdf,.doc,.docx,.xls,.xlsx" class="upload-demo" :action="uploadAction"
                             :on-remove="(file, fileList)=>{handleRemove(file, fileList,'qycxzzIds')}">
                             <el-button size="small" type="primary">上传文件</el-button>
                         </el-upload>
@@ -136,7 +136,20 @@ export default {
             this.$message.error('上传头像图片大小不能超过 512k!');
             }
             return isJPG && isLt2M;
-        }
+        },
+        beforeAvatarUpload2(file) {
+            const whiteList=['jpg','png','ppt','pptx','pdf','doc','docx','xls','xlsx']
+            const fileSuffix = file.name.substring(file.name.lastIndexOf(".") + 1);
+            const isLt2M = file.size / 1024 / 1024 < 2;
+            if (whiteList.indexOf(fileSuffix) === -1) {
+                this.message({message:"上传文件只能是'jpg','png','ppt','pptx','pdf','doc','docx','xls','xlsx'格式", type: 'warning'});
+                return false;
+            }
+            if (!isLt2M) {
+                this.$message.error('上传头像图片大小不能超过 2Mb!');
+            }
+            return isJPG && isLt2M;
+        },
     }
 }
 </script>
