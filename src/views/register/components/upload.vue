@@ -56,6 +56,8 @@
 </template>
 
 <script>
+import { get, post } from "@/utils/request";
+
 export default {
     name: 'upload',
     data() {
@@ -126,7 +128,7 @@ export default {
         },
         beforeAvatarUpload(file) {
             const isJPG = file.type === 'image/jpeg';
-            const isLt2M = file.size / 1024 < 5.12;
+            const isLt2M = file.size / 1024 < 512;
             if (!isJPG) {
                 this.$message.error('上传头像图片只能是 JPG 格式!');
             }
