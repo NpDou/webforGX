@@ -117,6 +117,13 @@ export default {
             this.ruleForm.password = Base64.decode(localStorage.getItem(`${process.env.VUE_APP_SERVER_URL}-password`));// base64解密
             this.checked = true;
         }
+        document.onkeydown =(e) => {
+            e = window.event || e;
+            if(this.$route.path=='/login'&&(e.code=='Enter'||e.code=='enter')){
+            //调用登录事件方法
+                this.submitForm('ruleForm');
+            }
+        }
     }
 }
 </script>

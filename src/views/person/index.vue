@@ -11,6 +11,11 @@
                     <p class="companyName" @click="toHome">{{userInfo.supplierName}}</p>
                 </div>
                 <el-menu default-active="1-1" :default-openeds="openeds" class="el-menu-vertical-demo" @select="chose">
+                    <el-menu-item index="home">
+                        <template slot="title">
+                            <i class="el-icon-user-solid"></i>
+                            <span>个人中心</span>
+                        </template></el-menu-item>
                     <el-submenu index="1">
                         <template slot="title">
                             <i class="el-icon-setting"></i>
@@ -26,6 +31,7 @@
                         </template>
                         <el-menu-item index="result">采购结果</el-menu-item>
                         <el-menu-item index="systemRecommendation">系统推荐</el-menu-item>
+                        <el-menu-item index="changeNotificationforperson">更改通知</el-menu-item>
                     </el-submenu>
                 </el-menu>
             </el-aside>
@@ -46,6 +52,7 @@ import companyInfo from "./components/companyInfo.vue"
 import systemRecommendation from "./components/systemRecommendation.vue"
 import detail from "./components/detail.vue"
 import home from "./components/home.vue"
+import changeNotificationforperson from "./components/changeNotificationforperson.vue"
 import { get, post } from "../../utils/request";
 import {
     mapActions,
@@ -59,7 +66,8 @@ export default {
         companyInfo,
         systemRecommendation,
         home,
-        detail
+        detail,
+        changeNotificationforperson,
     },
     data() {
         return {
@@ -94,7 +102,8 @@ export default {
         },
         viewMore(val) {
             if (val) {
-
+                this.result = 'changeNotificationforperson'
+                window.scrollTo(0, 0)
             } else {
                 this.result = 'systemRecommendation'
                 window.scrollTo(0, 0)
