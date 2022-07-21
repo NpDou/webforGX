@@ -8,7 +8,7 @@
                         <el-upload :on-success="(response, file, fileList)=>{uploadSuccess(response, file, fileList,'yyzz')}" :before-upload="beforeAvatarUpload" accept=".jpg" :limit="1" :action="uploadAction" list-type="picture-card"
                             :on-preview="handlePictureCardPreview" :on-remove="(file, fileList)=>{handleRemove(file, fileList,'yyzz')}">
                             <i class="el-icon-plus"></i>
-                            <div slot="tip" class="el-upload__tip">只支持.jpg 格式且不超过500kb</div>
+                            <div slot="tip" class="el-upload__tip">只支持.jpg 格式且不超过512kb</div>
                         </el-upload>
                     </el-form-item>
                 </div>
@@ -17,7 +17,7 @@
                         <el-upload :on-success="(response, file, fileList)=>{uploadSuccess(response, file, fileList,'aqscxkz')}" :before-upload="beforeAvatarUpload" accept=".jpg" :limit="1" :action="uploadAction" list-type="picture-card"
                             :on-preview="handlePictureCardPreview" :on-remove="(file, fileList)=>{handleRemove(file, fileList,'aqscxkz')}">
                             <i class="el-icon-plus"></i>
-                            <div slot="tip" class="el-upload__tip">只支持.jpg 格式且不超过500kb</div>
+                            <div slot="tip" class="el-upload__tip">只支持.jpg 格式且不超过512kb</div>
                         </el-upload>
                     </el-form-item>
                     <p></p>
@@ -27,7 +27,7 @@
                         <el-upload :on-success="(response, file, fileList)=>{uploadSuccess(response, file, fileList,'zzzsIds')}" :before-upload="beforeAvatarUpload" accept=".jpg" :action="uploadAction" list-type="picture-card"
                             :on-preview="handlePictureCardPreview" :on-remove="(file, fileList)=>{handleRemove(file, fileList,'zzzsIds')}">
                             <i class="el-icon-plus"></i>
-                            <div slot="tip" class="el-upload__tip">只支持.jpg 格式且不超过500kb</div>
+                            <div slot="tip" class="el-upload__tip">只支持.jpg 格式且不超过512kb</div>
                         </el-upload>
                     </el-form-item>
                 </div>
@@ -130,25 +130,25 @@ export default {
             const isJPG = file.type === 'image/jpeg';
             const isLt2M = file.size / 1024 < 512;
             if (!isJPG) {
-                this.$message.error('上传头像图片只能是 JPG 格式!');
+                this.$message.error('上传图片只能是 JPG 格式!');
             }
             if (!isLt2M) {
-            this.$message.error('上传头像图片大小不能超过 512k!');
+                this.$message.error('上传图片大小不能超过 512k!');
             }
             return isJPG && isLt2M;
         },
         beforeAvatarUpload2(file) {
             const whiteList=['jpg','png','ppt','pptx','pdf','doc','docx','xls','xlsx']
             const fileSuffix = file.name.substring(file.name.lastIndexOf(".") + 1);
-            const isLt2M = file.size / 1024 / 1024 < 2;
+            const isLt2M = file.size / 1024 / 1024 < 5;
             if (whiteList.indexOf(fileSuffix) === -1) {
                 this.message({message:"上传文件只能是'jpg','png','ppt','pptx','pdf','doc','docx','xls','xlsx'格式", type: 'warning'});
                 return false;
             }
             if (!isLt2M) {
-                this.$message.error('上传头像图片大小不能超过 2Mb!');
+                this.$message.error('上传文件大小不能超过 5Mb!');
             }
-            return isJPG && isLt2M;
+            return isLt2M;
         },
     }
 }

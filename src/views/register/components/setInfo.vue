@@ -75,6 +75,8 @@
                         <el-select v-model="ruleForm.supplierType" placeholder="请选择供应商类型">
                             <el-option label="施工单位" value="施工单位"></el-option>
                             <el-option label="设计单位" value="设计单位"></el-option>
+                            <el-option label="监理单位" value="监理单位"></el-option>
+                            <el-option label="复核单位" value="复核单位"></el-option>
                         </el-select>
                     </el-form-item>
                 </el-col>
