@@ -10,7 +10,7 @@
             </span>
             <span class="time">{{item.modifyTime || '--'}}</span>
         </li>
-        <template v-if="autoScroll">
+        <template v-if="autoScroll && scrollNum > 1">
           <li v-for="(item,index) in tableData" :key="index+'-copy'" @click="gotoDetail(item)">
               <span class="content">
                 <span class=text>
