@@ -105,7 +105,7 @@ export default {
                 line-height: 35px;
                 border-radius: 32px;
                 text-align: center;
-                
+                cursor: pointer;
             }
             .active{
                 background-color: rgba(226, 240, 255, 100);
