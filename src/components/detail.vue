@@ -106,7 +106,7 @@ export default {
                     {
                         name:this.dict[this.tab],
                     }
-                ]
+                ],
             }
         }
     },

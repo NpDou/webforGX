@@ -25,21 +25,14 @@ import myTable from "@/components/myTable.vue"
       data() {
         return {
           tableData: [],
-           size:20,
-              page:1,
-              total:0
+          size:20,
+          page:1,
+          total:0,
+          userInfo:{},
+          id:''
         }
       },
-      props: {
-        userInfo: {
-          type: Object,
-          default() {
-            return {
-             
-            }
-          }
-        }
-      },
+      
       methods:{
         handleSizeChange(val) {
             this.size = val
@@ -67,6 +60,8 @@ import myTable from "@/components/myTable.vue"
         }
       },
       mounted(){
+        this.userInfo=sessionStorage.getItem("SESSIONID")?JSON.parse(sessionStorage.getItem("SESSIONID")):{}
+        this.id=this.$route.query.id || this.userInfo.id
         this.fetchData()
       }
     }

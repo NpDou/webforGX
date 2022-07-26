@@ -186,15 +186,9 @@ export default {
         telephone: [
           { required: true, message: '请输入管理员电话', trigger: 'blur' },
         ],
-      }
-    }
-  },
-  props: {
-    userInfo: {
-      type: Object,
-      default() {
-        return {}
-      }
+      },
+      userInfo:{},
+      id:''
     }
   },
   methods: {
@@ -233,6 +227,10 @@ export default {
         }
       });
     }
+  },
+  mounted(){
+    this.userInfo=sessionStorage.getItem("SESSIONID")?JSON.parse(sessionStorage.getItem("SESSIONID")):{}
+    this.id=this.$route.query.id || this.userInfo.id
   }
 }
 </script>

@@ -30,6 +30,7 @@ export default {
         idChannel:3,
         startDate:'',
         title:'',
+        publish: 1,
         endDate:'',
       },
       page:1,

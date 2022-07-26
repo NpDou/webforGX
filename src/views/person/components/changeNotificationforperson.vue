@@ -25,19 +25,11 @@ import myTable from "@/components/myTable.vue"
       data() {
         return {
           tableData: [],
-           size:20,
-              page:1,
-              total:0
-        }
-      },
-      props: {
-        userInfo: {
-          type: Object,
-          default() {
-            return {
-             
-            }
-          }
+          size:20,
+          page:1,
+          total:0,
+          userInfo:{},
+          id:''
         }
       },
       methods:{
@@ -53,7 +45,7 @@ import myTable from "@/components/myTable.vue"
           post('/api/article/getArticleBySupplierId',{
             currentPage: this.page,
             pageSize: this.size,
-            supplierId: this.userInfo.id,
+            supplierId: this.id,
             id_channel: 6,
           }).then(res=>{
             if(res.code==20000){
@@ -67,6 +59,8 @@ import myTable from "@/components/myTable.vue"
         }
       },
       mounted(){
+        this.userInfo=sessionStorage.getItem("SESSIONID")?JSON.parse(sessionStorage.getItem("SESSIONID")):{}
+        this.id=this.$route.query.id || this.userInfo.id
         this.fetchData()
       }
     }

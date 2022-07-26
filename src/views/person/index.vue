@@ -36,7 +36,8 @@
                 </el-menu>
             </el-aside>
             <el-main>
-                <component :userInfo="userInfo" :is="result" @viewMore="viewMore" :id="articleId" @gotoDetail="gotoDetail"></component>
+                <router-view></router-view>
+                <!-- <component :userInfo="userInfo" :is="result" @viewMore="viewMore" :id="articleId" @gotoDetail="gotoDetail"></component> -->
             </el-main>
         </el-container>
         <el-footer>
@@ -50,7 +51,6 @@ import result from "./components/result.vue"
 import accountInfo from "./components/accountInfo.vue"
 import companyInfo from "./components/companyInfo.vue"
 import systemRecommendation from "./components/systemRecommendation.vue"
-import detail from "./components/detail.vue"
 import home from "./components/home.vue"
 import changeNotificationforperson from "./components/changeNotificationforperson.vue"
 import { get, post } from "../../utils/request";
@@ -66,7 +66,6 @@ export default {
         companyInfo,
         systemRecommendation,
         home,
-        detail,
         changeNotificationforperson,
     },
     data() {
@@ -95,10 +94,21 @@ export default {
     },
     methods: {
         toHome(){
-            this.result = 'home'
+            this.$router.push({
+                path:'/person/person_home',
+                query:{
+                    supplierId:this.userInfo.id
+                }
+            })
         },
         chose(key, keyPath) {
-            this.result = key
+            const result = '/person/person_' + key
+            this.$router.push({
+                path:result,
+                query:{
+                    id:this.userInfo.id
+                }
+            })
         },
         viewMore(val) {
             if (val) {
@@ -141,6 +151,15 @@ export default {
         gotoDetail(id){
             this.articleId = id
             this.result='detail'
+            this.$nextTick(()=>{
+                this.$router.push({
+                    path:'/person/detail',
+                    query:{
+                        pid:id,
+                        id:this.userInfo.id
+                    }
+                })
+            })
         }
     },
     mounted(){

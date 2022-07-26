@@ -16,22 +16,17 @@ import myTable from "@/components/myTable.vue"
         return {
           tableData1: [],
           tableData2: [],
-        }
-      },
-      props: {
-        userInfo: {
-          type: Object,
-          default() {
-            return {
-             
-            }
-          }
+          id:'',
+          userInfo:{}
         }
       },
       components:{
         myTable
       },
+      
       mounted(){
+        this.userInfo=sessionStorage.getItem("SESSIONID")?JSON.parse(sessionStorage.getItem("SESSIONID")):{}
+        this.id=this.$route.query.id || this.userInfo.id
         this.fetchData1()
         this.fetchData2()
       },
@@ -41,7 +36,7 @@ import myTable from "@/components/myTable.vue"
             currentPage: 1,
             pageSize : 15,
             id_channel: 6,
-            supplierId : this.userInfo.id,
+            supplierId : this.id,
           }).then(res=>{
             if(res.code==20000){
               this.tableData1=res.data.list||[]
@@ -55,7 +50,7 @@ import myTable from "@/components/myTable.vue"
             currentPage: 1,
             pageSize : 15,
             id_channel: 4,
-            supplierId : this.userInfo.id,
+            supplierId : this.id,
           }).then(res=>{
             if(res.code==20000){
               this.tableData2=res.data.list||[]
@@ -64,8 +59,20 @@ import myTable from "@/components/myTable.vue"
             }
           })
         },
+        
         seeAll(val){
-            this.$emit('viewMore',val)
+          var result = '/person/person_'
+            if (val) {
+                result = result + 'changeNotificationforperson'
+            } else {
+                result = result + 'systemRecommendation'
+            }
+            this.$router.push({
+                path:result,
+                query:{
+                    id:this.userInfo.id
+                }
+            })
         }
       }
     }

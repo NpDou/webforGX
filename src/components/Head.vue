@@ -133,7 +133,7 @@ export default {
         description: '/contactUs',
       },
       ],
-      hideMenu:['person'],
+      hideMenu:['person','person_detail','person_home','person_accountInfo','person_companyInfo','person_systemRecommendation','person_changeNotificationforperson','person_result'],
       currentIndex: "",
     };
   },

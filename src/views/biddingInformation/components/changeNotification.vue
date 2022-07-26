@@ -23,6 +23,7 @@ export default {
     return {
       params:{
         idChannel:6,
+        publish: 1,
         startDate:'',
         title:'',
         endDate:'',

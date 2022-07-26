@@ -66,6 +66,7 @@ export default {
       return {
         idChannel: this.tabDict_type[this.activeTab],
         startDate: '',
+        publish: 1,
         title: '',
         endDate: '',
         page: 1,

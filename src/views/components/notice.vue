@@ -23,6 +23,7 @@ export default {
         startDate:'',
         title:'',
         endDate:'',
+        publish: 1,
         page:1,
         size:20,
       }

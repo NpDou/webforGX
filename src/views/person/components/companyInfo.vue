@@ -57,9 +57,9 @@
                         经营期限
                     </span>
                     <span class="content">
-                        {{ userInfo.jyqx.split(',')[0] || '--' }}
+                        {{ userInfo.jyqx?userInfo.jyqx.split(',')[0] || '--':'--' }}
                         <i>至</i>
-                        {{ userInfo.jyqx.split(',')[1] || '--' }}
+                        {{ userInfo.jyqx?userInfo.jyqx.split(',')[1] || '--':'--' }}
                     </span>
                 </li>
                 <li>
@@ -303,14 +303,6 @@ import _ from 'lodash'
 import { getFileType } from '@/utils/judge.js'
 export default {
     name: 'companyInfo',
-    props: {
-        userInfo: {
-            type: Object,
-            default() {
-                return {}
-            }
-        }
-    },
     data() {
         var verifySupplierName = (rule, value, callback) => {
             if (value == '') {
@@ -470,7 +462,9 @@ export default {
                 businessScope: [
                     { required: true, message: '请输入经营范围', trigger: 'blur' },
                 ],
-            }
+            },
+            userInfo:{},
+            id:''
         }
     },
     computed: {
@@ -605,6 +599,10 @@ export default {
             }
             return isJPG && isLt2M;
         }
+    },
+    mounted(){
+        this.userInfo=sessionStorage.getItem("SESSIONID")?JSON.parse(sessionStorage.getItem("SESSIONID")):{}
+        this.id=this.$route.query.id || this.userInfo.id
     }
 }
 </script>

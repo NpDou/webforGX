@@ -86,6 +86,7 @@ const routes = [
     meta: {
       scrollToTop: true
     },
+    redirect:'/person/person_home',
     component: () => import('../views/person/index.vue'),
     beforeEnter: (to, from, next) => {
       let SESSIONID = sessionStorage.getItem("SESSIONID");
@@ -96,6 +97,64 @@ const routes = [
         next("/login")
       }     
     },
+    children:[
+      {
+        path: 'person_detail',
+        name: 'person_detail',
+        meta: {
+          scrollToTop: true
+        },
+        component: () => import('../views/person/components/detail.vue')
+      },
+      {
+        path: 'person_home',
+        name: 'person_home',
+        meta: {
+          scrollToTop: true
+        },
+        component: () => import('../views/person/components/home.vue')
+      },
+      {
+        path: 'person_accountInfo',
+        name: 'person_accountInfo',
+        meta: {
+          scrollToTop: true
+        },
+        component: () => import('../views/person/components/accountInfo.vue')
+      },
+      {
+        path: 'person_companyInfo',
+        name: 'person_companyInfo',
+        meta: {
+          scrollToTop: true
+        },
+        component: () => import('../views/person/components/companyInfo.vue')
+      },
+      {
+        path: 'person_systemRecommendation',
+        name: 'person_systemRecommendation',
+        meta: {
+          scrollToTop: true
+        },
+        component: () => import('../views/person/components/systemRecommendation.vue')
+      },
+      {
+        path: 'person_changeNotificationforperson',
+        name: 'person_changeNotificationforperson',
+        meta: {
+          scrollToTop: true
+        },
+        component: () => import('../views/person/components/changeNotificationforperson.vue')
+      },
+      {
+        path: 'person_result',
+        name: 'person_result',
+        meta: {
+          scrollToTop: true
+        },
+        component: () => import('../views/person/components/result.vue')
+      },
+    ]
   }
 ]
 

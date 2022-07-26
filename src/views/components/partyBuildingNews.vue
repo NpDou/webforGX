@@ -2,7 +2,7 @@
   <div class="partyBuildingNews">
     <headerTitle content="党建新闻" url="/companyDynamics?tab=partyBuildingNews" class="title" />
     <div class="container">
-        <myTable tab="partyBuildingNews" type="home" :tableData="allArticleData.dynamicNews.records"/>
+        <myTable tab="partyBuildingNews" type="home" :tableData="allArticleData.partyBuildingNews.records"/>
     </div>
   </div>
 </template>
@@ -23,6 +23,7 @@ export default {
         startDate:'',
         title:'',
         endDate:'',
+        publish: 1,
         page:1,
         size:20,
       }

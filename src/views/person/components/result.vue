@@ -51,19 +51,11 @@
       data() {
         return {
           tableData: [],
-           size:20,
-              page:1,
-              total:0
-        }
-      },
-      props: {
-        userInfo: {
-          type: Object,
-          default() {
-            return {
-             
-            }
-          }
+          size:20,
+          page:1,
+          total:0,
+          userInfo:{},
+          id:''
         }
       },
       methods:{
@@ -95,6 +87,8 @@
         }
       },
       mounted(){
+        this.userInfo=sessionStorage.getItem("SESSIONID")?JSON.parse(sessionStorage.getItem("SESSIONID")):{}
+        this.id=this.$route.query.id || this.userInfo.id
         this.fetchData()
       }
     }

@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      noFooters: ['login','register','person'],
+      noFooters: ['login','register','person','person_detail','person_home','person_accountInfo','person_companyInfo','person_systemRecommendation','person_changeNotificationforperson','person_result'],
       isRouterAlive:true
     }
   },
